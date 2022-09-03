@@ -1,0 +1,49 @@
+@use './vars.scss' as *;
+@use './fonts.scss' as *;
+@use './palette.scss' as *;
+
+$b-sm: 640px;
+$b-md: 768px;
+$b-lg: 1060px;
+$b-xl: 1280px;
+$font-break-points: (
+  $b-sm: 16px,
+  $b-md: 16px,
+  $b-lg: 16px,
+  $b-xl: 16px
+);
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  font-family: var(--f-r);
+  font-weight: 400;
+  color: var(--c-text-1);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  direction: ltr;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--c-bg);
+  transition: background-color 0.2s ease;
+}
+
+@each $break-point, $font-size in $font-break-points {
+  @media screen and (min-width: $break-point) {
+    html {
+      font-size: $font-size;
+    }
+  }
+}

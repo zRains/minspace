@@ -1,0 +1,50 @@
+{
+  "name": "rune",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.vue --ignore-path .gitignore .",
+    "fix": "eslint --fix --ext .ts,.vue --ignore-path .gitignore .",
+    "format": "prettier --write ./**/*.{vue,ts,scss,json,md}",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "nanoid": "^4.0.0",
+    "vue": "^3.2.38"
+  },
+  "devDependencies": {
+    "@iconify/vue": "^3.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-vue": "^9.4.0",
+    "git-cz": "^4.9.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.8",
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vue-tsc": "^0.40.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/git-cz"
+    }
+  },
+  "script": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**": "npm run format",
+    "src/**/*.{ts,vue}": "npm run fix"
+  }
+}

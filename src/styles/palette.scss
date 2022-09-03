@@ -1,0 +1,122 @@
+:root {
+  --c-white: #ffffff;
+  --c-white-soft: #f9f9f9;
+  --c-white-mute: #f1f1f1;
+
+  --c-black: #1a1a1a;
+  --c-black-pure: #000000;
+  --c-black-soft: #2b2d42;
+  --c-black-mute: #474d5c;
+
+  --c-gray: #8e8e8e;
+  --c-gray-light-1: #aeaeae;
+  --c-gray-light-2: #c7c7c7;
+  --c-gray-light-3: #d1d1d1;
+  --c-gray-light-4: #e5e5e5;
+  --c-gray-light-5: #f2f2f2;
+  --c-gray-dark-1: #636363;
+  --c-gray-dark-2: #484848;
+  --c-gray-dark-3: #3a3a3a;
+  --c-gray-dark-4: #282828;
+  --c-gray-dark-5: #202020;
+
+  --c-indigo: #213547;
+  --c-indigo-soft: #476582;
+  --c-indigo-light: #aac8e4;
+  --c-indigo-lighter: #c9def1;
+  --c-indigo-dark: #1d2f3f;
+  --c-indigo-darker: #14212e;
+
+  --c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --c-text-light-1: var(--c-indigo);
+  --c-text-light-2: rgba(60, 60, 60, 0.7);
+  --c-text-light-3: rgba(60, 60, 60, 0.33);
+  --c-text-light-4: rgba(60, 60, 60, 0.18);
+
+  --c-text-dark-1: rgba(255, 255, 255, 0.87);
+  --c-text-dark-2: rgba(235, 235, 235, 0.6);
+  --c-text-dark-3: rgba(235, 235, 235, 0.38);
+  --c-text-dark-4: rgba(235, 235, 235, 0.18);
+
+  --c-green: #1d9a6c;
+  --c-green-light: #39a96b;
+  --c-green-lighter: #56b870;
+  --c-green-dark: #188977;
+  --c-green-darker: #137177;
+
+  --c-yellow: #ffc517;
+  --c-yellow-light: #fcd253;
+  --c-yellow-lighter: #fcfc7c;
+  --c-yellow-dark: #e0ad15;
+  --c-yellow-darker: #ad850e;
+
+  --c-red: #d90429;
+  --c-red-light: #ef233c;
+  --c-red-lighter: #fd1d7c;
+  --c-red-dark: #cd2d3f;
+  --c-red-darker: #ab2131;
+}
+
+/**
+   * Colors Theme
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --c-bg: var(--c-white);
+  --c-bg-soft: var(--c-white-soft);
+  --c-bg-mute: var(--c-white-mute);
+  --c-bg-alt: var(--c-white-soft);
+
+  --c-divider: var(--c-divider-light-1);
+  --c-divider-light: var(--c-divider-light-2);
+
+  --c-divider-inverse: var(--c-divider-dark-1);
+  --c-divider-inverse-light: var(--c-divider-dark-2);
+
+  --c-text-1: var(--c-text-light-1);
+  --c-text-2: var(--c-text-light-2);
+  --c-text-3: var(--c-text-light-3);
+  --c-text-4: var(--c-text-light-4);
+
+  --c-text-inverse-1: var(--c-text-dark-1);
+  --c-text-inverse-2: var(--c-text-dark-2);
+  --c-text-inverse-3: var(--c-text-dark-3);
+  --c-text-inverse-4: var(--c-text-dark-4);
+
+  --c-text-code: var(--c-indigo-soft);
+
+  --c-brand: var(--c-green);
+  --c-brand-light: var(--c-green-light);
+  --c-brand-lighter: var(--c-green-lighter);
+  --c-brand-dark: var(--c-green-dark);
+  --c-brand-darker: var(--c-green-darker);
+}
+
+html[data-theme='dark'] {
+  --c-bg: var(--c-black-soft);
+  --c-bg-soft: var(--c-black-mute);
+  --c-bg-mute: var(--c-gray-dark-3);
+  --c-bg-alt: var(--c-black);
+
+  --c-divider: var(--c-divider-dark-1);
+  --c-divider-light: var(--c-divider-dark-2);
+
+  --c-divider-inverse: var(--c-divider-light-1);
+  --c-divider-inverse-light: var(--c-divider-light-2);
+
+  --c-text-1: var(--c-text-dark-1);
+  --c-text-2: var(--c-text-dark-2);
+  --c-text-3: var(--c-text-dark-3);
+  --c-text-4: var(--c-text-dark-4);
+
+  --c-text-inverse-1: var(--c-text-light-1);
+  --c-text-inverse-2: var(--c-text-light-2);
+  --c-text-inverse-3: var(--c-text-light-3);
+  --c-text-inverse-4: var(--c-text-light-4);
+
+  --c-text-code: var(--c-indigo-lighter);
+}
