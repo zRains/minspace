@@ -46,7 +46,6 @@ defineProps<{
   transform: translateY(calc(var(--u-gap) * -0.5));
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
-  box-shadow: var(--shadow-2);
   line-height: 100%;
   border-radius: 5px;
 

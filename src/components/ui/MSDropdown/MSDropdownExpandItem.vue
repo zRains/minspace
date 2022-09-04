@@ -37,6 +37,7 @@ defineProps<{
 
 .MSDropdownExpandItem {
   position: relative;
+  transition: background-color var(--u-dur);
 
   .ExpandPop {
     position: absolute;
@@ -49,10 +50,7 @@ defineProps<{
     visibility: hidden;
     background-color: var(--c-bg);
     border: 1px solid var(--c-divider-light);
-    box-shadow: var(--shadow-2);
-    line-height: 100%;
     border-radius: 5px;
-    color: var(--c-black);
     transition: opacity calc(var(--u-dur) / 2), visibility calc(var(--u-dur) / 2), background-color var(--u-dur);
 
     li {
@@ -60,9 +58,13 @@ defineProps<{
     }
   }
 
-  &:hover .ExpandPop {
-    visibility: visible;
-    opacity: 1;
+  &:hover {
+    background-color: var(--c-bg-mute);
+
+    .ExpandPop {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 </style>

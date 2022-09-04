@@ -27,5 +27,10 @@
   .LeftSideBarContainer {
     width: var(--ms-left-sidebar-width);
   }
+
+  .CentralSpaceContainer {
+    flex-grow: 1;
+    background-color: var(--c-bg-mute);
+  }
 }
 </style>

@@ -12,19 +12,18 @@ import MSButton from '../MSButton/MSButton.vue'
 
 <style lang="scss">
 .MSDropdownItem {
-  display: flex;
   width: 100%;
   padding: 8px;
   border-radius: 5px;
   font-family: var(--f-r);
   font-size: 0.95rem;
-  transition: background-color calc(var(--u-dur) / 2);
 
   .ButtonText {
     flex-grow: 1;
   }
 
-  &:hover {
+  &:hover,
+  &.active {
     background-color: var(--c-bg-mute);
   }
 }

@@ -10,8 +10,11 @@
 
 <style lang="scss">
 .MSButton {
+  display: flex;
+  align-items: center;
   user-select: none;
   cursor: pointer;
+  transition: background-color calc(var(--u-dur) / 2);
 
   .ButtonText {
     white-space: nowrap;
@@ -19,9 +22,8 @@
 
   .LeftButtonIcon,
   .RightButtonIcon {
-    .iconify {
-      vertical-align: middle;
-    }
+    display: flex;
+    align-items: center;
   }
 }
 </style>

@@ -12,7 +12,7 @@
     </div>
     <div class="MSLeftSidebarControl">
       <MSButton>
-        <template #icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
+        <template #left-icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
       </MSButton>
     </div>
   </div>
