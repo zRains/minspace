@@ -2,7 +2,7 @@
   <div class="MSOuterBoard">
     <MSUserAvatar src="https://zrain.fun/favicon.ico" />
     <div class="MSSpaceInfo">
-      <MSDropdown class="MSUserInfo">
+      <MSDropdown class="MSUserInfo" :items="userDropdownOptions" trigger="click">
         <template #trigger>
           <div class="UserName">Buzzfeed</div>
           <Icon icon="tabler:chevron-down" />
@@ -10,13 +10,91 @@
       </MSDropdown>
       <div class="MSSpaceStatus">45 rooms online</div>
     </div>
-    <div class="MSLeftSidebarControl"><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></div>
+    <div class="MSLeftSidebarControl">
+      <MSButton>
+        <template #icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
+      </MSButton>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { DropdownOptions } from '../../../types/ui'
 import MSUserAvatar from '../../ui/MSUserAvatar.vue'
-import MSDropdown from '../../ui/MSDropdown.vue'
+import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
+import MSButton from '../../ui/MSButton/MSButton.vue'
+
+const userDropdownOptions: DropdownOptions = [
+  {
+    type: 'click',
+    text: 'View profile',
+    onClick: () => {}
+  },
+  {
+    type: 'click',
+    text: 'Notification preferences',
+    onClick: () => {}
+  },
+  {
+    type: 'expand',
+    text: 'Theme setting',
+    items: [
+      {
+        type: 'click',
+        text: 'Light Mode',
+        onClick: () => {}
+      },
+      {
+        type: 'click',
+        text: 'Dark Mode',
+        onClick: () => {}
+      }
+    ]
+  },
+  {
+    type: 'toggle',
+    text: 'Undisturbed mode',
+    active: true,
+    onClick: () => {}
+  },
+  {
+    type: 'group',
+    label: 'Danger zone',
+    items: [
+      {
+        type: 'click',
+        text: 'Group click test-1',
+        onClick: () => {}
+      },
+      {
+        type: 'click',
+        text: 'Group click test-2',
+        onClick: () => {}
+      },
+      {
+        type: 'expand',
+        text: 'Group expand test-1',
+        items: [
+          {
+            type: 'click',
+            text: 'Light Mode',
+            onClick: () => {}
+          },
+          {
+            type: 'click',
+            text: 'Dark Mode',
+            onClick: () => {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    type: 'click',
+    text: 'Click test-3',
+    onClick: () => {}
+  }
+]
 </script>
 
 <style lang="scss">
