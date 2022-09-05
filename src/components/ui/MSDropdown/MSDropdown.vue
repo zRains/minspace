@@ -5,15 +5,15 @@
     @mouseenter="trigger === 'hover' && (isActivated = true)"
     @mouseleave="trigger === 'hover' && (isActivated = false)"
   >
-    <div
+    <MSButton
       class="Trigger"
       aria-haspopup="true"
       :aria-expanded="isActivated"
       :aria-label="label || 'MS dropdown'"
       @click="isActivated = !isActivated"
     >
-      <slot name="trigger"></slot>
-    </div>
+      <template #text> <slot name="trigger"></slot></template>
+    </MSButton>
 
     <MSDropdownPop :items="items" @click="() => clickToClose && (isActivated = !isActivated)" />
   </div>
@@ -24,6 +24,7 @@ import { ref } from 'vue'
 import type { DropdownOptions } from '../../../types/ui'
 import MSDropdownPop from './MSDropdownPop.vue'
 import useClickOutside from '../../../composes/clickOutside'
+import MSButton from '../MSButton/MSButton.vue'
 
 defineProps<{
   items: DropdownOptions
@@ -48,9 +49,6 @@ useClickOutside(MSDropdown, () => {
   position: relative;
 
   .Trigger {
-    cursor: pointer;
-    user-select: none;
-
     &[aria-expanded='true'] {
       & + .MSDropdownPop {
         opacity: 1;

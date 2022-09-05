@@ -4,7 +4,7 @@
     <div class="MSSpaceInfo">
       <MSDropdown class="MSUserInfo" :items="userDropdownOptions" trigger="click">
         <template #trigger>
-          <div class="UserName">Buzzfeed</div>
+          <div class="UserName">zRain</div>
           <Icon icon="tabler:chevron-down" />
         </template>
       </MSDropdown>

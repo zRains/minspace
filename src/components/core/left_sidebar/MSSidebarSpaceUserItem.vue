@@ -59,7 +59,7 @@ defineProps({
   .ItemStatus {
     .ItemTime {
       line-height: 18px;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: var(--c-text-2);
     }
 

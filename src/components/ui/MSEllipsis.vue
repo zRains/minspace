@@ -4,7 +4,4 @@
 
 <script setup lang="ts"></script>
 
-<style lang="scss">
-.MSEllipsis {
-}
-</style>
+<style lang="scss"></style>

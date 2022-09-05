@@ -34,7 +34,7 @@ export function getRelativeTime(d1: number, d2 = +new Date()) {
     second: 1000
   }
 
-  const rtf = new Intl.RelativeTimeFormat('ch', { numeric: 'auto' })
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
 
   const elapsed = d1 - d2
 
