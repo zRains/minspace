@@ -2,17 +2,17 @@
   <div class="MSMainLayout">
     <!-- Left sidebar -->
     <div class="LeftSideBarContainer">
-      <slot name="LeftSideBar" />
+      <slot name="left-sideBar" />
     </div>
 
     <!-- Central space -->
     <div class="CentralSpaceContainer">
-      <slot name="CentralSpace" />
+      <slot name="central-space" />
     </div>
 
     <!-- Right sidebar -->
     <div class="RightSideBarContainer">
-      <slot name="RightSideBar" />
+      <slot name="right-sideBar" />
     </div>
   </div>
 </template>

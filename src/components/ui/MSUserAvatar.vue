@@ -1,12 +1,6 @@
 <template>
-  <div class="MSUserAvatar">
-    <img
-      v-if="showUserAvatar && src"
-      :style="{ height: size + 'px', width: size + 'px' }"
-      :src="src"
-      :alt="alt"
-      @error="showUserAvatar = false"
-    />
+  <div class="MSUserAvatar" :style="{ height: size + 'px', width: size + 'px' }">
+    <img v-if="showUserAvatar && src" :src="src" :alt="alt" @error="showUserAvatar = false" />
     <Icon v-else :height="size" :width="size" icon="tabler:photo-x" />
   </div>
 </template>
@@ -36,7 +30,13 @@ const showUserAvatar = ref(true)
 
 <style lang="scss">
 .MSUserAvatar {
+  flex-shrink: 0;
+
   img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    height: 100%;
+    width: 100%;
     border-radius: 50%;
     vertical-align: middle;
   }

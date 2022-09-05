@@ -45,7 +45,7 @@
 
     <div class="MSSpaceMenu">
       <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
-      <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="USERS"> </MSSidebarSpaceMenu>
+      <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="USERS"></MSSidebarSpaceMenu>
     </div>
 
     <!-- <MSLoading/> -->
