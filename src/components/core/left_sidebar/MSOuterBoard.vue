@@ -99,10 +99,12 @@ const userDropdownOptions: DropdownOptions = [
 
 <style lang="scss">
 .MSOuterBoard {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 calc(var(--u-gap) * 2);
   height: var(--ms-left-sidebar-outer-board-height);
+  z-index: 2;
 
   .MSSpaceInfo {
     margin-left: calc(var(--u-gap) * 1.2);

@@ -38,6 +38,7 @@ const showUserAvatar = ref(true)
 .MSUserAvatar {
   img {
     border-radius: 50%;
+    vertical-align: middle;
   }
 }
 </style>

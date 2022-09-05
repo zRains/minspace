@@ -14,6 +14,7 @@ import MSButton from '../../ui/MSButton/MSButton.vue'
   margin: 0 calc(var(--u-gap) * 2);
   padding: var(--u-gap);
   border-radius: 5px;
+  line-height: 20px;
 
   .LeftButtonIcon {
     margin-right: var(--u-gap);

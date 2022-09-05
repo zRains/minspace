@@ -1,6 +1,6 @@
 <template>
   <div class="MSLeftSidebar">
-    <MSOuterBoardVue />
+    <MSOuterBoard />
     <div class="MSCoreMenu">
       <!-- Add room button -->
       <MSSidebarMenuItem class="AddRoomBtn">
@@ -14,7 +14,7 @@
         <template #text>Search</template>
       </MSSidebarMenuItem>
 
-      <div class="MSSidebarMenuDivider"></div>
+      <div class="MSSidebarDivider"></div>
 
       <!-- Back to home button -->
       <MSSidebarMenuItem class="BackToHomeBtn">
@@ -24,7 +24,7 @@
 
       <!-- All rooms button -->
       <MSSidebarMenuItem class="AllRoomsBtn">
-        <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
+        <template #icon><Icon height="20" width="20" icon="tabler:box-model" /></template>
         <template #text>All rooms</template>
       </MSSidebarMenuItem>
 
@@ -40,25 +40,45 @@
         <template #text>Setting</template>
       </MSSidebarMenuItem>
     </div>
+
+    <div class="MSSidebarDivider"></div>
+
+    <div class="MSSpaceMenu">
+      <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
+      <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="USERS"> </MSSidebarSpaceMenu>
+    </div>
+
+    <!-- <MSLoading/> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import MSOuterBoardVue from './MSOuterBoard.vue'
+import MSOuterBoard from './MSOuterBoard.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
+import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
+// import MSLoading from '../../ui/MSLoading.vue'
 </script>
 
 <style lang="scss">
 .MSLeftSidebar {
+  position: relative;
   height: 100%;
   width: var(--ms-left-sidebar-width);
+  border-right: 1px solid var(--c-divider-light);
 
-  .MSCoreMenu {
+  .MSSidebarDivider {
+    margin: calc(var(--u-gap) * 1.5) 0;
+  }
+
+  .MSCoreMenu,
+  .MSSpaceMenu {
+    position: relative;
     padding: var(--u-gap) 0;
+    z-index: 1;
+  }
 
-    .MSSidebarMenuDivider {
-      margin: calc(var(--u-gap) * 1.5) 0;
-    }
+  .MSSpaceMenu > *:not(:last-child) {
+    margin-bottom: calc(var(--u-gap) * 2);
   }
 }
 </style>

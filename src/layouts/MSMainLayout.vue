@@ -30,7 +30,6 @@
 
   .CentralSpaceContainer {
     flex-grow: 1;
-    background-color: var(--c-bg-mute);
   }
 }
 </style>
