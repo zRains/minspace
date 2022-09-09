@@ -49,6 +49,7 @@
     </div>
 
     <!-- <MSLoading/> -->
+    <MSEmpty />
   </div>
 </template>
 
@@ -56,6 +57,7 @@
 import MSOuterBoard from './MSOuterBoard.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
+import MSEmpty from '../../ui/MSEmpty.vue'
 // import MSLoading from '../../ui/MSLoading.vue'
 </script>
 

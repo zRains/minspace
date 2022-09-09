@@ -15,6 +15,9 @@
       <MSButton>
         <template #left-icon><Icon height="24" icon="tabler:file-plus" /></template>
       </MSButton>
+      <MSButton>
+        <template #left-icon><Icon height="24" icon="tabler:at" /></template>
+      </MSButton>
     </div>
   </div>
 </template>
