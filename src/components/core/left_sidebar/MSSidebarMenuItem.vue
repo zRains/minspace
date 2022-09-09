@@ -16,10 +16,6 @@ import MSButton from '../../ui/MSButton/MSButton.vue'
   border-radius: 5px;
   line-height: 20px;
 
-  .LeftButtonIcon {
-    margin-right: var(--u-gap);
-  }
-
   &:hover {
     background-color: var(--c-bg-mute);
   }

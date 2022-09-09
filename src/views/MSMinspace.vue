@@ -1,5 +1,5 @@
 <template>
-  <MSMainLayout>
+  <MSMainLayout class="MSMinspace">
     <template #left-sideBar>
       <MSLeftSidebar></MSLeftSidebar>
     </template>

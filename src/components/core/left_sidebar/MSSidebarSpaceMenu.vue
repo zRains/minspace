@@ -3,7 +3,7 @@
     <div class="MenuBanner" aria-haspopup="true" :aria-expanded="isExpand" :aria-label="(text || 'MS dropdown') + 'space menu'">
       <div class="BannerText">{{ text }}</div>
       <div class="BannerOptions">
-        <MSButton class="SidebarSpaceMenuFold" @click="isExpand = !isExpand">
+        <MSButton class="SidebarSpaceMenuFold" @click="isExpand = !isExpand" no-text>
           <template #left-icon><Icon :class="{ isExpand }" icon="tabler:chevron-down" /></template>
         </MSButton>
         <MSButton class="SidebarSpaceMenuAdd">

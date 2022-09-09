@@ -13,9 +13,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@iconify/vue": "^3.2.1",
     "nanoid": "^4.0.0",
     "vue": "^3.2.38",
-    "@iconify/vue": "^3.2.1"
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.36.1",
