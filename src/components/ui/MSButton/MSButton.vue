@@ -1,9 +1,9 @@
 <template>
-  <div class="MSButton">
+  <button class="MSButton">
     <div :class="{ ButtonLeftIcon: true, noText }"><slot name="left-icon"></slot></div>
     <div class="ButtonText"><slot name="text"></slot></div>
     <div :class="{ ButtonRightIcon: true, noText }"><slot name="right-icon"></slot></div>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +22,12 @@ defineProps({
   align-items: center;
   user-select: none;
   cursor: pointer;
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  background-color: var(--c-bg);
   transition: background-color calc(var(--u-dur) / 2);
 
   .ButtonText {

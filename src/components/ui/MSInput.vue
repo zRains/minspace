@@ -1,5 +1,12 @@
 <template>
-  <div class="MSInput" :style="{ padding: sizeRefer[size] + 'px', fontSize: `calc(0.9rem + ${(sizeRefer[size] - 6) * 0.01}rem)` }">
+  <div
+    class="MSInput"
+    :style="{
+      padding: sizeRefer[size] + 'px',
+      fontSize: `calc(0.9rem + ${(sizeRefer[size] - 6) * 0.01}rem)`,
+      width: width ? width + 'px' : 'unset'
+    }"
+  >
     <!-- Left icon -->
     <div class="InputLeftIcon"><slot name="left-icon"></slot></div>
 
@@ -19,9 +26,10 @@
       <slot name="right-icon">
         <Icon
           v-if="inputType === 'password'"
-          @click="
+          @mousedown="showPassword = true"
+          @mouseup="
             () => {
-              showPassword = !showPassword
+              showPassword = false
               focusInput()
             }
           "
@@ -52,6 +60,10 @@ defineProps({
     type: String as PropType<'large' | 'middle' | 'small'>,
     required: false,
     default: 'middle'
+  },
+  width: {
+    type: Number,
+    required: false
   },
   inputType: {
     type: String as PropType<'text' | 'number' | 'password'>,
@@ -89,11 +101,6 @@ const focusInput = () => {
     inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
   })
 }
-
-// const inputValue = ref('')
-// const inputType = ref(props.inputType)
-
-// const showEyeIcon = computed(() => inputType.value === 'password' && showPassword.value)
 </script>
 
 <style lang="scss">
@@ -102,7 +109,6 @@ $ms-input-height: 30px;
 .MSInput {
   display: flex;
   align-self: center;
-  width: 250px;
   border: 1px solid var(--c-divider);
   border-radius: 5px;
   background-color: var(--c-bg);
@@ -115,18 +121,8 @@ $ms-input-height: 30px;
     font-size: calc(100% + 0.2rem);
     color: var(--c-text-2);
 
-    &.InputLeftIcon {
-      & > *:last-child {
-        margin-right: calc(var(--u-gap) / 1.2);
-      }
-    }
-
     &.InputRightIcon {
       cursor: pointer;
-
-      & > *:first-child {
-        margin-left: calc(var(--u-gap) / 1.2);
-      }
     }
   }
 
@@ -136,7 +132,7 @@ $ms-input-height: 30px;
     input {
       display: block;
       margin: 0;
-      padding: 0;
+      padding: 0 var(--u-gap);
       outline: none;
       border: none;
       width: 100%;

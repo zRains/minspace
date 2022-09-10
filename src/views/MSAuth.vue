@@ -21,10 +21,10 @@
         </p>
 
         <!-- Register box -->
-        <div v-if="isRegisterMode" class="RegisterInputBox">
+        <div v-if="isRegisterMode" class="RegisterInputForm">
           <!-- Email -->
           <div class="InputBanner">Email</div>
-          <MSInput v-model:value="registerModule.email" size="large" input-type="text" cleanable>
+          <MSInput v-model:value="registerModule.email" size="large" :width="250" input-type="text" cleanable>
             <template #left-icon>
               <Icon icon="tabler:mail" />
             </template>
@@ -32,7 +32,7 @@
 
           <!-- Password -->
           <div class="InputBanner">Password</div>
-          <MSInput v-model:value="registerModule.password" size="large" input-type="password">
+          <MSInput v-model:value="registerModule.password" size="large" :width="250" input-type="password">
             <template #left-icon>
               <Icon icon="tabler:lock" />
             </template>
@@ -40,7 +40,7 @@
 
           <!-- Password confirm -->
           <div class="InputBanner">Password confirm</div>
-          <MSInput size="large" input-type="password" v-model:value="registerModule.passwordConfirm">
+          <MSInput v-model:value="registerModule.passwordConfirm" size="large" :width="250" input-type="password">
             <template #left-icon>
               <Icon icon="tabler:lock-square" />
             </template>
@@ -48,10 +48,10 @@
         </div>
 
         <!-- Login box -->
-        <div v-else class="LoginInputBox">
+        <div v-else class="LoginInputForm">
           <!-- Email -->
           <div class="InputBanner">Email</div>
-          <MSInput v-model:value="loginModule.email" size="large" input-type="text" cleanable>
+          <MSInput v-model:value="loginModule.email" size="large" :width="250" input-type="text" cleanable>
             <template #left-icon>
               <Icon icon="tabler:mail" />
             </template>
@@ -59,7 +59,7 @@
 
           <!-- Password -->
           <div class="InputBanner">Password</div>
-          <MSInput v-model:value="loginModule.password" size="large" input-type="password">
+          <MSInput v-model:value="loginModule.password" size="large" :width="250" input-type="password">
             <template #left-icon>
               <Icon icon="tabler:lock" />
             </template>
@@ -69,11 +69,11 @@
         <!-- Action!! -->
         <MSButton class="AuthConfirm">
           <template #left-icon><Icon icon="tabler:box" /></template>
-          <template #text>Create account</template>
+          <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
         </MSButton>
       </div>
 
-      <div class="PublicRooms">Public Rooms</div>
+      <div class="PublicRooms"></div>
     </div>
   </MSFullLayout>
 </template>
@@ -139,8 +139,8 @@ const isRegisterMode = ref(true)
         }
       }
 
-      .RegisterInputBox,
-      .LoginInputBox {
+      .RegisterInputForm,
+      .LoginInputForm {
         margin: 1.5rem 0;
 
         .InputBanner {
