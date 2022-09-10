@@ -67,7 +67,7 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton class="AuthConfirm">
+        <MSButton class="AuthConfirm" @click="Toast.success('i made it!', { position: 'TopCenter' })">
           <template #left-icon><Icon icon="tabler:box" /></template>
           <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
         </MSButton>
@@ -83,6 +83,7 @@ import { ref } from 'vue'
 import MSFullLayout from '../layouts/MSFullLayout.vue'
 import MSInput from '../components/ui/MSInput.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
+import useToast from '../composes/toast'
 
 const registerModule = ref({
   email: '',
@@ -96,6 +97,7 @@ const loginModule = ref({
 })
 
 const isRegisterMode = ref(true)
+const Toast = useToast()
 </script>
 
 <style lang="scss">
@@ -107,7 +109,7 @@ const isRegisterMode = ref(true)
   .AuthBanner {
     display: flex;
     margin: 0 auto;
-    padding-top: 10rem;
+    padding: 10rem var(--u-gap) 0 var(--u-gap);
     height: 100vh;
 
     .AuthContaienr {
