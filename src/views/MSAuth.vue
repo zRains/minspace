@@ -67,7 +67,7 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton class="AuthConfirm" @click="Toast.loading('Loading Setting...', { position: 'TopCenter' })">
+        <MSButton class="AuthConfirm" @click="Toast.success('Loading Setting...', { position: 'TopCenter' })">
           <template #left-icon><Icon icon="tabler:box" /></template>
           <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
         </MSButton>
@@ -123,7 +123,6 @@ const Toast = useToast()
         }
 
         .SwitchToLoginBtn {
-          display: inline-block;
           margin-left: var(--u-gap);
           color: var(--c-text-1);
           text-decoration: underline;
@@ -136,6 +135,7 @@ const Toast = useToast()
         }
 
         &:nth-child(3) {
+          display: flex;
           font-size: 0.95rem;
           font-family: var(--f-r);
         }

@@ -34,8 +34,8 @@ defineProps<{
 
 <style lang="scss">
 .MSDropdownPop {
-  display: block;
   position: absolute;
+  display: block;
   min-width: 120px;
   margin: 0;
   padding: var(--u-gap);
@@ -43,11 +43,13 @@ defineProps<{
   left: 0;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(calc(var(--u-gap) * -0.5));
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
   line-height: 100%;
   border-radius: 5px;
+  z-index: 1;
 
   transition: opacity calc(var(--u-dur) / 2), visibility calc(var(--u-dur) / 2), transform calc(var(--u-dur) / 2),
     background-color var(--u-dur);

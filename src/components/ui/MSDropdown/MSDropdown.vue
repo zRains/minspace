@@ -53,6 +53,7 @@ useClickOutside(MSDropdown, () => {
       & + .MSDropdownPop {
         opacity: 1;
         visibility: visible;
+        pointer-events: auto;
         transform: translateY(0);
       }
     }

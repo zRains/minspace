@@ -1,14 +1,29 @@
 <template>
-  <button class="MSButton">
-    <div :class="{ ButtonLeftIcon: true, noText }"><slot name="left-icon"></slot></div>
-    <div class="ButtonText"><slot name="text"></slot></div>
-    <div :class="{ ButtonRightIcon: true, noText }"><slot name="right-icon"></slot></div>
+  <button :class="{ MSButton: true, MSButtonLoading: loading }" :disabled="disabled">
+    <div class="ButtonWarper">
+      <div :class="{ ButtonLeftIcon: true, noText }"><slot name="left-icon"></slot></div>
+      <div class="ButtonText"><slot name="text"></slot></div>
+      <div :class="{ ButtonRightIcon: true, noText }"><slot name="right-icon"></slot></div>
+    </div>
+    <div v-if="loading" class="ButtonLoading"><MSLoading :size="20" /></div>
   </button>
 </template>
 
 <script setup lang="ts">
+import MSLoading from '../MSLoading.vue'
+
 defineProps({
   noText: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+  loading: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+  disabled: {
     type: Boolean,
     required: false,
     default: false
@@ -18,10 +33,8 @@ defineProps({
 
 <style lang="scss">
 .MSButton {
+  position: relative;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0;
   outline: none;
   border: none;
@@ -33,27 +46,66 @@ defineProps({
   user-select: none;
   cursor: pointer;
 
-  .ButtonText {
-    flex-grow: 1;
-    white-space: nowrap;
+  .ButtonWarper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--u-dur), visibility var(--u-dur);
+
+    .ButtonText {
+      flex-grow: 1;
+      white-space: nowrap;
+    }
+
+    .ButtonLeftIcon,
+    .ButtonRightIcon {
+      display: flex;
+      align-items: center;
+
+      &.ButtonLeftIcon:not(.noText) {
+        & > *:last-child {
+          margin-right: calc(var(--u-gap) / 1.2);
+        }
+      }
+
+      &.ButtonRightIcon:not(.noText) {
+        & > *:first-child {
+          margin-left: calc(var(--u-gap) / 1.2);
+        }
+      }
+    }
   }
 
-  .ButtonLeftIcon,
-  .ButtonRightIcon {
+  .ButtonLoading {
+    position: absolute;
     display: flex;
+    justify-content: center;
     align-items: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--u-dur), visibility var(--u-dur);
+  }
 
-    &.ButtonLeftIcon:not(.noText) {
-      & > *:last-child {
-        margin-right: calc(var(--u-gap) / 1.2);
-      }
+  &.MSButtonLoading {
+    .ButtonWarper {
+      opacity: 0;
+      visibility: hidden;
     }
 
-    &.ButtonRightIcon:not(.noText) {
-      & > *:first-child {
-        margin-left: calc(var(--u-gap) / 1.2);
-      }
+    .ButtonLoading {
+      opacity: 1;
+      visibility: visible;
     }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 }
 </style>

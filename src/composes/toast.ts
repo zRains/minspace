@@ -1,4 +1,5 @@
 import { render, h } from 'vue'
+import { coreState } from '../states'
 import MSToast from '../components/ui/toast/MSToast.vue'
 
 interface ToastOption {
@@ -15,19 +16,38 @@ interface ToastOption {
   content?: string
 }
 
+const {
+  toast: {
+    mutations: { addCloseHandle }
+  }
+} = coreState
+
 export default function useToast() {
   return {
-    create(options: ToastOption | string) {
+    create(options: ToastOption | string): {
+      closeToastHandle: () => void
+    } {
       const finalOptions: ToastOption = typeof options === 'string' ? { title: options } : options
       const toastProvider = document.querySelector('.MSToastProvider')
       const toastContainer = document.createElement('div')
       const vNode = h(MSToast, finalOptions, {})
 
-      if (!toastProvider) return
+      if (!toastProvider)
+        return {
+          closeToastHandle: () => {}
+        }
 
       toastContainer.classList.add('toastContainer')
       toastProvider.appendChild(toastContainer)
       render(vNode, toastContainer)
+
+      const toastCloseHandle = vNode.component?.exposed!.closeToastHandle
+
+      addCloseHandle(toastCloseHandle)
+
+      return {
+        closeToastHandle: toastCloseHandle
+      }
     },
     open(message: string) {
       this.create(message)

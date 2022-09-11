@@ -38,6 +38,7 @@ defineProps<{
 .MSDropdownExpandItem {
   position: relative;
   transition: background-color var(--u-dur);
+  border-radius: 5px;
 
   .ExpandPop {
     position: absolute;

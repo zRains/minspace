@@ -18,6 +18,11 @@ defineProps({
     type: Number,
     required: false,
     default: 30
+  },
+  color: {
+    type: String,
+    required: false,
+    default: 'var(--c-text-1)'
   }
 })
 </script>

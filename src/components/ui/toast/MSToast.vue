@@ -134,6 +134,10 @@ function showToastHandle() {
 }
 
 onMounted(showToastHandle)
+
+defineExpose({
+  closeToastHandle
+})
 </script>
 
 <style lang="scss">

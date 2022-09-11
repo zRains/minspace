@@ -60,7 +60,6 @@ $banner-height: 22px;
     }
 
     .BannerOptions > .MSButton {
-      display: inline-flex;
       height: $banner-height;
       line-height: $banner-height;
       padding: 0 calc(var(--u-gap) * 0.8);

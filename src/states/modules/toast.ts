@@ -1,28 +1,23 @@
-import { ComponentInternalInstance } from 'vue'
-
-const toastInstance: ComponentInternalInstance[] = []
+const closeHandles: Array<() => void> = []
 
 export default function useToast() {
   // states
 
   // mutations
-  function addToastInstance(instance: ComponentInternalInstance) {
-    // let verticalOffset = 0
-    // toastInstance.forEach((item) => {
-    //   verticalOffset += item.$el.offsetHeight + 16
-    // })
-    // verticalOffset += 16
+  function addCloseHandle(handle: () => void) {
+    closeHandles.push(handle)
+  }
 
-    // instance.toastPosition.y = verticalOffset
-
-    toastInstance.push(instance)
+  function closeAllToast() {
+    closeHandles.forEach((h) => h())
+    closeHandles.length = 0
   }
 
   // actions
 
   return {
     state: {},
-    mutations: { addToastInstance },
+    mutations: { addCloseHandle, closeAllToast },
     actions: {}
   }
 }
