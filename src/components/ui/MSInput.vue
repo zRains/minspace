@@ -1,6 +1,6 @@
 <template>
   <div
-    class="MSInput"
+    :class="{ MSInput: true, MSInputInvalid: invalid }"
     :style="{
       padding: sizeRefer[size] + 'px',
       fontSize: `calc(0.9rem + ${(sizeRefer[size] - 6) * 0.01}rem)`,
@@ -80,6 +80,11 @@ defineProps({
     required: false,
     default: false
   },
+  invalid: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
   value: {
     type: String,
     required: true
@@ -112,6 +117,7 @@ $ms-input-height: 30px;
   border: 1px solid var(--c-divider);
   border-radius: 5px;
   background-color: var(--c-bg);
+  transition: border var(--u-dur);
 
   .InputLeftIcon,
   .InputRightIcon {
@@ -120,6 +126,7 @@ $ms-input-height: 30px;
     align-items: center;
     font-size: calc(100% + 0.2rem);
     color: var(--c-text-2);
+    transition: color var(--u-dur);
 
     &.InputRightIcon {
       cursor: pointer;
@@ -138,6 +145,7 @@ $ms-input-height: 30px;
       width: 100%;
       font-family: var(--f-r);
       font-size: inherit;
+      transition: color var(--u-dur);
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -148,6 +156,16 @@ $ms-input-height: 30px;
       &[type='number'] {
         -moz-appearance: textfield;
       }
+    }
+  }
+
+  &.MSInputInvalid {
+    border: 1px solid var(--c-red);
+
+    .InputLeftIcon,
+    .InputRightIcon,
+    .InputContainer input {
+      color: var(--c-red);
     }
   }
 }

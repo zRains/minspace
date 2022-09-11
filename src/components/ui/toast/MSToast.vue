@@ -13,7 +13,13 @@
 
       <div class="ToastBody">
         <div class="ToastTitle">{{ title }}</div>
-        <div v-if="content" class="ToastContent">{{ content }}</div>
+        <div v-if="content" class="ToastContent">
+          <template v-if="typeof content === 'string'">{{ content }}</template>
+          <template v-else></template>
+          <ul v-for="c in content" :key="c">
+            <li>{{ c }}</li>
+          </ul>
+        </div>
       </div>
 
       <MSButton class="TostRightIcon" no-text @click="closeToastHandle">
@@ -46,7 +52,7 @@ const props = defineProps({
   duration: {
     type: Number,
     required: false,
-    default: 3000
+    default: 4000
   },
   fastAdd: {
     type: Boolean,
@@ -83,7 +89,7 @@ const props = defineProps({
     required: true
   },
   content: {
-    type: String,
+    type: Object as PropType<string | string[]>,
     required: false
   }
 })
@@ -145,7 +151,7 @@ defineExpose({
   display: inline-flex;
   align-items: center;
   padding: var(--u-gap) calc(var(--u-gap) * 1.5);
-  min-width: 250px;
+  min-width: 280px;
   max-width: 330px;
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
@@ -212,6 +218,15 @@ defineExpose({
     .ToastContent {
       padding-top: calc(var(--u-gap) / 1.8);
       font-size: 0.85rem;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+        }
+      }
     }
   }
 

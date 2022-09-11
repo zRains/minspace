@@ -12,7 +12,7 @@
     <div class="AuthBanner">
       <div class="AuthContainer">
         <p>START FOR FREE</p>
-        <p>{{ isRegisterMode ? 'Create new account' : 'Welcome back space' }}<span class="SpecialDot">.</span></p>
+        <p>Welcome to minspace<span class="SpecialDot">.</span></p>
         <p>
           {{ isRegisterMode ? 'Already A Member?' : 'No account?'
           }}<MSButton @click="isRegisterMode = !isRegisterMode" class="SwitchToLoginBtn">
@@ -24,7 +24,14 @@
         <div v-if="isRegisterMode" class="RegisterInputForm">
           <!-- Email -->
           <div class="InputBanner">Email</div>
-          <MSInput v-model:value="registerModule.email" size="large" :width="250" input-type="text" cleanable>
+          <MSInput
+            v-model:value="registerModule.email"
+            :invalid="!registerModule.isEmailValid"
+            :width="250"
+            cleanable
+            size="large"
+            input-type="text"
+          >
             <template #left-icon>
               <Icon icon="tabler:mail" />
             </template>
@@ -32,7 +39,13 @@
 
           <!-- Password -->
           <div class="InputBanner">Password</div>
-          <MSInput v-model:value="registerModule.password" size="large" :width="250" input-type="password">
+          <MSInput
+            v-model:value="registerModule.password"
+            :invalid="!registerModule.isPasswordValid"
+            :width="250"
+            size="large"
+            input-type="password"
+          >
             <template #left-icon>
               <Icon icon="tabler:lock" />
             </template>
@@ -40,7 +53,13 @@
 
           <!-- Password confirm -->
           <div class="InputBanner">Password confirm</div>
-          <MSInput v-model:value="registerModule.passwordConfirm" size="large" :width="250" input-type="password">
+          <MSInput
+            v-model:value="registerModule.passwordConfirm"
+            :invalid="!registerModule.isPasswordConfirmValid"
+            :width="250"
+            size="large"
+            input-type="password"
+          >
             <template #left-icon>
               <Icon icon="tabler:lock-square" />
             </template>
@@ -51,7 +70,14 @@
         <div v-else class="LoginInputForm">
           <!-- Email -->
           <div class="InputBanner">Email</div>
-          <MSInput v-model:value="loginModule.email" size="large" :width="250" input-type="text" cleanable>
+          <MSInput
+            v-model:value="loginModule.email"
+            :invalid="!loginModule.isEmailValid"
+            size="large"
+            :width="250"
+            input-type="text"
+            cleanable
+          >
             <template #left-icon>
               <Icon icon="tabler:mail" />
             </template>
@@ -59,7 +85,13 @@
 
           <!-- Password -->
           <div class="InputBanner">Password</div>
-          <MSInput v-model:value="loginModule.password" size="large" :width="250" input-type="password">
+          <MSInput
+            v-model:value="loginModule.password"
+            :invalid="!loginModule.isPasswordValid"
+            size="large"
+            :width="250"
+            input-type="password"
+          >
             <template #left-icon>
               <Icon icon="tabler:lock" />
             </template>
@@ -67,9 +99,9 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton class="AuthConfirm" @click="Toast.success('Loading Setting...', { position: 'TopCenter' })">
+        <MSButton class="AuthConfirm" @click="isRegisterMode ? checkRegisterValid() : checkLoginValid()">
           <template #left-icon><Icon icon="tabler:box" /></template>
-          <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
+          <template #text>{{ isRegisterMode ? 'Create account' : 'Login' }}</template>
         </MSButton>
       </div>
 
@@ -79,25 +111,62 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import MSFullLayout from '../layouts/MSFullLayout.vue'
 import MSInput from '../components/ui/MSInput.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
 import useToast from '../composes/toast'
 
-const registerModule = ref({
+const Toast = useToast()
+
+const registerModule = reactive({
   email: '',
   password: '',
-  passwordConfirm: ''
+  passwordConfirm: '',
+  isEmailValid: true,
+  isPasswordValid: true,
+  isPasswordConfirmValid: true
 })
 
-const loginModule = ref({
+const loginModule = reactive({
   email: '',
-  password: ''
+  password: '',
+  isEmailValid: true,
+  isPasswordValid: true
 })
 
 const isRegisterMode = ref(true)
-const Toast = useToast()
+
+function checkRegisterValid() {
+  const invalidArr: string[] = []
+
+  registerModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerModule.email)
+  if (!registerModule.isEmailValid) invalidArr.push('Invalid email')
+
+  registerModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(registerModule.password)
+  if (!registerModule.isPasswordValid) invalidArr.push('Invalid password')
+
+  registerModule.isPasswordConfirmValid = registerModule.password === registerModule.passwordConfirm
+  if (!registerModule.isPasswordConfirmValid) invalidArr.push('The two passwords do not match')
+
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr.map((e, i) => `${i + 1}. ${e}.`) })
+
+  return invalidArr.length === 0
+}
+
+function checkLoginValid() {
+  const invalidArr: string[] = []
+
+  loginModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginModule.email)
+  if (!loginModule.isEmailValid) invalidArr.push('Invalid email')
+
+  loginModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(loginModule.password)
+  if (!loginModule.isPasswordValid) invalidArr.push('Invalid password')
+
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr.map((e, i) => `${i + 1}. ${e}.`) })
+
+  return invalidArr.length === 0
+}
 </script>
 
 <style lang="scss">

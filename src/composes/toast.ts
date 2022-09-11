@@ -13,7 +13,7 @@ interface ToastOption {
   onClosed?: () => void
   closable?: boolean
   title: string
-  content?: string
+  content?: string | string[]
 }
 
 const {
