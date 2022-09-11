@@ -1,9 +1,9 @@
 <div align="center">
   <a href="#">
-    <img src="public/minspace.png" alt="Logo" width="80">
+    <img src="public/minspace.svg" alt="Logo" width="80">
   </a>
 
-  <h3 align="center">Rune</h3>
+  <h3 align="center">minspace</h3>
 
   <p align="center">
     A smaller world 🌎

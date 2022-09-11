@@ -12,9 +12,9 @@
     <div class="AuthBanner">
       <div class="AuthContainer">
         <p>START FOR FREE</p>
-        <p>{{ isRegisterMode ? 'Create new account' : 'Wellcome back space' }}<span class="SpecialDot">.</span></p>
+        <p>{{ isRegisterMode ? 'Create new account' : 'Welcome back space' }}<span class="SpecialDot">.</span></p>
         <p>
-          {{ isRegisterMode ? 'Alerady A Member?' : 'No account?'
+          {{ isRegisterMode ? 'Already A Member?' : 'No account?'
           }}<MSButton @click="isRegisterMode = !isRegisterMode" class="SwitchToLoginBtn">
             <template #text>{{ isRegisterMode ? 'Log In' : 'Sign up' }}</template>
           </MSButton>
@@ -67,10 +67,7 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton
-          class="AuthConfirm"
-          @click="Toast.success('Login failed', { content: 'Password error, please re-enter the password', position: 'TopCenter' })"
-        >
+        <MSButton class="AuthConfirm" @click="Toast.loading('Loading Setting...', { position: 'TopCenter' })">
           <template #left-icon><Icon icon="tabler:box" /></template>
           <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
         </MSButton>

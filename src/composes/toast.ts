@@ -60,6 +60,13 @@ export default function useToast() {
         ...options
       })
     },
+    loading(message: string, options?: Omit<ToastOption, 'type' | 'title'>) {
+      return this.create({
+        title: message,
+        type: 'loading',
+        ...options
+      })
+    },
     clear() {}
   }
 }

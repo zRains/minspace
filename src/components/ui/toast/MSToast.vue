@@ -4,9 +4,10 @@
       <div :class="['TostLeftIcon', type]">
         <slot name="left-icon">
           <Icon v-if="type === 'success'" height="16" width="16" icon="tabler:check" />
-          <Icon v-if="type === 'info'" height="16" width="16" icon="tabler:info-circle" />
+          <Icon v-if="type === 'info'" height="16" width="16" icon="tabler:bell" />
           <Icon v-if="type === 'warning'" height="16" width="16" icon="tabler:alert-circle" />
           <Icon v-if="type === 'error'" height="16" width="16" icon="tabler:alert-triangle" />
+          <MSLoading v-if="type === 'loading'" :size="18" />
         </slot>
       </div>
 
@@ -28,6 +29,7 @@
 import { Icon } from '@iconify/vue'
 import { PropType, ref, onMounted, render } from 'vue'
 import MSButton from '../MSButton/MSButton.vue'
+import MSLoading from '../MSLoading.vue'
 import Timer from '../../../utils/timer'
 
 const props = defineProps({
@@ -140,7 +142,7 @@ onMounted(showToastHandle)
   align-items: center;
   padding: var(--u-gap) calc(var(--u-gap) * 1.5);
   min-width: 250px;
-  max-width: 300px;
+  max-width: 330px;
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
   border-radius: 5px;
@@ -169,6 +171,25 @@ onMounted(showToastHandle)
       color: #2bb44a;
     }
 
+    &.info {
+      background-color: rgba(#3e71f3, 0.1);
+      color: #3e71f3;
+    }
+
+    &.warning {
+      background-color: rgba(#ffcc00, 0.15);
+      color: #f89e23;
+    }
+
+    &.error {
+      background-color: rgba(#eb2833, 0.1);
+      color: #eb2833;
+    }
+
+    &.loading {
+      background-color: var(--c-bg-mute);
+    }
+
     &.TostRightIcon {
       cursor: pointer;
     }
@@ -185,7 +206,7 @@ onMounted(showToastHandle)
     }
 
     .ToastContent {
-      padding-top: var(--u-gap);
+      padding-top: calc(var(--u-gap) / 1.8);
       font-size: 0.85rem;
     }
   }
