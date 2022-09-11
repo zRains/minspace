@@ -10,7 +10,7 @@
       ></path>
     </svg>
     <div class="AuthBanner">
-      <div class="AuthContaienr">
+      <div class="AuthContainer">
         <p>START FOR FREE</p>
         <p>{{ isRegisterMode ? 'Create new account' : 'Wellcome back space' }}<span class="SpecialDot">.</span></p>
         <p>
@@ -67,7 +67,10 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton class="AuthConfirm" @click="Toast.success('i made it!', { position: 'TopCenter' })">
+        <MSButton
+          class="AuthConfirm"
+          @click="Toast.success('Login failed', { content: 'Password error, please re-enter the password', position: 'TopCenter' })"
+        >
           <template #left-icon><Icon icon="tabler:box" /></template>
           <template #text>{{ isRegisterMode ? 'Create account' : 'Login minspace' }}</template>
         </MSButton>
@@ -112,7 +115,7 @@ const Toast = useToast()
     padding: 10rem var(--u-gap) 0 var(--u-gap);
     height: 100vh;
 
-    .AuthContaienr {
+    .AuthContainer {
       & > p {
         margin: 0;
         font-family: var(--f-rb);

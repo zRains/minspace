@@ -1,5 +1,4 @@
 import { render, h } from 'vue'
-// import { coreState } from '../states'
 import MSToast from '../components/ui/toast/MSToast.vue'
 
 interface ToastOption {
@@ -11,6 +10,7 @@ interface ToastOption {
   onClick?: () => void
   onShow?: () => void
   onClosed?: () => void
+  closable?: boolean
   title: string
   content?: string
 }

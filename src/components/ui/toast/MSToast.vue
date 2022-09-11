@@ -1,12 +1,12 @@
 <template>
   <Transition>
     <div :class="['MSToast', position]" ref="toastRef" v-show="showToast" @mouseover="toggleTimer(true)" @mouseleave="toggleTimer(false)">
-      <div class="TostLeftIcon">
+      <div :class="['TostLeftIcon', type]">
         <slot name="left-icon">
-          <Icon v-if="type === 'success'" icon="tabler:circle-check" />
-          <Icon v-if="type === 'info'" icon="tabler:info-circle" />
-          <Icon v-if="type === 'warning'" icon="tabler:alert-circle" />
-          <Icon v-if="type === 'error'" icon="tabler:alert-triangle" />
+          <Icon v-if="type === 'success'" height="16" width="16" icon="tabler:check" />
+          <Icon v-if="type === 'info'" height="16" width="16" icon="tabler:info-circle" />
+          <Icon v-if="type === 'warning'" height="16" width="16" icon="tabler:alert-circle" />
+          <Icon v-if="type === 'error'" height="16" width="16" icon="tabler:alert-triangle" />
         </slot>
       </div>
 
@@ -15,7 +15,11 @@
         <div v-if="content" class="ToastContent">{{ content }}</div>
       </div>
 
-      <div class="TostRightIcon"><slot name="right-icon"> </slot></div>
+      <MSButton class="TostRightIcon" no-text @click="closeToastHandle">
+        <template #right-icon>
+          <slot name="right-icon"><Icon height="16" width="16" icon="eva:close-fill" /></slot
+        ></template>
+      </MSButton>
     </div>
   </Transition>
 </template>
@@ -23,6 +27,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { PropType, ref, onMounted, render } from 'vue'
+import MSButton from '../MSButton/MSButton.vue'
 import Timer from '../../../utils/timer'
 
 const props = defineProps({
@@ -65,6 +70,11 @@ const props = defineProps({
     type: Function as PropType<() => void>,
     required: false,
     default: () => {}
+  },
+  closable: {
+    type: Boolean,
+    required: false,
+    default: true
   },
   title: {
     type: String,
@@ -127,12 +137,58 @@ onMounted(showToastHandle)
 <style lang="scss">
 .MSToast {
   display: inline-flex;
-  padding: var(--u-gap);
+  align-items: center;
+  padding: var(--u-gap) calc(var(--u-gap) * 1.5);
+  min-width: 250px;
+  max-width: 300px;
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
   border-radius: 5px;
   pointer-events: auto;
-  transition: transform var(--u-dur) ease;
+  opacity: 1;
+  visibility: visible;
+  transition: transform var(--u-dur) ease, opacity var(--u-dur) ease, visibility var(--u-dur) ease;
+
+  .TostLeftIcon,
+  .TostRightIcon {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    margin-bottom: auto;
+
+    &.TostRightIcon {
+      width: 16px;
+    }
+
+    &.success {
+      background-color: rgba(#2bb44a, 0.15);
+      color: #2bb44a;
+    }
+
+    &.TostRightIcon {
+      cursor: pointer;
+    }
+  }
+
+  .ToastBody {
+    flex-grow: 1;
+    padding: 0 calc(var(--u-gap) * 1.5);
+
+    .ToastTitle {
+      font-size: 0.92rem;
+      font-family: var(--f-rb);
+      font-weight: bold;
+    }
+
+    .ToastContent {
+      padding-top: var(--u-gap);
+      font-size: 0.85rem;
+    }
+  }
 
   &.TopLeft {
     align-self: flex-start;
@@ -154,16 +210,19 @@ onMounted(showToastHandle)
 
   &.v-enter-from,
   &.v-leave-to {
+    opacity: 0;
+    visibility: hidden;
+
     &.TopLeft {
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% - var(--u-gap)));
     }
 
     &.TopCenter {
-      transform: translateY(-100%);
+      transform: translateY(calc(-100% - var(--u-gap)));
     }
 
     &.TopRight {
-      transform: translateX(100%);
+      transform: translateX(calc(100% + var(--u-gap)));
     }
   }
 }

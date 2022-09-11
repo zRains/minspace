@@ -18,10 +18,11 @@ defineProps({
 
 <style lang="scss">
 .MSButton {
+  box-sizing: border-box;
   display: flex;
+  justify-content: center;
   align-items: center;
-  user-select: none;
-  cursor: pointer;
+  padding: 0;
   outline: none;
   border: none;
   font-family: inherit;
@@ -29,8 +30,11 @@ defineProps({
   text-align: left;
   background-color: var(--c-bg);
   transition: background-color calc(var(--u-dur) / 2);
+  user-select: none;
+  cursor: pointer;
 
   .ButtonText {
+    flex-grow: 1;
     white-space: nowrap;
   }
 
