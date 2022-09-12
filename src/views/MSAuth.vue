@@ -99,7 +99,7 @@
         </div>
 
         <!-- Action!! -->
-        <MSButton class="AuthConfirm" @click="isRegisterMode ? checkRegisterValid() : checkLoginValid()">
+        <MSButton class="AuthConfirm" :loading="authConfirmLoading" @click="authConfirmHandle">
           <template #left-icon><Icon icon="tabler:box" /></template>
           <template #text>{{ isRegisterMode ? 'Create account' : 'Login' }}</template>
         </MSButton>
@@ -116,6 +116,8 @@ import MSFullLayout from '../layouts/MSFullLayout.vue'
 import MSInput from '../components/ui/MSInput.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
 import useToast from '../composes/toast'
+import { register, login } from '../apis/auth'
+import storage from '../utils/storage'
 
 const Toast = useToast()
 
@@ -135,7 +137,8 @@ const loginModule = reactive({
   isPasswordValid: true
 })
 
-const isRegisterMode = ref(true)
+const isRegisterMode = ref(false)
+const authConfirmLoading = ref(false)
 
 function checkRegisterValid() {
   const invalidArr: string[] = []
@@ -149,7 +152,7 @@ function checkRegisterValid() {
   registerModule.isPasswordConfirmValid = registerModule.password === registerModule.passwordConfirm
   if (!registerModule.isPasswordConfirmValid) invalidArr.push('The two passwords do not match')
 
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr.map((e, i) => `${i + 1}. ${e}.`) })
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
 
   return invalidArr.length === 0
 }
@@ -163,9 +166,46 @@ function checkLoginValid() {
   loginModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(loginModule.password)
   if (!loginModule.isPasswordValid) invalidArr.push('Invalid password')
 
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr.map((e, i) => `${i + 1}. ${e}.`) })
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
 
   return invalidArr.length === 0
+}
+
+async function registerHandle() {
+  authConfirmLoading.value = true
+  const { succeed, res } = await register(registerModule)
+  authConfirmLoading.value = false
+
+  console.log(res)
+
+  if (succeed) {
+    // return
+  }
+
+  // Toast.error('Register Error', { content: res.map((e: Record<string, string>) => e.message) })
+}
+
+async function loginHandle() {
+  authConfirmLoading.value = true
+  const { succeed, res } = await login(loginModule)
+  authConfirmLoading.value = false
+
+  if (succeed) {
+    console.log(res)
+
+    storage.set('user', res)
+  }
+}
+
+function authConfirmHandle() {
+  if (isRegisterMode.value && checkRegisterValid()) {
+    registerHandle()
+    return
+  }
+
+  if (!isRegisterMode.value && checkLoginValid()) {
+    loginHandle()
+  }
 }
 </script>
 

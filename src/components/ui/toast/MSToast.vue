@@ -15,10 +15,12 @@
         <div class="ToastTitle">{{ title }}</div>
         <div v-if="content" class="ToastContent">
           <template v-if="typeof content === 'string'">{{ content }}</template>
-          <template v-else></template>
-          <ul v-for="c in content" :key="c">
-            <li>{{ c }}</li>
-          </ul>
+          <template v-else-if="content.length === 1">{{ content[0] }}</template>
+          <template v-else>
+            <ul v-for="(c, i) in content" :key="c">
+              <li>{{ `${i + 1}. ${c}.` }}</li>
+            </ul>
+          </template>
         </div>
       </div>
 

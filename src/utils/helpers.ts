@@ -1,6 +1,4 @@
-/**
- * 防抖
- */
+/** Debounce fun */
 export function debounce(fn: () => void, delay = 300) {
   let timer = 0
   return function _() {
@@ -9,9 +7,7 @@ export function debounce(fn: () => void, delay = 300) {
   }
 }
 
-/**
- * 节流
- */
+/** Throttle fun */
 export function throttle(fn: () => void, delay = 300) {
   let timer = 0
   return function _() {
@@ -21,9 +17,7 @@ export function throttle(fn: () => void, delay = 300) {
   }
 }
 
-/**
- * 获取相对时间
- */
+/** Get relative time */
 export function getRelativeTime(d1: number, d2 = +new Date()) {
   const units = {
     year: 24 * 60 * 60 * 1000 * 365,
