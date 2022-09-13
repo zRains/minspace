@@ -19,90 +19,8 @@
             <template #text>{{ isRegisterMode ? 'Log In' : 'Sign up' }}</template>
           </MSButton>
         </p>
-
-        <!-- Register box -->
-        <div v-if="isRegisterMode" class="RegisterInputForm">
-          <!-- Email -->
-          <div class="InputBanner">Email</div>
-          <MSInput
-            v-model:value="registerModule.email"
-            :invalid="!registerModule.isEmailValid"
-            :width="250"
-            cleanable
-            size="large"
-            input-type="text"
-          >
-            <template #left-icon>
-              <Icon icon="tabler:mail" />
-            </template>
-          </MSInput>
-
-          <!-- Password -->
-          <div class="InputBanner">Password</div>
-          <MSInput
-            v-model:value="registerModule.password"
-            :invalid="!registerModule.isPasswordValid"
-            :width="250"
-            size="large"
-            input-type="password"
-          >
-            <template #left-icon>
-              <Icon icon="tabler:lock" />
-            </template>
-          </MSInput>
-
-          <!-- Password confirm -->
-          <div class="InputBanner">Password confirm</div>
-          <MSInput
-            v-model:value="registerModule.passwordConfirm"
-            :invalid="!registerModule.isPasswordConfirmValid"
-            :width="250"
-            size="large"
-            input-type="password"
-          >
-            <template #left-icon>
-              <Icon icon="tabler:lock-square" />
-            </template>
-          </MSInput>
-        </div>
-
-        <!-- Login box -->
-        <div v-else class="LoginInputForm">
-          <!-- Email -->
-          <div class="InputBanner">Email</div>
-          <MSInput
-            v-model:value="loginModule.email"
-            :invalid="!loginModule.isEmailValid"
-            size="large"
-            :width="250"
-            input-type="text"
-            cleanable
-          >
-            <template #left-icon>
-              <Icon icon="tabler:mail" />
-            </template>
-          </MSInput>
-
-          <!-- Password -->
-          <div class="InputBanner">Password</div>
-          <MSInput
-            v-model:value="loginModule.password"
-            :invalid="!loginModule.isPasswordValid"
-            size="large"
-            :width="250"
-            input-type="password"
-          >
-            <template #left-icon>
-              <Icon icon="tabler:lock" />
-            </template>
-          </MSInput>
-        </div>
-
-        <!-- Action!! -->
-        <MSButton class="AuthConfirm" :loading="authConfirmLoading" @click="authConfirmHandle">
-          <template #left-icon><Icon icon="tabler:box" /></template>
-          <template #text>{{ isRegisterMode ? 'Create account' : 'Login' }}</template>
-        </MSButton>
+        <MSRegister :class="{ active: isRegisterMode }" />
+        <MSLogin :class="{ active: !isRegisterMode }" />
       </div>
 
       <div class="PublicRooms"></div>
@@ -111,102 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import MSFullLayout from '../layouts/MSFullLayout.vue'
-import MSInput from '../components/ui/MSInput.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
-import useToast from '../composes/toast'
-import { register, login } from '../apis/auth'
-import storage from '../utils/storage'
-
-const Toast = useToast()
-
-const registerModule = reactive({
-  email: '',
-  password: '',
-  passwordConfirm: '',
-  isEmailValid: true,
-  isPasswordValid: true,
-  isPasswordConfirmValid: true
-})
-
-const loginModule = reactive({
-  email: '',
-  password: '',
-  isEmailValid: true,
-  isPasswordValid: true
-})
+import MSRegister from '../components/auth/MSRegister.vue'
+import MSLogin from '../components/auth/MSLogin.vue'
 
 const isRegisterMode = ref(false)
-const authConfirmLoading = ref(false)
-
-function checkRegisterValid() {
-  const invalidArr: string[] = []
-
-  registerModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerModule.email)
-  if (!registerModule.isEmailValid) invalidArr.push('Invalid email')
-
-  registerModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(registerModule.password)
-  if (!registerModule.isPasswordValid) invalidArr.push('Invalid password')
-
-  registerModule.isPasswordConfirmValid = registerModule.password === registerModule.passwordConfirm
-  if (!registerModule.isPasswordConfirmValid) invalidArr.push('The two passwords do not match')
-
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
-
-  return invalidArr.length === 0
-}
-
-function checkLoginValid() {
-  const invalidArr: string[] = []
-
-  loginModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginModule.email)
-  if (!loginModule.isEmailValid) invalidArr.push('Invalid email')
-
-  loginModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(loginModule.password)
-  if (!loginModule.isPasswordValid) invalidArr.push('Invalid password')
-
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
-
-  return invalidArr.length === 0
-}
-
-async function registerHandle() {
-  authConfirmLoading.value = true
-  const { succeed, res } = await register(registerModule)
-  authConfirmLoading.value = false
-
-  console.log(res)
-
-  if (succeed) {
-    // return
-  }
-
-  // Toast.error('Register Error', { content: res.map((e: Record<string, string>) => e.message) })
-}
-
-async function loginHandle() {
-  authConfirmLoading.value = true
-  const { succeed, res } = await login(loginModule)
-  authConfirmLoading.value = false
-
-  if (succeed) {
-    console.log(res)
-
-    storage.set('user', res)
-  }
-}
-
-function authConfirmHandle() {
-  if (isRegisterMode.value && checkRegisterValid()) {
-    registerHandle()
-    return
-  }
-
-  if (!isRegisterMode.value && checkLoginValid()) {
-    loginHandle()
-  }
-}
 </script>
 
 <style lang="scss">
@@ -250,9 +79,13 @@ function authConfirmHandle() {
         }
       }
 
-      .RegisterInputForm,
-      .LoginInputForm {
+      .MSRegister,
+      .MSLogin {
+        position: absolute;
         margin: 1.5rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--u-dur), visibility var(--u-dur);
 
         .InputBanner {
           user-select: none;
@@ -263,14 +96,20 @@ function authConfirmHandle() {
         .MSInput:not(:last-child) {
           margin-bottom: calc(var(--u-gap) * 2);
         }
-      }
 
-      .AuthConfirm {
-        display: inline-flex;
-        padding: var(--u-gap) calc(var(--u-gap) * 2);
-        background-color: var(--c-brand);
-        border-radius: 5px;
-        color: var(--c-bg);
+        .RegisterConfirm,
+        .LoginConfirm {
+          display: inline-flex;
+          padding: var(--u-gap) calc(var(--u-gap) * 2);
+          background-color: var(--c-brand);
+          border-radius: 5px;
+          color: var(--c-bg);
+        }
+
+        &.active {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
 

@@ -1,9 +1,9 @@
 import { InjectionKey } from 'vue'
 
-import useToast from './modules/toast'
+import useToastStates from './modules/toast'
 
 export const coreState = (() => ({
-  toast: useToast()
+  toast: useToastStates()
 }))()
 
 export const coreStateKey: InjectionKey<typeof coreState> = Symbol('coreState')

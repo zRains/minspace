@@ -1,6 +1,6 @@
 const closeHandles: Array<() => void> = []
 
-export default function useToast() {
+export default function useToastStates() {
   // states
 
   // mutations
@@ -16,7 +16,7 @@ export default function useToast() {
   // actions
 
   return {
-    state: {},
+    states: {},
     mutations: { addCloseHandle, closeAllToast },
     actions: {}
   }

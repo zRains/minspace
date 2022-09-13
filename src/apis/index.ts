@@ -76,17 +76,14 @@ export function cleanReq() {
   currentReq.clear()
 }
 
-export function ARFactory(config: AxiosRequestConfig): Promise<{ succeed: boolean; res: any }> {
+export function ARFactory(config: AxiosRequestConfig): Promise<{ succeed: boolean; data: any }> {
   return new Promise((resolve) => {
     Axios(config).then((axiosResponse) => {
       if (!axiosResponse.data.succeed) {
         Toast.error('Error', { content: axiosResponse.data.data.map((e: Record<string, string>) => e.message) })
       }
 
-      resolve({
-        succeed: axiosResponse.data.succeed || false,
-        res: axiosResponse.data.data
-      })
+      resolve(axiosResponse.data)
     })
   })
 }

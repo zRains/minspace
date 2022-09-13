@@ -13,13 +13,13 @@ const router = createRouter({
       component: () => import('../App.vue'),
       children: [
         {
-          path: 'au',
-          name: 'au-page',
+          path: 'auth',
+          name: 'auth-page',
           component: () => import('../views/MSAuth.vue')
         },
         {
-          path: 'ms',
-          name: 'ms-page',
+          path: 'space',
+          name: 'space-page',
           component: () => import('../views/MSMinspace.vue')
         }
       ]
