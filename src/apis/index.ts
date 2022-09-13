@@ -80,7 +80,7 @@ export function ARFactory(config: AxiosRequestConfig): Promise<{ succeed: boolea
   return new Promise((resolve) => {
     Axios(config).then((axiosResponse) => {
       if (!axiosResponse.data.succeed) {
-        Toast.error('Error', { content: axiosResponse.data.data.map((e: Record<string, string>) => e.message) })
+        Toast.error('Error', { content: axiosResponse.data.data.errors.map((e: Record<string, string>) => e.message) })
       }
 
       resolve(axiosResponse.data)

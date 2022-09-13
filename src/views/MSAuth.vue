@@ -34,8 +34,9 @@ import MSFullLayout from '../layouts/MSFullLayout.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
 import MSRegister from '../components/auth/MSRegister.vue'
 import MSLogin from '../components/auth/MSLogin.vue'
+import router from '../routers'
 
-const isRegisterMode = ref(false)
+const isRegisterMode = ref(router.currentRoute.value.query?.authType === 'register')
 </script>
 
 <style lang="scss">

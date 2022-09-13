@@ -53,12 +53,13 @@ class CustomStorage {
    * Get val
    * @param key key
    */
-  get(key: string) {
+  public get(key: string) {
     if (typeof key === 'string' && this.myStorage.has(key)) {
       const { exp } = this.myStorage.get(key)!
 
       if (exp !== -1 && exp <= new Date().getTime()) {
         this.del(key)
+        return undefined
       }
 
       return this.myStorage.get(key)!.val
@@ -71,7 +72,7 @@ class CustomStorage {
    * delete val
    * @param key key
    */
-  del(key: string) {
+  public del(key: string) {
     if (typeof key !== 'string' && this.myStorage.has(key)) {
       this.myStorage.delete(key)
       localStorage.removeItem(key)
@@ -79,6 +80,14 @@ class CustomStorage {
     }
 
     return false
+  }
+
+  /**
+   * Check whatever key in myStorage
+   * @param key key
+   */
+  public has(key: string) {
+    return this.get(key) !== undefined
   }
 
   /**

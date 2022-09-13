@@ -1,10 +1,10 @@
 <template>
   <div class="MSOuterBoard">
-    <MSUserAvatar src="https://zrain.fun/favicon.ico" />
+    <MSUserAvatar :src="currentUser.avatar" />
     <div class="MSSpaceInfo">
       <MSDropdown class="MSUserInfo" :items="userDropdownOptions" trigger="click">
         <template #trigger>
-          <div class="UserName">zRain</div>
+          <div class="UserName">{{ currentUser.username }}</div>
           <Icon icon="tabler:chevron-down" />
         </template>
       </MSDropdown>
@@ -19,10 +19,18 @@
 </template>
 
 <script setup lang="ts">
+import { inject } from 'vue'
 import type { DropdownOptions } from '../../../types/ui'
 import MSUserAvatar from '../../ui/MSUserAvatar.vue'
 import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
 import MSButton from '../../ui/MSButton/MSButton.vue'
+import { coreStateKey } from '../../../states'
+
+const {
+  user: {
+    states: { currentUser }
+  }
+} = inject(coreStateKey)!
 
 const userDropdownOptions: DropdownOptions = [
   {

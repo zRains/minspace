@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { coreState } from '../states'
 
 // Router modules
 // import useAuthRouters from './auth_routers/index'
@@ -20,11 +21,35 @@ const router = createRouter({
         {
           path: 'space',
           name: 'space-page',
-          component: () => import('../views/MSMinspace.vue')
+          component: () => import('../views/MSMinspace.vue'),
+          meta: {
+            authRequired: true
+          }
         }
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const {
+    user: {
+      actions: { isAuthenticated }
+    }
+  } = coreState
+
+  if (to.meta.authRequired) {
+    if (!isAuthenticated()) {
+      next({
+        name: 'auth-page',
+        query: { authType: 'login', redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

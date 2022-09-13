@@ -29,8 +29,8 @@ import MSInput from '../ui/MSInput.vue'
 import MSButton from '../ui/MSButton/MSButton.vue'
 import useToast from '../../composes/toast'
 import { login } from '../../apis/auth'
-import storage from '../../utils/storage'
 import router from '../../routers'
+import { coreState } from '../../states'
 
 const isLoading = ref(false)
 const Toast = useToast()
@@ -63,7 +63,7 @@ async function loginHandle() {
     isLoading.value = false
 
     if (succeed) {
-      storage.set('user', data)
+      coreState.user.mutations.setCurrentUser(data)
       router.push({ name: 'space-page' })
     }
   }
