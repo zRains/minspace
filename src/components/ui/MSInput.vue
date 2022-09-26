@@ -3,6 +3,7 @@
     :class="{ MSInput: true, MSInputInvalid: invalid }"
     :style="{
       padding: sizeRefer[size] + 'px',
+      '--icon-margin': sizeRefer[size] + 'px',
       fontSize: `calc(0.9rem + ${(sizeRefer[size] - 6) * 0.01}rem)`,
       width: width ? width + 'px' : 'unset'
     }"
@@ -66,7 +67,7 @@ defineProps({
     required: false
   },
   inputType: {
-    type: String as PropType<'text' | 'number' | 'password'>,
+    type: String as PropType<'text' | 'number' | 'password' | 'search'>,
     required: false,
     default: 'text'
   },
@@ -92,9 +93,9 @@ defineProps({
 })
 
 const sizeRefer = {
-  large: 8,
-  middle: 6,
-  small: 4
+  large: 7,
+  middle: 5,
+  small: 3
 }
 
 const inputRef = ref<HTMLInputElement>()
@@ -106,11 +107,13 @@ const focusInput = () => {
     inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
   })
 }
+
+defineExpose({
+  focusInput
+})
 </script>
 
 <style lang="scss">
-$ms-input-height: 30px;
-
 .MSInput {
   display: flex;
   align-self: center;
@@ -128,6 +131,14 @@ $ms-input-height: 30px;
     color: var(--c-text-2);
     transition: color var(--u-dur);
 
+    &.InputLeftIcon .iconify {
+      margin-right: var(--icon-margin);
+    }
+
+    &.InputRightIcon .iconify {
+      margin-left: var(--icon-margin);
+    }
+
     &.InputRightIcon {
       cursor: pointer;
     }
@@ -139,7 +150,7 @@ $ms-input-height: 30px;
     input {
       display: block;
       margin: 0;
-      padding: 0 var(--u-gap);
+      padding: 0;
       outline: none;
       border: none;
       width: 100%;
@@ -155,6 +166,15 @@ $ms-input-height: 30px;
 
       &[type='number'] {
         -moz-appearance: textfield;
+      }
+
+      &[type='search'] {
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+          -webkit-appearance: none;
+        }
       }
     }
   }

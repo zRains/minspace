@@ -17,7 +17,7 @@
           <template v-if="typeof content === 'string'">{{ content }}</template>
           <template v-else-if="content.length === 1">{{ content[0] }}</template>
           <template v-else>
-            <ul v-for="(c, i) in content" :key="c">
+            <ul class="ResetList" v-for="(c, i) in content" :key="c">
               <li>{{ `${i + 1}. ${c}.` }}</li>
             </ul>
           </template>
@@ -220,15 +220,6 @@ defineExpose({
     .ToastContent {
       padding-top: calc(var(--u-gap) / 1.8);
       font-size: 0.85rem;
-
-      ul {
-        margin: 0;
-        padding: 0;
-
-        li {
-          list-style: none;
-        }
-      }
     }
   }
 

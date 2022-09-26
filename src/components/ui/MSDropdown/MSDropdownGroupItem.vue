@@ -1,7 +1,7 @@
 <template>
   <div class="MSDropdownGroupItem">
     <div v-if="label" class="GroupItemLabel">{{ label }}</div>
-    <ul>
+    <ul class="ResetList">
       <li v-for="item in items" :key="JSON.stringify(item)">
         <!-- Dropdown item -->
         <MSDropdownItem v-if="item.type === 'click'">
@@ -41,10 +41,6 @@ defineProps<{
     font-family: var(--f-r);
     font-size: 0.85rem;
     color: var(--c-text-2);
-  }
-
-  ul {
-    padding: 0;
   }
 }
 </style>

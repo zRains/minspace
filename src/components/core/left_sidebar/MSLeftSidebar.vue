@@ -1,58 +1,53 @@
 <template>
   <div class="MSLeftSidebar">
     <MSOuterBoard />
-    <div class="MSCoreMenu">
-      <!-- Add room button -->
-      <MSSidebarMenuItem class="AddRoomBtn">
-        <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
-        <template #text>New room</template>
-      </MSSidebarMenuItem>
+    <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
+      <div class="CoreMenu">
+        <!-- Add room button -->
+        <MSSidebarMenuItem class="AddRoomBtn">
+          <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
+          <template #text>New room</template>
+        </MSSidebarMenuItem>
 
-      <!-- Search button -->
-      <MSSidebarMenuItem class="SearchBtn">
-        <template #icon><Icon height="20" width="20" icon="tabler:search" /></template>
-        <template #text>Search</template>
-      </MSSidebarMenuItem>
+        <!-- Search -->
+        <MSSearchContainer />
 
-      <div class="MSSidebarDivider"></div>
+        <!-- Back to home button -->
+        <MSSidebarMenuItem class="ActivitiesBtn" @click="changeCurrentTab('activities')">
+          <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
+          <template #text>Activities</template>
+        </MSSidebarMenuItem>
 
-      <!-- Back to home button -->
-      <MSSidebarMenuItem class="ActivitiesBtn" @click="changeCurrentTab('activities')">
-        <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
-        <template #text>Activities</template>
-      </MSSidebarMenuItem>
+        <!-- All rooms button -->
+        <MSSidebarMenuItem class="RoomsBtn" @click="changeCurrentTab('rooms')">
+          <template #icon><Icon height="20" width="20" icon="tabler:box-model" /></template>
+          <template #text>Rooms</template>
+        </MSSidebarMenuItem>
 
-      <!-- All rooms button -->
-      <MSSidebarMenuItem class="RoomsBtn" @click="changeCurrentTab('rooms')">
-        <template #icon><Icon height="20" width="20" icon="tabler:box-model" /></template>
-        <template #text>Rooms</template>
-      </MSSidebarMenuItem>
+        <!-- Notifications button -->
+        <MSSidebarMenuItem class="NotificationsBtn" @click="changeCurrentTab('notifications')">
+          <template #icon><Icon height="20" width="20" icon="tabler:bell" /></template>
+          <template #text>Notifications</template>
+        </MSSidebarMenuItem>
 
-      <!-- Notifications button -->
-      <MSSidebarMenuItem class="NotificationsBtn" @click="changeCurrentTab('notifications')">
-        <template #icon><Icon height="20" width="20" icon="tabler:bell" /></template>
-        <template #text>Notifications</template>
-      </MSSidebarMenuItem>
+        <!-- Setting button -->
+        <MSSidebarMenuItem class="SettingsBtn" @click="changeCurrentTab('settings')">
+          <template #icon><Icon height="20" width="20" icon="tabler:settings" /></template>
+          <template #text>Settings</template>
+        </MSSidebarMenuItem>
+      </div>
 
-      <!-- Setting button -->
-      <MSSidebarMenuItem class="SettingsBtn" @click="changeCurrentTab('settings')">
-        <template #icon><Icon height="20" width="20" icon="tabler:settings" /></template>
-        <template #text>Settings</template>
-      </MSSidebarMenuItem>
-    </div>
+      <div class="MenuDivider"></div>
 
-    <div class="MSSidebarDivider"></div>
+      <div class="SpaceMenu">
+        <!-- Rooms -->
+        <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
 
-    <div class="MSSpaceMenu">
-      <!-- Rooms -->
-      <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
-
-      <!-- Users -->
-      <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="USERS"></MSSidebarSpaceMenu>
-    </div>
-
-    <!-- <MSLoading/> -->
-    <MSEmpty />
+        <!-- Users -->
+        <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
+      </div>
+      <MSEmpty />
+    </MSScroller>
   </div>
 </template>
 
@@ -63,6 +58,8 @@ import MSEmpty from '../../ui/MSEmpty.vue'
 import MSOuterBoard from './MSOuterBoard.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
+import MSSearchContainer from './search/MSSearchContainer.vue'
+import MSScroller from '../../ui/MSScroller.vue'
 
 const {
   space: {
@@ -78,19 +75,21 @@ const {
   width: var(--ms-left-sidebar-width);
   border-right: 1px solid var(--c-divider-light);
 
-  .MSSidebarDivider {
-    margin: calc(var(--u-gap) * 1.5) 0;
-  }
+  .LeftSidebarMenuContainer {
+    .MenuDivider {
+      margin: calc(var(--u-gap) * 1.5) 0;
+    }
 
-  .MSCoreMenu,
-  .MSSpaceMenu {
-    position: relative;
-    padding: var(--u-gap) 0;
-    z-index: 1;
-  }
+    .CoreMenu,
+    .SpaceMenu {
+      position: relative;
+      padding: var(--u-gap) 0;
+      z-index: 1;
+    }
 
-  .MSSpaceMenu > *:not(:last-child) {
-    margin-bottom: calc(var(--u-gap) * 2);
+    .SpaceMenu > *:not(:last-child) {
+      margin-bottom: calc(var(--u-gap) * 2);
+    }
   }
 }
 </style>

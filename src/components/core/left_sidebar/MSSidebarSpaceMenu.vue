@@ -20,15 +20,23 @@
       <MSSidebarSpaceUserItem
         avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         user-name="Jeff"
+        @click="changeCurrentTab('messenger')"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import MSButton from '../../ui/MSButton/MSButton.vue'
 import MSSidebarSpaceUserItem from './MSSidebarSpaceUserItem.vue'
+import { coreStateKey } from '../../../states'
+
+const {
+  space: {
+    mutations: { changeCurrentTab }
+  }
+} = inject(coreStateKey)!
 
 const props = defineProps({
   text: {
