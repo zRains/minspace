@@ -1,17 +1,27 @@
 <template>
   <div class="MSCentralSpace">
-    <MSUserBanner
-      avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-      user-name="Jeff"
-    />
-
-    <MSMessageContainer />
+    <MSMessengerContainer v-if="currentTab === 'messenger'" />
+    <MSSettingContainer v-if="currentTab === 'settings'" />
+    <MSNotificationContainer v-if="currentTab === 'notifications'" />
+    <MSRoomContainer v-if="currentTab === 'rooms'" />
+    <MSActivitiesContainer v-if="currentTab === 'activities'" />
   </div>
 </template>
 
 <script setup lang="ts">
-import MSUserBanner from './MSUserBanner.vue'
-import MSMessageContainer from './MSMessageContainer.vue'
+import { inject } from 'vue'
+import MSMessengerContainer from './modules/messengers/MSMessengerContainer.vue'
+import MSSettingContainer from './modules/settings/MSSettingContainer.vue'
+import MSNotificationContainer from './modules/notifications/MSNotificationContainer.vue'
+import MSRoomContainer from './modules/rooms/MSRoomContainer.vue'
+import MSActivitiesContainer from './modules/activities/MSActivitiesContainer.vue'
+import { coreStateKey } from '../../../states'
+
+const {
+  space: {
+    states: { currentTab }
+  }
+} = inject(coreStateKey)!
 </script>
 
 <style lang="scss">

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { AXIOS_BASE_URL } from '../minspace.config'
 import storage from '../utils/storage'
 import useToast from '../composes/toast'
+import router from '../routers'
 
 const Toast = useToast()
 
@@ -45,12 +46,17 @@ Axios.interceptors.request.use(
     config.headers!.Authorization = storage.get('token')
     return config
   },
-  (err) => Promise.reject(err)
+  (error) => Promise.reject(error)
 )
 
 Axios.interceptors.response.use(
   (response) => {
     delReq(response)
+    if (response.data.code === 401) {
+      const currentRoute = router.currentRoute.value
+      router.push({ name: 'auth-page', query: Object.assign(currentRoute.query, { authType: 'login' }), params: currentRoute.params })
+    }
+
     return response
   },
   (err) => Promise.reject(err)
@@ -80,7 +86,8 @@ export function ARFactory(config: AxiosRequestConfig): Promise<{ succeed: boolea
   return new Promise((resolve) => {
     Axios(config).then((axiosResponse) => {
       if (!axiosResponse.data.succeed) {
-        Toast.error('Error', { content: axiosResponse.data.data.errors.map((e: Record<string, string>) => e.message) })
+        const { errors } = axiosResponse.data.data
+        Toast.error('Error', { content: Array.isArray(errors) ? errors.map((e: Record<string, string>) => e.message) : errors.message })
       }
 
       resolve(axiosResponse.data)

@@ -24,7 +24,14 @@ const router = createRouter({
           component: () => import('../views/MSMinspace.vue'),
           meta: {
             authRequired: true
-          }
+          },
+          children: [
+            {
+              path: '',
+              name: 'activities-page',
+              component: () => import('../components/core/central_space/MSCentralSpace.vue')
+            }
+          ]
         }
       ]
     }

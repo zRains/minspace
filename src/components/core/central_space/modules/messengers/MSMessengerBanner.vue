@@ -1,5 +1,5 @@
 <template>
-  <MSCentralSpaceBanner class="MSUserBanner">
+  <MSCentralSpaceBanner class="MSMessengerBanner">
     <template #banner-info>
       <MSUserAvatar :src="avatar" />
       <div class="UserBannerName">{{ userName }}</div>
@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import MSUserAvatar from '../../ui/MSUserAvatar.vue'
-import MSCentralSpaceBanner from './MSCentralSpaceBanner.vue'
+import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
+import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
 
 defineProps({
   avatar: {
@@ -24,7 +24,7 @@ defineProps({
 </script>
 
 <style lang="scss">
-.MSUserBanner {
+.MSMessengerBanner {
   .UserBannerName {
     margin-left: calc(var(--u-gap) * 2);
   }

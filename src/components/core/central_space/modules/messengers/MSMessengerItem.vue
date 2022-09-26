@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ MSMessageItem: true, SelfMessageItem: selfMessage }">
+  <div :class="{ MSMessengerItem: true, SelfMessageItem: selfMessage }">
     <div class="MessageAvatar">
       <MSUserAvatar :src="avatar" :alt="userName" />
     </div>
@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { getRelativeTime } from '../../../utils/helpers'
-import MSUserAvatar from '../../ui/MSUserAvatar.vue'
+import { getRelativeTime } from '../../../../../utils/helpers'
+import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
 defineProps({
   selfMessage: {
@@ -45,7 +45,7 @@ defineProps({
 </script>
 
 <style lang="scss">
-.MSMessageItem {
+.MSMessengerItem {
   display: flex;
   margin-top: calc(var(--u-gap) * 2);
 
@@ -74,7 +74,7 @@ defineProps({
     }
 
     .MessageContent {
-      padding: var(--u-gap);
+      padding: var(--u-gap) calc(var(--u-gap) * 1.5);
       background-color: var(--c-bg);
       border: 1px solid var(--c-divider-light);
       border-radius: 5px;

@@ -39,7 +39,7 @@ defineProps<{
   min-width: 120px;
   margin: 0;
   padding: var(--u-gap);
-  top: 20px;
+  top: 100%;
   left: 0;
   opacity: 0;
   visibility: hidden;

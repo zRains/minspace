@@ -1,5 +1,5 @@
 <template>
-  <div class="MSInputContainer">
+  <div class="MSMessengerInput">
     <MSButton class="InputEmojiBtn">
       <template #left-icon><Icon height="24" color="var(--c-green)" icon="fluent:emoji-sparkle-24-filled" /></template>
     </MSButton>
@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import MSButton from '../../ui/MSButton/MSButton.vue'
+import MSButton from '../../../../ui/MSButton/MSButton.vue'
 
 const sendText = ref('')
 </script>
@@ -32,7 +32,7 @@ const sendText = ref('')
 <style lang="scss">
 $input-container-height: 40px;
 
-.MSInputContainer {
+.MSMessengerInput {
   display: flex;
   align-items: center;
   margin: 14px calc(var(--u-gap) * 2);

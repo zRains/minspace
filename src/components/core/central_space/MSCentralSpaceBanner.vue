@@ -16,10 +16,15 @@
   display: flex;
   padding: 14px calc(var(--u-gap) * 2);
   border-bottom: 1px solid var(--c-divider-light);
+  background-color: var(--c-bg);
 
   .BannerInfo {
     display: flex;
     line-height: 32px;
+  }
+
+  .BannerOptions {
+    margin-left: auto;
   }
 }
 </style>

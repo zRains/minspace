@@ -30,6 +30,7 @@ const showUserAvatar = ref(true)
 
 <style lang="scss">
 .MSUserAvatar {
+  display: flex;
   flex-shrink: 0;
 
   img {
