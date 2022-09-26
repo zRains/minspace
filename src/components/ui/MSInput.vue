@@ -1,13 +1,5 @@
 <template>
-  <div
-    :class="{ MSInput: true, MSInputInvalid: invalid }"
-    :style="{
-      padding: sizeRefer[size] + 'px',
-      '--icon-margin': sizeRefer[size] + 'px',
-      fontSize: `calc(0.9rem + ${(sizeRefer[size] - 6) * 0.01}rem)`,
-      width: width ? width + 'px' : 'unset'
-    }"
-  >
+  <div :class="{ MSInput: true, MSInputInvalid: invalid }" :style="inputStyles">
     <!-- Left icon -->
     <div class="InputLeftIcon"><slot name="left-icon"></slot></div>
 
@@ -52,11 +44,11 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, PropType, ref } from 'vue'
+import { computed, nextTick, PropType, ref } from 'vue'
 
 defineEmits(['update:value'])
 
-defineProps({
+const props = defineProps({
   size: {
     type: String as PropType<'large' | 'middle' | 'small'>,
     required: false,
@@ -65,6 +57,16 @@ defineProps({
   width: {
     type: Number,
     required: false
+  },
+  backgroundColor: {
+    type: String,
+    required: false,
+    default: 'var(--c-bg)'
+  },
+  borderColor: {
+    type: String,
+    required: false,
+    default: 'var(--c-divider)'
   },
   inputType: {
     type: String as PropType<'text' | 'number' | 'password' | 'search'>,
@@ -107,6 +109,14 @@ const focusInput = () => {
     inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
   })
 }
+const inputStyles = computed(() => ({
+  padding: `${sizeRefer[props.size]}px`,
+  '--input-icon-margin': `${sizeRefer[props.size]}px`,
+  '--input-background-color': props.backgroundColor,
+  '--input-border-color': props.borderColor,
+  fontSize: `calc(0.9rem + ${(sizeRefer[props.size] - 6) * 0.01}rem)`,
+  width: props.width ? `${props.width}px` : 'unset'
+}))
 
 defineExpose({
   focusInput
@@ -117,10 +127,10 @@ defineExpose({
 .MSInput {
   display: flex;
   align-self: center;
-  border: 1px solid var(--c-divider);
+  border: 1px solid var(--input-border-color);
   border-radius: 5px;
-  background-color: var(--c-bg);
-  transition: border var(--u-dur);
+  background-color: var(--input-background-color);
+  transition: border var(--u-dur), background-color var(--u-dur);
 
   .InputLeftIcon,
   .InputRightIcon {
@@ -132,11 +142,11 @@ defineExpose({
     transition: color var(--u-dur);
 
     &.InputLeftIcon .iconify {
-      margin-right: var(--icon-margin);
+      margin-right: var(--input-icon-margin);
     }
 
     &.InputRightIcon .iconify {
-      margin-left: var(--icon-margin);
+      margin-left: var(--input-icon-margin);
     }
 
     &.InputRightIcon {
@@ -156,7 +166,8 @@ defineExpose({
       width: 100%;
       font-family: var(--f-r);
       font-size: inherit;
-      transition: color var(--u-dur);
+      background-color: var(--input-background-color);
+      transition: color var(--u-dur), background-color var(--u-dur);
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {

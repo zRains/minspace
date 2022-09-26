@@ -46,7 +46,7 @@ import MSButton from '../../../ui/MSButton/MSButton.vue'
     align-items: center;
 
     .MSButton {
-      padding: 4px 8px;
+      padding: calc(var(--u-gap) * 0.5) var(--u-gap);
       border-radius: 3px;
 
       &.ReportUserBtn {

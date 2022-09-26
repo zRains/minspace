@@ -5,7 +5,16 @@
       <template #text>Search</template>
     </MSSidebarMenuItem>
 
-    <MSInput v-model:value="searchValue" input-type="search" size="large" placeholder="Search user..." cleanable ref="inputRef" />
+    <MSInput
+      v-model:value="searchValue"
+      input-type="search"
+      size="large"
+      placeholder="Search user..."
+      cleanable
+      ref="inputRef"
+      background-color="var(--c-bg-mute)"
+      border-color="var(--c-bg-mute)"
+    />
 
     <div class="SearchResultContainer">
       <div class="SearchOption">
