@@ -1,11 +1,11 @@
 <template>
   <div class="MSScroller" :style="scrollerStyles" ref="scrollerRef">
-    <div class="ScrollContent"><slot></slot></div>
+    <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue'
+import { computed, onMounted, PropType, ref } from 'vue'
 
 const props = defineProps({
   direction: {
@@ -19,12 +19,12 @@ const props = defineProps({
     default: '100%'
   },
   vertical: {
-    type: [String, Number],
+    type: Number,
     required: false,
     default: 8
   },
   horizontal: {
-    type: [String, Number],
+    type: Number,
     required: false,
     default: 8
   },
@@ -40,24 +40,26 @@ const props = defineProps({
   }
 })
 
+const scrollerRef = ref<HTMLElement>()
+const scrollable = ref(false)
 const scrollerStyles = computed(() => ({
   height: typeof props.height === 'string' ? props.height : `${props.height}px`,
   '--scroller-thumb-color': props.thumbColor,
   '--scroller-track-color': props.trackColor,
-  '--scroller-vertical-size': typeof props.vertical === 'string' ? props.vertical : `${props.vertical}px`,
-  '--scroller-horizontal-size': typeof props.horizontal === 'string' ? props.horizontal : `${props.horizontal}px`
+  '--scroller-vertical-size': `${props.vertical}px`,
+  '--scroller-horizontal-size': `${props.horizontal}px`,
+  '--scrollable-patch': scrollable.value ? `${props.direction === 'vertical' ? props.vertical : props.horizontal}px` : '0px'
 }))
 
-const scrollerRef = ref<HTMLElement>()
+onMounted(() => {
+  const el = scrollerRef.value!
 
-// onMounted(() => {
+  scrollable.value = el.scrollHeight > el.clientHeight
 
-//   setTimeout(() => {
-//     const el = scrollerRef.value!
-
-//     console.log(el.scrollHeight, el.clientHeight)
-//   })
-// })
+  new ResizeObserver(() => {
+    scrollable.value = el.scrollHeight > el.clientHeight
+  }).observe(el)
+})
 </script>
 
 <style lang="scss">

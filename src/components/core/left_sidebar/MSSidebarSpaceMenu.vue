@@ -62,7 +62,6 @@ $banner-height: 22px;
     display: flex;
     height: $banner-height;
     line-height: $banner-height;
-    margin: 0 calc(var(--u-gap) * 2);
     font-size: 0.8rem;
     color: var(--c-text-2);
 

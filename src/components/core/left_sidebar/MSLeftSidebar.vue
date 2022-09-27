@@ -3,14 +3,18 @@
     <MSOuterBoard />
     <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
       <div class="CoreMenu">
-        <!-- Add room button -->
-        <MSSidebarMenuItem class="AddRoomBtn">
-          <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
-          <template #text>New room</template>
-        </MSSidebarMenuItem>
+        <MSCollapsibleBox :collapsed="activeSearch">
+          <!-- Add room button -->
+          <MSSidebarMenuItem class="AddRoomBtn">
+            <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
+            <template #text>New room</template>
+          </MSSidebarMenuItem>
+        </MSCollapsibleBox>
 
         <!-- Search -->
         <MSSearchContainer />
+
+        <div class="MenuDivider"></div>
 
         <!-- Back to home button -->
         <MSSidebarMenuItem class="ActivitiesBtn" @click="changeCurrentTab('activities')">
@@ -60,9 +64,11 @@ import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
+import MSCollapsibleBox from './MSCollapsibleBox.vue'
 
 const {
   space: {
+    states: { activeSearch },
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
@@ -83,7 +89,7 @@ const {
     .CoreMenu,
     .SpaceMenu {
       position: relative;
-      // padding: var(--u-gap) 0;
+      padding: 0 calc((var(--u-gap)) * 2 - var(--scrollable-patch)) 0 calc((var(--u-gap)) * 2);
       z-index: 1;
     }
 

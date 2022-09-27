@@ -7,7 +7,7 @@
 
     <MSInput
       v-model:value="searchValue"
-      @keydown.enter="searchUserHandle"
+      @keydown.enter="searchHandle"
       input-type="search"
       size="large"
       placeholder="Search user..."
@@ -19,52 +19,63 @@
 
     <div class="SearchResultContainer">
       <div class="SearchOption">
-        <MSButton class="CancelSearchBtn" @click="activeSearch = false">
+        <MSButton class="CancelSearchBtn" @click="changeActiveSearch(false)">
           <template #left-icon><Icon icon="tabler:zoom-cancel" /></template>
           <template #text>Cancel Search</template>
         </MSButton>
       </div>
       <ul class="UserResult ResetList">
-        <li><MSSearchUserItem /></li>
+        <li v-for="user in searchResult.user" :key="user.uid"><MSSearchUserItem :user="user" /></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive, inject } from 'vue'
 import MSInput from '../../../ui/MSInput.vue'
 import MSSidebarMenuItem from '../MSSidebarMenuItem.vue'
 import MSSearchUserItem from './MSSearchUserItem.vue'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
-import searchUser from '../../../../apis/user.api'
+import { searchUser } from '../../../../apis/user.api'
+import type { findUserResultDto } from '../../../../apis/user.api'
+import { coreStateKey } from '../../../../states'
+
+const {
+  space: {
+    states: { activeSearch },
+    mutations: { changeActiveSearch }
+  }
+} = inject(coreStateKey)!
 
 const inputRef = ref<HTMLElement & { focusInput: () => {} }>()
 const searchValue = ref('')
-const activeSearch = ref(false)
+const searchResult = reactive<{ user: findUserResultDto[] }>({
+  user: []
+})
 
 function activeSearchHandle() {
-  activeSearch.value = true
+  changeActiveSearch(true)
   setTimeout(() => {
     inputRef.value!.focusInput()
   }, 100)
 }
 
-async function searchUserHandle() {
+async function searchHandle() {
   if (searchValue.value.length > 0) {
-    const { succeed, data } = await searchUser({ keyword: searchValue.value })
+    // User search
+    const { succeed: isFindUserSucceed, data: findUserData } = await searchUser({ keyword: searchValue.value })
 
-    console.log(succeed, data)
-  }
+    // Room search
+
+    if (isFindUserSucceed) searchResult.user = findUserData
+  } else changeActiveSearch(false)
 }
 </script>
 
 <style lang="scss">
 .MSSearchContainer {
   position: relative;
-  margin: calc(var(--u-gap) * 1.5) 0;
-  padding: 0 calc(var(--u-gap) * 2);
-  height: 800px;
 
   .MSSidebarMenuItem {
     width: 100%;
@@ -76,8 +87,8 @@ async function searchUserHandle() {
 
   .MSInput {
     position: absolute;
-    left: calc(var(--u-gap) * 2);
-    right: calc(var(--u-gap) * 2);
+    left: 0;
+    right: 0;
     top: 0;
     opacity: 0;
     visibility: hidden;

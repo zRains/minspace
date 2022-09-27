@@ -5,6 +5,7 @@ type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
 export default function useSpace() {
   // states
   const currentTab = ref<Tab>('activities')
+  const activeSearch = ref(false)
   // const utilOptions = reactive({
   //   text: ''
   // })
@@ -14,11 +15,15 @@ export default function useSpace() {
     currentTab.value = tab
   }
 
+  const changeActiveSearch = (val: boolean) => {
+    activeSearch.value = val
+  }
+
   // actions
 
   return {
-    states: { currentTab },
-    mutations: { changeCurrentTab },
+    states: { currentTab, activeSearch },
+    mutations: { changeCurrentTab, changeActiveSearch },
     actions: {}
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="MSSearchUserItem">
-    <MSUserAvatar src="https://www.deelter.com/images/logo.png" :size="32" />
+    <MSUserAvatar :src="user.avatar" :size="32" />
     <div class="UserInfo">
-      <div class="UserName">Deelter</div>
-      <div class="UserUid">#1543</div>
+      <div class="UserName">{{ user.username }}</div>
+      <div class="UserUid">#{{ user.uid }}</div>
     </div>
     <div class="UserOptions">
       <MSButton class="ReportUserBtn" no-text>
@@ -17,8 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
+import { PropType } from 'vue'
+import { findUserResultDto } from '../../../../apis/user.api'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
+import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
+
+defineProps({
+  user: {
+    type: Object as PropType<findUserResultDto>,
+    required: true
+  }
+})
 </script>
 
 <style lang="scss">

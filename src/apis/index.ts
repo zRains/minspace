@@ -69,7 +69,7 @@ export function cleanReq() {
   currentReq.clear()
 }
 
-export function ARFactory(config: AxiosRequestConfig): Promise<{ succeed: boolean; data: any }> {
+export function ARFactory<T = any>(config: AxiosRequestConfig): Promise<{ succeed: boolean; data: T }> {
   return new Promise((resolve) => {
     Axios(config).then((axiosResponse) => {
       if (!axiosResponse.data.succeed) {

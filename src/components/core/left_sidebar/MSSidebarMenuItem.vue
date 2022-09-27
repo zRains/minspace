@@ -11,9 +11,8 @@ import MSButton from '../../ui/MSButton/MSButton.vue'
 
 <style lang="scss">
 .MSSidebarMenuItem {
-  margin: 0 calc(var(--u-gap) * 2);
+  width: 100%;
   padding: var(--u-gap);
-  width: calc(100% - var(--u-gap) * 4);
   border-radius: 5px;
   line-height: 20px;
 

@@ -33,7 +33,6 @@ defineProps({
 .MSSidebarSpaceUserItem {
   display: flex;
   align-items: center;
-  margin: 0 calc(var(--u-gap) * 2);
   padding: var(--u-gap);
   border-radius: 5px;
   cursor: pointer;

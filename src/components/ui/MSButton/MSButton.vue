@@ -34,7 +34,6 @@ defineProps({
 <style lang="scss">
 .MSButton {
   position: relative;
-  box-sizing: border-box;
   padding: 0;
   outline: none;
   border: none;

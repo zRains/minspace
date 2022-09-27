@@ -28,7 +28,7 @@ import { reactive, ref } from 'vue'
 import MSInput from '../ui/MSInput.vue'
 import MSButton from '../ui/MSButton/MSButton.vue'
 import useToast from '../../composes/toast'
-import { login } from '../../apis/auth'
+import { login } from '../../apis/auth.api'
 import router from '../../routers'
 import { coreState } from '../../states'
 
