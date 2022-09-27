@@ -26,6 +26,7 @@
       <div class="PublicRooms"></div>
     </div>
   </MSFullLayout>
+  <MSToastProvider />
 </template>
 
 <script setup lang="ts">
@@ -34,6 +35,7 @@ import MSFullLayout from '../layouts/MSFullLayout.vue'
 import MSButton from '../components/ui/MSButton/MSButton.vue'
 import MSRegister from '../components/auth/MSRegister.vue'
 import MSLogin from '../components/auth/MSLogin.vue'
+import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
 import router from '../routers'
 
 const isRegisterMode = ref(router.currentRoute.value.query?.authType === 'register')

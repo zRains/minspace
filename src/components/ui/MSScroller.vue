@@ -1,11 +1,11 @@
 <template>
-  <div class="MSScroller styled-scrollbars" :style="scrollerStyles">
-    <slot></slot>
+  <div class="MSScroller" :style="scrollerStyles" ref="scrollerRef">
+    <div class="ScrollContent"><slot></slot></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue'
+import { computed, PropType, ref } from 'vue'
 
 const props = defineProps({
   direction: {
@@ -47,6 +47,17 @@ const scrollerStyles = computed(() => ({
   '--scroller-vertical-size': typeof props.vertical === 'string' ? props.vertical : `${props.vertical}px`,
   '--scroller-horizontal-size': typeof props.horizontal === 'string' ? props.horizontal : `${props.horizontal}px`
 }))
+
+const scrollerRef = ref<HTMLElement>()
+
+// onMounted(() => {
+
+//   setTimeout(() => {
+//     const el = scrollerRef.value!
+
+//     console.log(el.scrollHeight, el.clientHeight)
+//   })
+// })
 </script>
 
 <style lang="scss">

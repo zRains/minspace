@@ -91,7 +91,7 @@ const props = defineProps({
     required: true
   },
   content: {
-    type: Object as PropType<string | string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     required: false
   }
 })

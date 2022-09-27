@@ -7,6 +7,7 @@
 
     <MSInput
       v-model:value="searchValue"
+      @keydown.enter="searchUserHandle"
       input-type="search"
       size="large"
       placeholder="Search user..."
@@ -36,6 +37,7 @@ import MSInput from '../../../ui/MSInput.vue'
 import MSSidebarMenuItem from '../MSSidebarMenuItem.vue'
 import MSSearchUserItem from './MSSearchUserItem.vue'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
+import searchUser from '../../../../apis/user.api'
 
 const inputRef = ref<HTMLElement & { focusInput: () => {} }>()
 const searchValue = ref('')
@@ -47,6 +49,14 @@ function activeSearchHandle() {
     inputRef.value!.focusInput()
   }, 100)
 }
+
+async function searchUserHandle() {
+  if (searchValue.value.length > 0) {
+    const { succeed, data } = await searchUser({ keyword: searchValue.value })
+
+    console.log(succeed, data)
+  }
+}
 </script>
 
 <style lang="scss">
@@ -54,7 +64,7 @@ function activeSearchHandle() {
   position: relative;
   margin: calc(var(--u-gap) * 1.5) 0;
   padding: 0 calc(var(--u-gap) * 2);
-  height: 200px;
+  height: 800px;
 
   .MSSidebarMenuItem {
     width: 100%;

@@ -4,18 +4,17 @@ class CustomStorage {
 
   public myStorage: Map<string, { val: any; exp: number }> = new Map()
 
-  constructor({ clearAll = false, clearExpire = true }) {
-    if (clearAll) localStorage.clear()
-
+  constructor({ clearExpire = true }) {
     for (const [k, p] of Object.entries(localStorage)) {
-      try {
-        const tempPackage = JSON.parse(p)
-        if (clearExpire && tempPackage.exp !== -1 && tempPackage.exp <= new Date().getTime()) {
+      if (/_isMystorage/.test(p))
+        try {
+          const tempPackage = JSON.parse(p)
+          if (clearExpire && tempPackage.exp !== -1 && tempPackage.exp <= new Date().getTime()) {
+            localStorage.removeItem(k)
+          } else this.myStorage.set(k, tempPackage)
+        } catch (error) {
           localStorage.removeItem(k)
-        } else this.myStorage.set(k, tempPackage)
-      } catch (error) {
-        localStorage.removeItem(k)
-      }
+        }
     }
   }
 
@@ -35,7 +34,7 @@ class CustomStorage {
     )
       return false
 
-    const valPackage = { val, exp }
+    const valPackage = { _isMystorage: true, val, exp }
 
     try {
       localStorage.setItem(key, JSON.stringify(valPackage))

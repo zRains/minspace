@@ -78,6 +78,11 @@ $banner-height: 22px;
       background-color: var(--c-bg-mute);
       border-radius: 3px;
 
+      &.SidebarSpaceMenuAdd {
+        color: var(--c-green);
+        background-color: var(--c-green-op);
+      }
+
       &.SidebarSpaceMenuFold .iconify {
         transform: rotate(0);
         transition: transform var(--u-dur);

@@ -9,7 +9,6 @@ interface RegisterDto extends LoginDto {
   passwordConfirm: string
 }
 
-/** Create account */
 export function register({ email, password, passwordConfirm }: RegisterDto) {
   return ARFactory({
     url: '/auth/register',

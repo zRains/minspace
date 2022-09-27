@@ -1,7 +1,7 @@
 <template>
   <div class="MSEmpty">
     <!-- Icon -->
-    <div class="MSEmpty">
+    <div class="EmptyIcon" :style="{ height: typeof size === 'string' ? size : `${size}px` }">
       <slot name="icon"><Icon :height="size" :width="size" :color="color" icon="tabler:3d-cube-sphere" /></slot>
     </div>
 
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 defineProps({
   size: {
-    type: Number,
+    type: [String, Number],
     required: false,
     default: 60
   },
@@ -34,8 +34,9 @@ defineProps({
   align-items: center;
 
   .EmptyTip {
+    height: 20px;
+    line-height: 20px;
     color: var(--c-text-2);
-    margin-top: var(--u-gap);
   }
 }
 </style>

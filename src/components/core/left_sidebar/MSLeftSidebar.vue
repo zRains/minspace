@@ -83,7 +83,7 @@ const {
     .CoreMenu,
     .SpaceMenu {
       position: relative;
-      padding: var(--u-gap) 0;
+      // padding: var(--u-gap) 0;
       z-index: 1;
     }
 
