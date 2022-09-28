@@ -17,17 +17,19 @@
       border-color="var(--c-bg-mute)"
     />
 
-    <div class="SearchResultContainer">
+    <MSCollapsibleBox class="SearchResultContainer" :collapsed="!activeSearch" :disable="!searchResultCollapsible">
       <div class="SearchOption">
-        <MSButton class="CancelSearchBtn" @click="changeActiveSearch(false)">
+        <MSButton class="CancelSearchBtn" @click="cancelSearchHandle">
           <template #left-icon><Icon icon="tabler:zoom-cancel" /></template>
-          <template #text>Cancel Search</template>
+          <template #text>Cancel</template>
         </MSButton>
       </div>
-      <ul class="UserResult ResetList">
-        <li v-for="user in searchResult.user" :key="user.uid"><MSSearchUserItem :user="user" /></li>
-      </ul>
-    </div>
+
+      <MSResult v-if="initialize" :size="40" :icon="'tabler:user-search'" :tip="'Get your new friends'" />
+      <MSResult v-else-if="searching" :size="40" :tip="'Searching...'" result-type="loading" />
+      <MSResult v-else-if="!initialize && searchResult.user.length === 0" :size="40" result-type="empty" :tip="'No such user(s)'" />
+      <MSUserResult :users="searchResult.user" />
+    </MSCollapsibleBox>
   </div>
 </template>
 
@@ -35,11 +37,13 @@
 import { ref, reactive, inject } from 'vue'
 import MSInput from '../../../ui/MSInput.vue'
 import MSSidebarMenuItem from '../MSSidebarMenuItem.vue'
-import MSSearchUserItem from './MSSearchUserItem.vue'
+import MSUserResult from './MSUserResult.vue'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
+import MSResult from '../../../ui/MSResult.vue'
 import { searchUser } from '../../../../apis/user.api'
 import type { findUserResultDto } from '../../../../apis/user.api'
 import { coreStateKey } from '../../../../states'
+import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'
 
 const {
   space: {
@@ -50,11 +54,15 @@ const {
 
 const inputRef = ref<HTMLElement & { focusInput: () => {} }>()
 const searchValue = ref('')
+const searching = ref(false)
+const initialize = ref(true)
+const searchResultCollapsible = ref(true)
 const searchResult = reactive<{ user: findUserResultDto[] }>({
   user: []
 })
 
 function activeSearchHandle() {
+  searchResultCollapsible.value = true
   changeActiveSearch(true)
   setTimeout(() => {
     inputRef.value!.focusInput()
@@ -62,14 +70,34 @@ function activeSearchHandle() {
 }
 
 async function searchHandle() {
+  searchResultCollapsible.value = true
+  initialize.value = false
   if (searchValue.value.length > 0) {
+    searching.value = true
     // User search
     const { succeed: isFindUserSucceed, data: findUserData } = await searchUser({ keyword: searchValue.value })
 
     // Room search
 
     if (isFindUserSucceed) searchResult.user = findUserData
+
+    if (findUserData.length !== 0) {
+      setTimeout(() => {
+        searchResultCollapsible.value = false
+      }, 200)
+    }
+
+    searching.value = false
   } else changeActiveSearch(false)
+}
+
+function cancelSearchHandle() {
+  searchResultCollapsible.value = true
+  changeActiveSearch(false)
+  setTimeout(() => {
+    searchValue.value = ''
+    searchResult.user = []
+  }, 200)
 }
 </script>
 
@@ -96,21 +124,18 @@ async function searchHandle() {
   }
 
   .SearchResultContainer {
-    padding: 0 calc(var(--u-gap) * 0.5);
-
     .SearchOption {
+      padding: 0 var(--u-gap);
+
       .MSButton {
+        background-color: transparent;
         font-size: 0.8rem;
         color: var(--c-text-2);
       }
     }
 
-    .UserResult {
-      padding: var(--u-gap) 0;
-
-      li:not(:last-child) {
-        margin-bottom: var(--u-gap);
-      }
+    .MSResult {
+      padding: calc(var(--u-gap) * 2);
     }
   }
 

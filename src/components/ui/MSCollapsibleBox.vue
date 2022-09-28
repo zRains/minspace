@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ MSCollapsibleBox: true, collapsed }" :style="collapsibleBoxStyles">
+  <div :class="{ MSCollapsibleBox: true, collapsed, disable }" :style="collapsibleBoxStyles">
     <div class="BoxContent" ref="boxContentRef"><slot></slot></div>
   </div>
 </template>
@@ -16,19 +16,24 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  disable: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
 const boxContentRef = ref<HTMLElement>()
 const collapsibleBoxHeight = ref(props.boxHeight)
-const collapsibleBoxStyles = computed(() => {
-  const expectHeight = collapsibleBoxHeight.value ? `${collapsibleBoxHeight.value}px` : 'unset'
-
-  return { '--collapsible-box-height': props.collapsed ? '0px' : expectHeight }
+const boxObserver = new ResizeObserver(() => {
+  const updateBoxHeight = boxContentRef.value ? boxContentRef.value.clientHeight : 0
+  collapsibleBoxHeight.value = Math.abs(collapsibleBoxHeight.value! - updateBoxHeight) <= 2 ? collapsibleBoxHeight.value : updateBoxHeight
 })
+const collapsibleBoxStyles = computed(() => ({ '--collapsible-box-height': props.collapsed ? '0px' : `${collapsibleBoxHeight.value}px` }))
 
 onMounted(() => {
-  collapsibleBoxHeight.value = boxContentRef.value!.clientHeight
+  if (!props.disable) boxObserver.observe(boxContentRef.value!)
 })
 </script>
 
@@ -42,6 +47,10 @@ onMounted(() => {
   &.collapsed {
     opacity: 0;
     visibility: hidden;
+  }
+
+  &.disable {
+    transition: none;
   }
 }
 </style>

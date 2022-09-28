@@ -50,7 +50,6 @@
         <!-- Users -->
         <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
       </div>
-      <MSEmpty />
     </MSScroller>
   </div>
 </template>
@@ -58,13 +57,12 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import { coreStateKey } from '../../../states'
-import MSEmpty from '../../ui/MSEmpty.vue'
 import MSOuterBoard from './MSOuterBoard.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
-import MSCollapsibleBox from './MSCollapsibleBox.vue'
+import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
 
 const {
   space: {

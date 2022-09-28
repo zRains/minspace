@@ -1,77 +1,114 @@
 <template>
-  <div class="MSSearchUserItem">
-    <MSUserAvatar :src="user.avatar" :size="32" />
-    <div class="UserInfo">
-      <div class="UserName">{{ user.username }}</div>
-      <div class="UserUid">#{{ user.uid }}</div>
+  <div :class="{ MSSearchUserItem: true, active }">
+    <div class="UserOverview" @click="$emit('activeUserItem')">
+      <MSUserAvatar :src="user.avatar" :size="34" />
+      <div class="UserInfo">
+        <div class="UserName">{{ user.username }}</div>
+        <div class="UserUid">#{{ user.uid }}</div>
+      </div>
     </div>
-    <div class="UserOptions">
-      <MSButton class="ReportUserBtn" no-text>
-        <template #right-icon><Icon icon="tabler:alert-triangle" /></template>
-      </MSButton>
-      <MSButton class="AddFriendBtn" no-text>
-        <template #right-icon><Icon icon="tabler:user-plus" /></template>
-      </MSButton>
-    </div>
+    <MSCollapsibleBox class="UserDetails" :collapsed="!active">
+      <div class="UserSign">{{ user.sign || 'Too lazy to sign ' }}</div>
+      <div class="UserOptions">
+        <MSButton class="ReportUserBtn" no-text>
+          <template #right-icon><Icon icon="tabler:alert-triangle" /></template>
+        </MSButton>
+        <MSButton class="AddFriendBtn" no-text>
+          <template #right-icon><Icon icon="tabler:user-plus" /></template>
+        </MSButton>
+      </div>
+    </MSCollapsibleBox>
   </div>
 </template>
 
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { findUserResultDto } from '../../../../apis/user.api'
-import MSButton from '../../../ui/MSButton/MSButton.vue'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
+import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'
+import MSButton from '../../../ui/MSButton/MSButton.vue'
 
 defineProps({
   user: {
     type: Object as PropType<findUserResultDto>,
     required: true
+  },
+  active: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
+
+defineEmits(['activeUserItem'])
 </script>
 
 <style lang="scss">
 .MSSearchUserItem {
-  height: 32px;
-  display: flex;
+  border-radius: 5px;
+  transition: background-color var(--u-dur);
 
-  .UserInfo {
-    flex-grow: 1;
-    padding: 0 calc(var(--u-gap));
-    line-height: 100%;
+  .UserOverview {
+    display: flex;
+    padding: var(--u-gap);
+    cursor: pointer;
+    transition: background-color calc(var(--u-dur) / 2);
 
-    .UserName {
-      font-size: 0.9rem;
-    }
+    .UserInfo {
+      flex-grow: 1;
+      padding: 0 calc(var(--u-gap));
 
-    .UserUid {
-      font-size: 0.75rem;
-      color: var(--c-text-2);
+      .UserName {
+        line-height: 18px;
+        font-size: 0.9rem;
+      }
+
+      .UserUid {
+        font-size: 0.75rem;
+        color: var(--c-text-2);
+      }
     }
   }
 
-  .UserOptions {
-    display: flex;
-    align-items: center;
+  .UserDetails {
+    .UserSign {
+      padding: var(--u-gap);
+      font-size: 0.8rem;
+    }
 
-    .MSButton {
-      padding: calc(var(--u-gap) * 0.5) var(--u-gap);
-      border-radius: 3px;
+    .UserOptions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 var(--u-gap) var(--u-gap) var(--u-gap);
 
-      &.ReportUserBtn {
-        background-color: var(--c-red-op);
-        color: var(--c-red);
-      }
+      .MSButton {
+        padding: calc(var(--u-gap) * 0.4) var(--u-gap);
+        border-radius: 5px;
 
-      &.AddFriendBtn {
-        background-color: var(--c-green-op);
-        color: var(--c-green);
-      }
+        &.ReportUserBtn {
+          background-color: var(--c-red-op);
+          color: var(--c-red);
+        }
 
-      &:not(:last-child) {
-        margin-right: var(--u-gap);
+        &.AddFriendBtn {
+          background-color: var(--c-green-op);
+          color: var(--c-green);
+        }
+
+        &:not(:last-child) {
+          margin-right: var(--u-gap);
+        }
       }
     }
+  }
+
+  &:hover {
+    background-color: var(--c-bg-mute);
+  }
+
+  &.active {
+    background-color: var(--c-bg-soft);
   }
 }
 </style>
