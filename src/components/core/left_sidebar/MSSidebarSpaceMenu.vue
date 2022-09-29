@@ -33,7 +33,7 @@ import MSSidebarSpaceUserItem from './MSSidebarSpaceUserItem.vue'
 import { coreStateKey } from '../../../states'
 
 const {
-  space: {
+  leftSidebar: {
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
@@ -62,10 +62,10 @@ $banner-height: 22px;
     display: flex;
     height: $banner-height;
     line-height: $banner-height;
-    font-size: 0.8rem;
-    color: var(--c-text-2);
 
     .BannerText {
+      font-size: 0.9rem;
+      color: var(--c-text-2);
       flex-grow: 1;
       font-family: var(--f-rb);
     }
@@ -76,6 +76,7 @@ $banner-height: 22px;
       padding: 0 calc(var(--u-gap) * 0.8);
       background-color: var(--c-bg-mute);
       border-radius: 3px;
+      font-size: 0.8rem;
 
       &.SidebarSpaceMenuAdd {
         color: var(--c-green);

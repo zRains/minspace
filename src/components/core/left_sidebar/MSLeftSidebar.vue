@@ -1,6 +1,6 @@
 <template>
   <div class="MSLeftSidebar">
-    <MSOuterBoard />
+    <MSSidebarUserNav />
     <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
       <div class="CoreMenu">
         <MSCollapsibleBox :collapsed="activeSearch">
@@ -41,8 +41,6 @@
         </MSSidebarMenuItem>
       </div>
 
-      <div class="MenuDivider"></div>
-
       <div class="SpaceMenu">
         <!-- Rooms -->
         <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
@@ -51,21 +49,23 @@
         <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
       </div>
     </MSScroller>
+    <MSSidebarOuterPlane />
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue'
 import { coreStateKey } from '../../../states'
-import MSOuterBoard from './MSOuterBoard.vue'
+import MSSidebarUserNav from './MSSidebarUserNav.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
 import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
+import MSSidebarOuterPlane from './outer_plane/MSSidebarOuterPlane.vue'
 
 const {
-  space: {
+  leftSidebar: {
     states: { activeSearch },
     mutations: { changeCurrentTab }
   }
@@ -80,6 +80,8 @@ const {
   border-right: 1px solid var(--c-divider-light);
 
   .LeftSidebarMenuContainer {
+    position: relative;
+
     .MenuDivider {
       margin: calc(var(--u-gap) * 1.5) 0;
     }
@@ -87,7 +89,9 @@ const {
     .CoreMenu,
     .SpaceMenu {
       position: relative;
+      margin-top: calc(var(--u-gap) * 1.5);
       padding: 0 calc((var(--u-gap)) * 2 - var(--scrollable-patch)) 0 calc((var(--u-gap)) * 2);
+      background-color: var(--c-bg);
       z-index: 1;
     }
 

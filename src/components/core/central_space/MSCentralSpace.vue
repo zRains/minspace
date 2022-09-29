@@ -18,7 +18,7 @@ import MSActivitiesContainer from './modules/activities/MSActivitiesContainer.vu
 import { coreStateKey } from '../../../states'
 
 const {
-  space: {
+  leftSidebar: {
     states: { currentTab }
   }
 } = inject(coreStateKey)!

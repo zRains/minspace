@@ -46,7 +46,7 @@ import { coreStateKey } from '../../../../states'
 import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'
 
 const {
-  space: {
+  leftSidebar: {
     states: { activeSearch },
     mutations: { changeActiveSearch }
   }
@@ -95,6 +95,7 @@ function cancelSearchHandle() {
   searchResultCollapsible.value = true
   changeActiveSearch(false)
   setTimeout(() => {
+    initialize.value = true
     searchValue.value = ''
     searchResult.user = []
   }, 200)

@@ -1,13 +1,13 @@
 import { InjectionKey } from 'vue'
 
-import useSpace from './modules/space'
+import useLeftSidebar from './modules/leftSidebar'
 import useToastStates from './modules/toast'
 import useUserStates from './modules/user'
 
 export const coreState = (() => ({
   toast: useToastStates(),
   user: useUserStates(),
-  space: useSpace()
+  leftSidebar: useLeftSidebar()
 }))()
 
 export const coreStateKey: InjectionKey<typeof coreState> = Symbol('coreState')

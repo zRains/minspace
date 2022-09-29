@@ -28,7 +28,8 @@ const boxContentRef = ref<HTMLElement>()
 const collapsibleBoxHeight = ref(props.boxHeight)
 const boxObserver = new ResizeObserver(() => {
   const updateBoxHeight = boxContentRef.value ? boxContentRef.value.clientHeight : 0
-  collapsibleBoxHeight.value = Math.abs(collapsibleBoxHeight.value! - updateBoxHeight) <= 2 ? collapsibleBoxHeight.value : updateBoxHeight
+  // collapsibleBoxHeight.value = Math.abs(collapsibleBoxHeight.value! - updateBoxHeight) <= 2 ? collapsibleBoxHeight.value : updateBoxHeight
+  collapsibleBoxHeight.value = updateBoxHeight
 })
 const collapsibleBoxStyles = computed(() => ({ '--collapsible-box-height': props.collapsed ? '0px' : `${collapsibleBoxHeight.value}px` }))
 

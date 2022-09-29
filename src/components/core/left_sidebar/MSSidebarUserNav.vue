@@ -1,5 +1,5 @@
 <template>
-  <div class="MSOuterBoard">
+  <div class="MSSidebarUserNav">
     <MSUserAvatar :src="currentUser.avatar" />
     <div class="MSSpaceInfo">
       <MSDropdown class="MSUserInfo" :items="userDropdownOptions" trigger="click">
@@ -106,13 +106,14 @@ const userDropdownOptions: DropdownOptions = [
 </script>
 
 <style lang="scss">
-.MSOuterBoard {
+.MSSidebarUserNav {
   position: relative;
   display: flex;
   align-items: center;
   padding: 0 calc(var(--u-gap) * 2);
   height: var(--ms-left-sidebar-outer-board-height);
-  z-index: 2;
+  background-color: var(--c-bg);
+  z-index: 3;
 
   .MSSpaceInfo {
     margin-left: calc(var(--u-gap) * 1.2);

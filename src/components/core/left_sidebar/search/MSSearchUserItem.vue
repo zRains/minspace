@@ -13,7 +13,7 @@
         <MSButton class="ReportUserBtn" no-text>
           <template #right-icon><Icon icon="tabler:alert-triangle" /></template>
         </MSButton>
-        <MSButton class="AddFriendBtn" no-text>
+        <MSButton class="AddFriendBtn" no-text @click="addFriendHandle">
           <template #right-icon><Icon icon="tabler:user-plus" /></template>
         </MSButton>
       </div>
@@ -22,11 +22,18 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
+import { inject, PropType } from 'vue'
 import { findUserResultDto } from '../../../../apis/user.api'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
 import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
+import { coreStateKey } from '../../../../states'
+
+const {
+  leftSidebar: {
+    mutations: { changeActiveOuterPlane }
+  }
+} = inject(coreStateKey)!
 
 defineProps({
   user: {
@@ -41,6 +48,10 @@ defineProps({
 })
 
 defineEmits(['activeUserItem'])
+
+function addFriendHandle() {
+  changeActiveOuterPlane(true)
+}
 </script>
 
 <style lang="scss">

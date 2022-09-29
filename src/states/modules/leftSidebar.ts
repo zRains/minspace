@@ -2,13 +2,11 @@ import { ref } from 'vue'
 
 type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
 
-export default function useSpace() {
+export default function leftSidebar() {
   // states
   const currentTab = ref<Tab>('activities')
   const activeSearch = ref(false)
-  // const utilOptions = reactive({
-  //   text: ''
-  // })
+  const activeOuterPlane = ref(false)
 
   // mutations
   const changeCurrentTab = (tab: Tab) => {
@@ -19,11 +17,15 @@ export default function useSpace() {
     activeSearch.value = val
   }
 
+  const changeActiveOuterPlane = (val: boolean) => {
+    activeOuterPlane.value = val
+  }
+
   // actions
 
   return {
-    states: { currentTab, activeSearch },
-    mutations: { changeCurrentTab, changeActiveSearch },
+    states: { currentTab, activeSearch, activeOuterPlane },
+    mutations: { changeCurrentTab, changeActiveSearch, changeActiveOuterPlane },
     actions: {}
   }
 }
