@@ -27,14 +27,10 @@ const {
   background-color: var(--c-bg);
   z-index: 2;
   transform: translateX(-100%);
-  opacity: 0;
-  visibility: hidden;
   transition: background-color var(--u-dur), transform var(--u-dur), opacity var(--u-dur), visibility var(--u-dur);
 
   &.active {
     transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
   }
 }
 </style>

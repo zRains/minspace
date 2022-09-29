@@ -6,12 +6,12 @@
         <Icon height="24" width="24" icon="tabler:mail" />
       </div>
       <Icon class="ArrowIcon" height="30" width="30" icon="tabler:arrow-narrow-right" />
-      <MSUserAvatar src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" :size="36" />
+      <MSUserAvatar :src="currentFriendApplicationReceiver.avatar" :size="36" />
     </div>
-    <div class="ApplicationMessage">Say hello to...</div>
+    <div class="ApplicationMessage">Say hello to {{ currentFriendApplicationReceiver.username }}</div>
     <div class="ApplicationOptions">
       <MSButton class="SendApplicationBtn">
-        <template #text>Send application</template>
+        <template #text>Send</template>
       </MSButton>
       <MSButton class="CancelBtn" @click="cancelHandle">
         <template #text>Cancel</template>
@@ -28,6 +28,7 @@ import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
 
 const {
   leftSidebar: {
+    states: { currentFriendApplicationReceiver },
     mutations: { changeActiveOuterPlane }
   }
 } = inject(coreStateKey)!
@@ -84,6 +85,7 @@ function cancelHandle() {
       width: 100%;
       padding: calc(var(--u-gap) * 0.5);
       text-align: center;
+      font-size: 0.9rem;
       border-radius: 5px;
 
       &.SendApplicationBtn {

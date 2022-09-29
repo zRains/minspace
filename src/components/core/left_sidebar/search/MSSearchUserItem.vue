@@ -31,11 +31,11 @@ import { coreStateKey } from '../../../../states'
 
 const {
   leftSidebar: {
-    mutations: { changeActiveOuterPlane }
+    mutations: { changeActiveOuterPlane, changeCurrentFriendApplicationReceiver }
   }
 } = inject(coreStateKey)!
 
-defineProps({
+const props = defineProps({
   user: {
     type: Object as PropType<findUserResultDto>,
     required: true
@@ -50,6 +50,7 @@ defineProps({
 defineEmits(['activeUserItem'])
 
 function addFriendHandle() {
+  changeCurrentFriendApplicationReceiver(props.user)
   changeActiveOuterPlane(true)
 }
 </script>
@@ -57,7 +58,7 @@ function addFriendHandle() {
 <style lang="scss">
 .MSSearchUserItem {
   border-radius: 5px;
-  transition: background-color var(--u-dur);
+  transition: background-color calc(var(--u-dur) / 2);
 
   .UserOverview {
     display: flex;
