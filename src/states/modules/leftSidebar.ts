@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import type { findUserResultDto } from '../../apis/user.api'
 
 type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
@@ -8,8 +8,8 @@ export default function leftSidebar() {
   const currentTab = ref<Tab>('activities')
   const activeSearch = ref(false)
   const activeOuterPlane = ref(false)
-  const currentFriendApplicationReceiver = ref<findUserResultDto>({
-    uid: '',
+  const currentFriendApplicationReceiver = reactive<findUserResultDto>({
+    uid: -1,
     email: '',
     username: '',
     avatar: '',
@@ -30,7 +30,7 @@ export default function leftSidebar() {
   }
 
   const changeCurrentFriendApplicationReceiver = (receiver: findUserResultDto) => {
-    currentFriendApplicationReceiver.value = receiver
+    Object.assign(currentFriendApplicationReceiver, receiver)
   }
 
   // actions

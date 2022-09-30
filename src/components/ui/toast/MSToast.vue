@@ -1,12 +1,18 @@
 <template>
   <Transition>
-    <div :class="['MSToast', position]" ref="toastRef" v-show="showToast" @mouseover="toggleTimer(true)" @mouseleave="toggleTimer(false)">
-      <div :class="['TostLeftIcon', type]">
+    <div
+      :class="['MSToast', position, type]"
+      ref="toastRef"
+      v-show="showToast"
+      @mouseover="toggleTimer(true)"
+      @mouseleave="toggleTimer(false)"
+    >
+      <div class="TostLeftIcon">
         <slot name="left-icon">
-          <Icon v-if="type === 'success'" height="16" width="16" icon="tabler:check" />
-          <Icon v-if="type === 'info'" height="16" width="16" icon="tabler:bell" />
-          <Icon v-if="type === 'warning'" height="16" width="16" icon="tabler:alert-circle" />
-          <Icon v-if="type === 'error'" height="16" width="16" icon="tabler:alert-triangle" />
+          <Icon v-if="type === 'success'" height="18" width="18" icon="tabler:check" />
+          <Icon v-if="type === 'info'" height="18" width="18" icon="tabler:bell" />
+          <Icon v-if="type === 'warning'" height="18" width="18" icon="tabler:alert-circle" />
+          <Icon v-if="type === 'error'" height="18" width="18" icon="tabler:alert-triangle" />
           <MSLoading v-if="type === 'loading'" :size="18" />
         </slot>
       </div>
@@ -152,7 +158,7 @@ defineExpose({
 .MSToast {
   display: inline-flex;
   align-items: center;
-  padding: var(--u-gap) calc(var(--u-gap) * 1.5);
+  padding: calc(var(--u-gap) * 2);
   min-width: 280px;
   max-width: 330px;
   background-color: var(--c-bg);
@@ -169,41 +175,21 @@ defineExpose({
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    height: 26px;
-    width: 26px;
+
     border-radius: 50%;
     margin-bottom: auto;
 
     &.TostRightIcon {
+      height: 16px;
       width: 16px;
-    }
-
-    &.success {
-      background-color: rgba(#2bb44a, 0.15);
-      color: #2bb44a;
-    }
-
-    &.info {
-      background-color: rgba(#3e71f3, 0.1);
-      color: #3e71f3;
-    }
-
-    &.warning {
-      background-color: rgba(#ffcc00, 0.15);
-      color: #f89e23;
-    }
-
-    &.error {
-      background-color: rgba(#eb2833, 0.1);
-      color: #eb2833;
-    }
-
-    &.loading {
-      background-color: var(--c-bg-mute);
-    }
-
-    &.TostRightIcon {
+      color: var(--c-text-2);
+      background-color: transparent;
       cursor: pointer;
+    }
+
+    &.TostLeftIcon {
+      height: 26px;
+      width: 26px;
     }
   }
 
@@ -212,14 +198,13 @@ defineExpose({
     padding: 0 calc(var(--u-gap) * 1.5);
 
     .ToastTitle {
-      font-size: 0.92rem;
       font-family: var(--f-rb);
       font-weight: bold;
     }
 
     .ToastContent {
       padding-top: calc(var(--u-gap) / 1.8);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
   }
 
@@ -257,6 +242,46 @@ defineExpose({
     &.TopRight {
       transform: translateX(calc(100% + var(--u-gap)));
     }
+  }
+
+  &.success {
+    background-color: #f1f8f4;
+
+    .TostLeftIcon {
+      background-color: rgba(#2bb44a, 0.15);
+      color: #2bb44a;
+    }
+  }
+
+  &.info {
+    background-color: #e6eff9;
+
+    .TostLeftIcon {
+      background-color: rgba(#3e71f3, 0.1);
+      color: #3e71f3;
+    }
+  }
+
+  &.warning {
+    background-color: #fef9eb;
+
+    .TostLeftIcon {
+      background-color: rgba(#ffcc00, 0.15);
+      color: #f89e23;
+    }
+  }
+
+  &.error {
+    background-color: #fbefeb;
+
+    .TostLeftIcon {
+      background-color: rgba(#eb2833, 0.1);
+      color: #eb2833;
+    }
+  }
+
+  &.loading .TostLeftIcon {
+    background-color: var(--c-bg-mute);
   }
 }
 </style>

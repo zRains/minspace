@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 import storage from '../../utils/storage'
 
 type UserDto = {
-  uid: string
+  uid: number
   role: 'USER' | 'OPERATOR' | 'ADMIN'
   sign: string
   email: string
@@ -15,7 +15,7 @@ type UserDto = {
 export default function useUserStates() {
   // states
   const currentUser: UserDto = reactive({
-    uid: '',
+    uid: -1,
     role: 'USER',
     sign: '',
     email: '',

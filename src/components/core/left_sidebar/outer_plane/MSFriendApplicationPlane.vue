@@ -10,7 +10,7 @@
     </div>
     <div class="ApplicationMessage">Say hello to {{ currentFriendApplicationReceiver.username }}</div>
     <div class="ApplicationOptions">
-      <MSButton class="SendApplicationBtn">
+      <MSButton class="SendApplicationBtn" @click="sendApplicationHandle">
         <template #text>Send</template>
       </MSButton>
       <MSButton class="CancelBtn" @click="cancelHandle">
@@ -25,16 +25,25 @@ import { inject } from 'vue'
 import { coreStateKey } from '../../../../states'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
+import { addFriendSocket } from '../../../../apis/ws.api'
 
 const {
   leftSidebar: {
     states: { currentFriendApplicationReceiver },
     mutations: { changeActiveOuterPlane }
+  },
+  user: {
+    states: { currentUser }
   }
 } = inject(coreStateKey)!
 
 function cancelHandle() {
   changeActiveOuterPlane(false)
+}
+
+async function sendApplicationHandle() {
+  const data = await addFriendSocket(currentUser.uid, currentFriendApplicationReceiver.uid)
+  console.log(data)
 }
 </script>
 

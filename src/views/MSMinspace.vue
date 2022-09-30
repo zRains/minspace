@@ -11,9 +11,33 @@
 </template>
 
 <script setup lang="ts">
-import MSMainLayout from '../layouts/MSMainLayout.vue'
+import { inject, onMounted } from 'vue'
 import MSLeftSidebar from '../components/core/left_sidebar/MSLeftSidebar.vue'
 import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
+import useToast from '../composes/toast'
+import MSMainLayout from '../layouts/MSMainLayout.vue'
+import { coreStateKey } from '../states'
+
+const {
+  socket: {
+    mutations: { connectSocket }
+  }
+} = inject(coreStateKey)!
+
+const Toast = useToast()
+
+onMounted(() => {
+  connectSocket((socket) =>
+    socket.on('exception', (data) => {
+      const { errors } = data
+
+      Toast.error('Error', {
+        content: Array.isArray(errors) ? errors.map((e: Record<string, string>) => e.message) : errors.message,
+        duration: 5000
+      })
+    })
+  )
+})
 </script>
 
 <style lang="scss"></style>

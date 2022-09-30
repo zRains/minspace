@@ -8,7 +8,7 @@ export type findUserDto = {
 }
 
 export type findUserResultDto = {
-  uid: string
+  uid: number
   email: string
   username: string
   avatar: string
