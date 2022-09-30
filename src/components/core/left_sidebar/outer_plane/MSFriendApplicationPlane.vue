@@ -26,6 +26,7 @@ import { coreStateKey } from '../../../../states'
 import MSButton from '../../../ui/MSButton/MSButton.vue'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
 import { addFriendSocket } from '../../../../apis/ws.api'
+import useToast from '../../../../composes/toast'
 
 const {
   leftSidebar: {
@@ -36,13 +37,19 @@ const {
     states: { currentUser }
   }
 } = inject(coreStateKey)!
+const Toast = useToast()
 
 function cancelHandle() {
   changeActiveOuterPlane(false)
 }
 
 async function sendApplicationHandle() {
-  const data = await addFriendSocket(currentUser.uid, currentFriendApplicationReceiver.uid)
+  if (currentUser.uid === currentFriendApplicationReceiver.uid) {
+    Toast.error('Error', { content: 'Cannot add yourself as a friend' })
+    return
+  }
+
+  const data = await addFriendSocket(currentFriendApplicationReceiver.uid)
   console.log(data)
 }
 </script>

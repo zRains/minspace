@@ -45,7 +45,7 @@ const loginModule = reactive({
 function checkLoginValid() {
   const invalidArr: string[] = []
 
-  loginModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(loginModule.email)
+  loginModule.isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginModule.email)
   if (!loginModule.isEmailValid) invalidArr.push('Invalid email')
 
   loginModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(loginModule.password)
@@ -64,7 +64,7 @@ async function loginHandle() {
 
     if (succeed) {
       coreState.user.mutations.setCurrentUser(data)
-      router.push({ name: 'space-page' })
+      router.push({ name: 'activities-page' })
     }
   }
 }
