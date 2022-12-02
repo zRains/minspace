@@ -1,6 +1,12 @@
 import { coreState } from '../states'
 
-export async function addFriendSocket(friendId: number) {
+type WsResponse = {
+  code: number
+  data: any
+  succeed: boolean
+}
+
+export async function addFriendSocket(friendId: number): Promise<WsResponse> {
   const { socket } = coreState.socket.states
 
   return new Promise((resolve) => {

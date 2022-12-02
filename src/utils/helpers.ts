@@ -1,3 +1,5 @@
+import { h, render, DefineComponent } from 'vue'
+
 /** Debounce fun */
 export function debounce(fn: () => void, delay = 300) {
   let timer = 0
@@ -38,4 +40,18 @@ export function getRelativeTime(d1: number, d2 = +new Date()) {
   }
 
   return 'Unknown time'
+}
+
+export function renderInstance<T extends DefineComponent>(Constructor: T, props: Record<string, any>) {
+  const container = document.createElement('div')
+
+  Reflect.set(props, 'vanish', () => {
+    render(null, container)
+  })
+
+  const vnode = h(Constructor, props)
+
+  render(vnode, container)
+
+  document.body.appendChild(container.firstChild!)
 }

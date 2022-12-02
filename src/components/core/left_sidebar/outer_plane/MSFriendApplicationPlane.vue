@@ -49,8 +49,9 @@ async function sendApplicationHandle() {
     return
   }
 
-  const data = await addFriendSocket(currentFriendApplicationReceiver.uid)
-  console.log(data)
+  const { succeed } = await addFriendSocket(currentFriendApplicationReceiver.uid)
+
+  // if(succeed)
 }
 </script>
 

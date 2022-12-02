@@ -42,9 +42,6 @@ useClickOutside(MSDropdown, () => {
 </script>
 
 <style lang="scss">
-@use 'sass:math';
-@import '../../../styles/vars.scss';
-
 .MSDropdown {
   position: relative;
 

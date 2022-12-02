@@ -72,7 +72,7 @@ class CustomStorage {
    * @param key key
    */
   public del(key: string) {
-    if (typeof key !== 'string' && this.myStorage.has(key)) {
+    if (typeof key === 'string' && this.myStorage.has(key)) {
       this.myStorage.delete(key)
       localStorage.removeItem(key)
       return true

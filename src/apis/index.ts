@@ -1,9 +1,8 @@
 import type { AxiosRequestConfig, Canceler } from 'axios'
 import axios from 'axios'
+import useToast from '../composes/toast'
 import { AXIOS_BASE_URL } from '../minspace.config'
 import storage from '../utils/storage'
-import useToast from '../composes/toast'
-// import router from '../routers'
 
 const Toast = useToast()
 
@@ -18,6 +17,7 @@ const Axios = axios.create({
 /** Storage all current requests */
 const currentReq: Map<string, Canceler> = new Map()
 
+/** Add new request */
 function addReq<T>(config: AxiosRequestConfig<T>) {
   const reqToken = [config.method, config.url, JSON.stringify(config.params), JSON.stringify(config.data)].join('&')
   // eslint-disable-next-line no-param-reassign
@@ -42,8 +42,9 @@ Axios.interceptors.request.use(
   (config) => {
     delReq(config)
     addReq(config)
-    // eslint-disable-next-line no-param-reassign
-    config.headers!.Authorization = `bearer ${storage.get('user').token}`
+    if (storage.has('user')) {
+      config.headers = { ...config.headers, Authorization: `bearer ${storage.get('user').token}` }
+    }
 
     return config
   },
