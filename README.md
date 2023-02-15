@@ -1,6 +1,6 @@
 <div align="center">
   <a href="#">
-    <img src="public/minspace.svg" alt="Logo" width="80">
+    <img src="public/favicon.svg" alt="Logo" width="80">
   </a>
 
   <h3 align="center">minspace</h3>
