@@ -83,7 +83,7 @@ function checkRegisterValid() {
   registerModule.isPasswordConfirmValid = registerModule.password === registerModule.passwordConfirm
   if (!registerModule.isPasswordConfirmValid) invalidArr.push('Confirm passwords do not match')
 
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr, position: 'TopCenter' })
 
   return invalidArr.length === 0
 }

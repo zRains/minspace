@@ -158,9 +158,9 @@ defineExpose({
 .MSToast {
   display: inline-flex;
   align-items: center;
-  padding: calc(var(--u-gap) * 2);
-  min-width: 280px;
-  max-width: 330px;
+  padding: calc(var(--u-gap) * 1.5);
+  min-width: 400px;
+  max-width: 800px;
   background-color: var(--c-bg);
   border: 1px solid var(--c-divider-light);
   border-radius: 5px;

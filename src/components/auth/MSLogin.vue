@@ -51,7 +51,7 @@ function checkLoginValid() {
   loginModule.isPasswordValid = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(loginModule.password)
   if (!loginModule.isPasswordValid) invalidArr.push('Invalid password')
 
-  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr })
+  if (invalidArr.length !== 0) Toast.error('Please check your message', { content: invalidArr, position: 'TopCenter' })
 
   return invalidArr.length === 0
 }
