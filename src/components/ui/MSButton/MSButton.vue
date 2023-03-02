@@ -40,7 +40,7 @@ defineProps({
   font-family: inherit;
   font-size: inherit;
   text-align: left;
-  background-color: var(--c-bg);
+  background-color: transparent;
   transition: background-color calc(var(--u-dur) / 2);
   user-select: none;
   cursor: pointer;

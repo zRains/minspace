@@ -1,6 +1,9 @@
 <template>
   <div class="MSLeftSidebar">
+    <!-- User top nav -->
     <MSSidebarUserNav />
+
+    <!-- Main sidebar container -->
     <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
       <div class="CoreMenu">
         <MSCollapsibleBox :collapsed="activeSearch">
@@ -48,6 +51,8 @@
         <!-- Users -->
         <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
       </div>
+
+      <!-- <div style="width: 100%; height: 1000px; background-color: red"></div> -->
     </MSScroller>
     <MSSidebarOuterPlane />
   </div>
@@ -77,7 +82,6 @@ const {
   position: relative;
   height: 100%;
   width: var(--ms-left-sidebar-width);
-  border-right: 1px solid var(--c-divider-light);
 
   .LeftSidebarMenuContainer {
     position: relative;
@@ -92,7 +96,6 @@ const {
       margin-top: calc(var(--u-gap) * 1.5);
       padding: 0 calc((var(--u-gap)) * 2 - var(--scrollable-patch)) 0 calc((var(--u-gap)) * 2);
       background-color: var(--c-bg);
-      z-index: 1;
     }
 
     .SpaceMenu > *:not(:last-child) {

@@ -133,7 +133,7 @@ const isRegisterMode = ref(router.currentRoute.value.query?.authType === 'regist
     z-index: -1;
 
     .path-0 {
-      animation: pathAnim-0 8s;
+      animation: pathAnim-0 10s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }

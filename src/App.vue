@@ -1,5 +1,7 @@
 <template>
+  <!-- <div class="AppStyleInjector"> -->
   <RouterView />
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">

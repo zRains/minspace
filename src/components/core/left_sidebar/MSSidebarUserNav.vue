@@ -112,8 +112,6 @@ const userDropdownOptions: DropdownOptions = [
   align-items: center;
   padding: 0 calc(var(--u-gap) * 2);
   height: var(--ms-left-sidebar-outer-board-height);
-  background-color: var(--c-bg);
-  z-index: 3;
 
   .MSSpaceInfo {
     margin-left: calc(var(--u-gap) * 1.2);
