@@ -11,7 +11,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'index-page',
-      component: () => import('../App.vue'),
       children: [
         {
           path: 'auth',

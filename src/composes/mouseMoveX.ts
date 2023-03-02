@@ -1,6 +1,6 @@
-import { onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref, type Ref } from 'vue'
 
-export default function mouseMoveX(el: Ref<HTMLElement | undefined>) {
+export default function mouseMoveX(el: Ref<HTMLElement | undefined>, mousedownCb: Function = () => {}, mouseupCb: Function = () => {}) {
   let originalX: number = 0
   const moveDistance = ref(0)
 
@@ -8,23 +8,25 @@ export default function mouseMoveX(el: Ref<HTMLElement | undefined>) {
     moveDistance.value = e.clientX - originalX
   }
 
-  function onMouseup(e: MouseEvent) {
-    el.value!.removeEventListener('mousemove', onMousemove)
-    el.value!.removeEventListener('mouseup', onMouseup)
+  function onMouseup() {
+    document.documentElement.removeEventListener('mousemove', onMousemove)
+    document.documentElement.removeEventListener('mouseup', onMouseup)
+    mouseupCb()
   }
 
   function onMousedown(e: MouseEvent) {
     originalX = e.clientX
 
-    el.value!.addEventListener('mousemove', onMousemove)
-    el.value!.addEventListener('mouseup', onMouseup)
+    document.documentElement.addEventListener('mousemove', onMousemove)
+    document.documentElement.addEventListener('mouseup', onMouseup)
+    mousedownCb()
   }
 
   onMounted(() => {
     el.value!.addEventListener('mousedown', onMousedown)
   })
 
-  onUnmounted(() => {
+  onBeforeUnmount(() => {
     el.value!.removeEventListener('mousedown', onMousedown)
   })
 
