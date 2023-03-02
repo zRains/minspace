@@ -1,7 +1,7 @@
 <template>
   <Transition>
-    <MSMask v-if="dialogVisible" class="MSDialogMask FlexCenter">
-      <div class="MSDialog" aria-modal="true" role="dialog">
+    <MSMask v-if="dialogVisible" class="MSDialogMask">
+      <div class="MSDialog" aria-modal="true" role="dialog" :style="{ width }">
         <!-- Dialog header -->
         <section class="DialogHeader">
           <slot name="header">
@@ -124,7 +124,6 @@ $dialog-max-width: 600px;
   .MSDialog {
     display: inline-flex;
     flex-direction: column;
-    padding: calc(var(--u-gap) * 2.5);
     min-height: $dialog-min-height;
     min-width: $dialog-min-width;
     max-width: $dialog-max-width;
@@ -145,7 +144,6 @@ $dialog-max-width: 600px;
 
     .DialogBody {
       flex-grow: 1;
-      margin-bottom: calc(var(--u-gap) * 2);
     }
 
     .DialogOperation {

@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, PropType } from 'vue'
+import { inject, type PropType } from 'vue'
 import { findUserResultDto } from '../../../../apis/user.api'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
 import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'

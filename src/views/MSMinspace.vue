@@ -3,13 +3,16 @@
     <template #left-sideBar>
       <MSLeftSidebar />
     </template>
+
     <template #central-space>
       <RouterView />
     </template>
   </MSMainLayout>
 
-  <!-- Left sidebar search result details dialog -->
-  <!-- <MSDialog v-model:visible="testVisible" /> -->
+  <!-- Dialog groups -->
+  <!-- <MSUserDialog /> -->
+
+  <!-- Toast provider -->
   <MSToastProvider />
 </template>
 
@@ -17,11 +20,12 @@
 import { inject, onMounted, ref } from 'vue'
 import MSLeftSidebar from '../components/core/left_sidebar/MSLeftSidebar.vue'
 import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
-import useToast from '../composes/toast'
+// import useToast from '../composes/toast'
 import MSMainLayout from '../layouts/MSMainLayout.vue'
 import { coreStateKey } from '../states'
 
-// import MSDialog from '../components/ui/MSDialog.vue'
+// Dialog
+import MSUserDialog from '../components/template/dialog/MSUserDialog.vue'
 
 const {
   socket: {
@@ -30,8 +34,6 @@ const {
 } = inject(coreStateKey)!
 
 // const Toast = useToast()
-
-// const testVisible = ref(true)
 
 onMounted(() => {
   // connectSocket((socket) =>

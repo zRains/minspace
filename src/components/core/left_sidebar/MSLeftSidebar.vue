@@ -21,13 +21,13 @@
 
         <!-- Back to home button -->
         <MSSidebarMenuItem class="ActivitiesBtn" @click="changeCurrentTab('activities')">
-          <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
+          <template #icon><Icon height="20" width="20" icon="tabler:atom-2-filled" /></template>
           <template #text>Activities</template>
         </MSSidebarMenuItem>
 
         <!-- All rooms button -->
         <MSSidebarMenuItem class="RoomsBtn" @click="changeCurrentTab('rooms')">
-          <template #icon><Icon height="20" width="20" icon="tabler:box-model" /></template>
+          <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
           <template #text>Rooms</template>
         </MSSidebarMenuItem>
 
@@ -51,8 +51,6 @@
         <!-- Users -->
         <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
       </div>
-
-      <!-- <div style="width: 100%; height: 1000px; background-color: red"></div> -->
     </MSScroller>
     <MSSidebarOuterPlane />
   </div>
@@ -85,21 +83,18 @@ const {
 
   .LeftSidebarMenuContainer {
     position: relative;
+    padding: calc(var(--u-gap) * 1.5) var(--u-gap);
 
     .MenuDivider {
-      margin: calc(var(--u-gap) * 1.5) 0;
+      height: calc(var(--u-gap) * 2);
     }
 
-    .CoreMenu,
     .SpaceMenu {
-      position: relative;
-      margin-top: calc(var(--u-gap) * 1.5);
-      padding: 0 calc((var(--u-gap)) * 2 - var(--scrollable-patch)) 0 calc((var(--u-gap)) * 2);
-      background-color: var(--c-bg);
-    }
+      margin-top: calc(var(--u-gap) * 2);
 
-    .SpaceMenu > *:not(:last-child) {
-      margin-bottom: calc(var(--u-gap) * 2);
+      & > *:not(:last-child) {
+        margin-bottom: calc(var(--u-gap) * 2);
+      }
     }
   }
 }

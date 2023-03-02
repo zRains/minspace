@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, PropType, ref } from 'vue'
+import { computed, onMounted, type PropType, ref } from 'vue'
 
 const props = defineProps({
   direction: {
@@ -47,8 +47,7 @@ const scrollerStyles = computed(() => ({
   '--scroller-thumb-color': props.thumbColor,
   '--scroller-track-color': props.trackColor,
   '--scroller-vertical-size': `${props.vertical}px`,
-  '--scroller-horizontal-size': `${props.horizontal}px`,
-  '--scrollable-patch': scrollable.value ? `${props.direction === 'vertical' ? props.vertical : props.horizontal}px` : '0px'
+  '--scroller-horizontal-size': `${props.horizontal}px`
 }))
 
 onMounted(() => {
@@ -66,6 +65,7 @@ onMounted(() => {
 .MSScroller {
   overflow: auto;
   scrollbar-color: var(--scroller-thumb-color) var(--scroller-track-color);
+  /* padding-right: 8px; */
 
   &::-webkit-scrollbar {
     width: var(--scroller-vertical-size);

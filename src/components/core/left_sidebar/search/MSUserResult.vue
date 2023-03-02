@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, watch } from 'vue'
+import { type PropType, ref, watch } from 'vue'
 import MSSearchUserItem from './MSSearchUserItem.vue'
 import type { findUserResultDto } from '../../../../apis/user.api'
 

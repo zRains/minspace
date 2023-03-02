@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, PropType, ref } from 'vue'
+import { computed, nextTick, type PropType, ref } from 'vue'
 
 defineEmits(['update:value'])
 

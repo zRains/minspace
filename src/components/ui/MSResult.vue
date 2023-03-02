@@ -1,15 +1,14 @@
 <template>
   <div class="MSResult">
     <!-- Icon -->
-    <div class="ResultIcon" :style="{ height: `${size}px`, color }">
-      <template v-if="icon">
-        <Icon :height="size" :width="size" :icon="icon" />
-      </template>
-      <PredefinedIcon v-else />
+    <div class="ResultIcon" :style="{ color }">
+      <img v-if="image" :src="image" :alt="image" :style="{ width: '50%', height: 'auto' }" />
+      <MSLoading v-else-if="resultType === 'loading'" :size="props.size * 0.85" />
+      <Icon v-else :height="size" :width="size" :icon="icon || predefinedRef[resultType].icon" />
     </div>
 
     <!-- Tip -->
-    <div class="ResultTip" :style="{ fontSize: `calc(16px * ${props.size / 60} * 1.2)` }">
+    <div class="ResultTip" :style="{ fontSize: `calc(16px * ${props.size / 60} * 1.3)` }">
       {{ tip ? tip : resultType === 'loading' ? 'Processing' : predefinedRef[resultType].tip }}
     </div>
 
@@ -19,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { computed, h, PropType } from 'vue'
+import { type PropType } from 'vue'
 import MSLoading from './MSLoading.vue'
 
 const props = defineProps({
@@ -28,6 +26,10 @@ const props = defineProps({
     type: String as PropType<'empty' | 'error' | 'default' | 'loading'>,
     required: false,
     default: 'default'
+  },
+  image: {
+    type: String,
+    required: false
   },
   icon: {
     type: String,
@@ -54,12 +56,6 @@ const predefinedRef = {
   default: { icon: 'tabler:box', tip: 'Welcome minspace' },
   error: { icon: 'tabler:alert-triangle', tip: 'Some errors occurred' }
 }
-
-const PredefinedIcon = computed(() =>
-  props.resultType === 'loading'
-    ? h(MSLoading, { size: props.size * 0.85 })
-    : h(Icon, { icon: predefinedRef[props.resultType].icon, height: props.size, width: props.size })
-)
 </script>
 
 <style lang="scss">
@@ -69,9 +65,12 @@ const PredefinedIcon = computed(() =>
   align-items: center;
 
   .ResultTip {
-    height: 20px;
-    line-height: 20px;
+    text-align: center;
     color: var(--c-text-2);
+  }
+
+  .ResultIcon {
+    text-align: center;
   }
 }
 </style>

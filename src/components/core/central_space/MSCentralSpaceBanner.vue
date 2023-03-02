@@ -14,7 +14,7 @@
 <style lang="scss">
 .MSCentralSpaceBanner {
   display: flex;
-  padding: 14px calc(var(--u-gap) * 2);
+  height: var(--ms-left-central-banner-height);
   border-bottom: 1px solid var(--c-divider-light);
   background-color: var(--c-bg);
 
