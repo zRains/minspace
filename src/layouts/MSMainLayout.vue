@@ -64,7 +64,7 @@ watch(moveX, (n) => {
 .MSMainLayout {
   display: flex;
   min-height: 100vh;
-  --resizer-bar-width: 8;
+  --resizer-bar-width: 4;
 
   .LeftSideBarContainer {
     position: relative;
@@ -93,7 +93,7 @@ watch(moveX, (n) => {
         height: 100%;
         width: 1px;
         background-color: var(--c-divider-light);
-        transition-property: transform;
+        transition-property: transform background-color;
         transition-duration: calc(var(--u-dur) * 0.8);
         transform-origin: center;
         transform: scale(1, 1);
@@ -104,6 +104,7 @@ watch(moveX, (n) => {
         cursor: ew-resize;
 
         &::after {
+          background-color: var(--c-green-light);
           transform: scale(var(--resizer-bar-width), 1);
         }
       }
