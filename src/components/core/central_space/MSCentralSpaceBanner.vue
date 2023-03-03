@@ -19,8 +19,7 @@
   background-color: var(--c-bg);
 
   .BannerInfo {
-    display: flex;
-    line-height: 32px;
+    margin-left: calc(var(--u-gap) * 2);
   }
 
   .BannerOptions {

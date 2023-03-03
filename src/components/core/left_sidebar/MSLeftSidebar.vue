@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import { coreStateKey } from '../../../states'
 import MSSidebarUserNav from './MSSidebarUserNav.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
@@ -78,10 +78,11 @@ type TabFromFunc<T extends Function> = T extends (tab: infer TAB) => any ? TAB :
 
 const {
   leftSidebar: {
-    states: { activeSearch, currentTab },
+    states: { activeSearch },
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
+const currentTab = computed(() => router.currentRoute.value.name || '')
 
 function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {
   changeCurrentTab(tab)

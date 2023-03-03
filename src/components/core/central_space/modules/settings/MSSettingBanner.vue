@@ -1,12 +1,12 @@
 <template>
   <MSCentralSpaceBanner class="MSSettingBanner">
     <template #banner-info>
-      <div class="SettingText">Settings</div>
+      <div class="BannerText">Settings</div>
     </template>
 
     <template #banner-options>
       <div class="UtilBannerOptions">
-        <MSButton>
+        <MSButton class="SaveBtn">
           <template #text>Save</template>
         </MSButton>
       </div>
@@ -21,15 +21,26 @@ import MSButton from '../../../../ui/MSButton/MSButton.vue'
 
 <style lang="scss">
 .MSSettingBanner {
-  .SettingText {
+  .BannerText {
+    margin: auto calc(var(--u-gap) * 2);
     font-size: 1.1rem;
     font-family: var(--f-rb);
+    text-transform: uppercase;
   }
 
   .UtilBannerOptions {
     display: flex;
     align-items: center;
+    margin-right: calc(var(--u-gap) * 2);
     height: 100%;
+
+    .SaveBtn {
+      padding: calc(var(--u-gap) * 0.5) calc(var(--u-gap) * 2);
+      background-color: var(--c-green);
+      color: var(--c-bg);
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
   }
 }
 </style>

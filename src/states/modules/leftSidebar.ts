@@ -1,5 +1,6 @@
 import { reactive, ref } from 'vue'
 import type { findUserResultDto } from '../../apis/user.api'
+import router from '../../routers'
 import storage from '../../utils/storage'
 
 type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
@@ -15,10 +16,11 @@ const activeUserCache = reactive(
   })
 )
 
+// 当前激活的左侧菜单路由
+const currentTab = ref<string>(String(router.currentRoute.value.name))
+
 export default function leftSidebar() {
   // states
-  // 当前激活的左侧菜单路由
-  const currentTab = ref<Tab>('activities')
   // 是否激活左侧搜索组件
   const activeSearch = ref(false)
   // 是否激活用户信息展示面板（搜索用户信息查看，用户信息查看等）

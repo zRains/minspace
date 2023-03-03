@@ -37,10 +37,11 @@ import MSMessengerItem from './MSMessengerItem.vue'
 
 <style lang="scss">
 .MSMessengerContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   background-color: #fafbfd;
+  height: 100vh;
 
   .Message {
     margin: 0 calc(var(--u-gap) * 2);

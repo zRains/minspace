@@ -1,7 +1,7 @@
 <template>
   <MSCentralSpaceBanner class="MSNotificationBanner">
     <template #banner-info>
-      <div class="SettingText">Notifications</div>
+      <div class="BannerText">Notifications</div>
     </template>
 
     <template #banner-options>
@@ -21,9 +21,11 @@ import MSButton from '../../../../ui/MSButton/MSButton.vue'
 
 <style lang="scss">
 .MSNotificationBanner {
-  .SettingText {
+  .BannerText {
+    margin: auto calc(var(--u-gap) * 2);
     font-size: 1.1rem;
     font-family: var(--f-rb);
+    text-transform: uppercase;
   }
 
   .UtilBannerOptions {

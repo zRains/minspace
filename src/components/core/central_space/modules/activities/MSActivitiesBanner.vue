@@ -1,7 +1,7 @@
 <template>
   <MSCentralSpaceBanner class="MSActivitiesBanner">
     <template #banner-info>
-      <div class="SettingText">Activities</div>
+      <div class="BannerText">Activities</div>
     </template>
   </MSCentralSpaceBanner>
 </template>
@@ -12,7 +12,7 @@ import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
 
 <style lang="scss">
 .MSActivitiesBanner {
-  .SettingText {
+  .BannerText {
     margin: auto calc(var(--u-gap) * 2);
     font-size: 1.1rem;
     font-family: var(--f-rb);

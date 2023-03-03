@@ -10,13 +10,13 @@
     <!-- input options -->
     <div class="InputOptions">
       <MSButton>
-        <template #left-icon><Icon height="24" icon="tabler:window-maximize" /></template>
+        <template #left-icon><Icon height="24" icon="tabler:at" /></template>
       </MSButton>
       <MSButton>
         <template #left-icon><Icon height="24" icon="tabler:file-plus" /></template>
       </MSButton>
       <MSButton>
-        <template #left-icon><Icon height="24" icon="tabler:at" /></template>
+        <template #left-icon><Icon height="24" icon="tabler:window-maximize" /></template>
       </MSButton>
     </div>
   </div>
@@ -33,14 +33,18 @@ const sendText = ref('')
 $input-container-height: 40px;
 
 .MSMessengerInput {
+  position: absolute;
   display: flex;
   align-items: center;
-  margin: 14px calc(var(--u-gap) * 2);
+  left: calc(var(--u-gap) * 2);
+  /* bottom: calc(var(--u-gap) * 2); */
   padding: var(--u-gap);
   height: $input-container-height;
+  width: calc(100% - var(--u-gap) * 4);
   background-color: var(--c-bg);
   box-shadow: var(--shadow-2);
-  border-radius: 6px;
+  border-radius: 5px;
+  animation: inputAnime var(--u-dur) forwards;
 
   .SendTextInput {
     flex-grow: 1;
@@ -60,6 +64,16 @@ $input-container-height: 40px;
 
     .MSButton:not(:last-child) {
       margin-right: var(--u-gap);
+    }
+  }
+
+  @keyframes inputAnime {
+    0% {
+      bottom: 0;
+    }
+
+    100% {
+      bottom: calc(var(--u-gap) * 2);
     }
   }
 }

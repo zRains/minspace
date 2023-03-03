@@ -40,6 +40,7 @@ const showUserAvatar = ref(true)
     width: 100%;
     border-radius: 50%;
     vertical-align: middle;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 }
 </style>

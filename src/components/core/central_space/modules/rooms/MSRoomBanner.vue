@@ -1,7 +1,7 @@
 <template>
   <MSCentralSpaceBanner class="MSRoomBanner">
     <template #banner-info>
-      <div class="SettingText">Rooms</div>
+      <div class="BannerText">Rooms</div>
     </template>
 
     <template #banner-options>
@@ -21,9 +21,11 @@ import MSButton from '../../../../ui/MSButton/MSButton.vue'
 
 <style lang="scss">
 .MSRoomBanner {
-  .SettingText {
+  .BannerText {
+    margin: auto calc(var(--u-gap) * 2);
     font-size: 1.1rem;
     font-family: var(--f-rb);
+    text-transform: uppercase;
   }
 
   .UtilBannerOptions {
