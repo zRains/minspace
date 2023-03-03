@@ -14,8 +14,10 @@
 import { inject, type PropType } from 'vue'
 import { findUserResultDto } from '../../../../apis/user.api'
 import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
-
 import { coreStateKey } from '../../../../states'
+
+// Router
+import router from '../../../../routers'
 
 const {
   leftSidebar: {
@@ -32,7 +34,8 @@ const props = defineProps({
 
 function activeUserHandle() {
   changeActiveUserCache(props.user)
-  changeActiveUserDialog(true)
+  router.push({ name: 'users' })
+  // changeActiveUserDialog(true)
 }
 </script>
 

@@ -25,7 +25,7 @@
         </MSButton>
       </div>
 
-      <MSResult v-if="initialize" :size="40" :image="'illustrations/add_friends.svg'" :tip="'Get your new friends'" />
+      <MSResult v-if="initialize" :size="40" :image="'/illustrations/add_friends.svg'" :tip="'Get your new friends'" />
       <MSResult v-else-if="searching" :size="40" :tip="'Searching...'" result-type="loading" />
       <MSResult v-else-if="!initialize && searchResult.user.length === 0" :size="40" result-type="empty" :tip="'No such user(s)'" />
       <MSUserResult :users="searchResult.user" />

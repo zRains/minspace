@@ -2,6 +2,7 @@ import type { AxiosRequestConfig, Canceler } from 'axios'
 import axios from 'axios'
 import useToast from '../composes/toast'
 import { AXIOS_BASE_URL } from '../minspace.config'
+import router from '../routers'
 import storage from '../utils/storage'
 
 const Toast = useToast()
@@ -42,8 +43,11 @@ Axios.interceptors.request.use(
   (config) => {
     delReq(config)
     addReq(config)
+
     if (storage.has('user')) {
-      config.headers = { ...config.headers, Authorization: `bearer ${storage.get('user').token}` }
+      config.headers = Object.assign(config.headers, {
+        Authorization: `bearer ${storage.get('user').token}`
+      })
     }
 
     return config
@@ -54,10 +58,11 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
   (response) => {
     delReq(response)
-    // if (response.data.code === 401) {
-    //   const currentRoute = router.currentRoute.value
-    //   router.push({ name: 'auth-page', query: Object.assign(currentRoute.query, { authType: 'login' }), params: currentRoute.params })
-    // }
+
+    if (response.data.code === 401) {
+      const currentRoute = router.currentRoute.value
+      router.push({ name: 'auth', query: Object.assign(currentRoute.query, { authType: 'login' }), params: currentRoute.params })
+    }
 
     return response
   },

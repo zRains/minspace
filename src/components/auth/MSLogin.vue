@@ -64,7 +64,7 @@ async function loginHandle() {
 
     if (succeed) {
       coreState.user.mutations.setCurrentUser(data)
-      router.push({ name: 'activities-page' })
+      router.push({ name: 'activities' })
     }
   }
 }

@@ -64,7 +64,7 @@ const {
     align-items: center;
     padding: calc(var(--u-gap) * 2);
     border-bottom: 1px solid var(--c-divider-light);
-    background-image: url('illustrations/user_info.svg');
+    background-image: url('/illustrations/user_info.svg');
     background-size: 180px 120px;
     background-repeat: no-repeat;
     background-position: right top;

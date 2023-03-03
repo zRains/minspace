@@ -28,6 +28,10 @@ import MSResizer from '../components/mini/MSResizer.vue'
 .MSMainLayout {
   display: flex;
   min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-left: 1px solid var(--c-divider-light);
+  border-right: 1px solid var(--c-divider-light);
   --resizer-bar-width: 4;
 
   .LeftSideBarContainer {

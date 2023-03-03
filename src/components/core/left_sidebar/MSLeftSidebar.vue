@@ -20,25 +20,25 @@
         <div class="MenuDivider"></div>
 
         <!-- Back to home button -->
-        <MSSidebarMenuItem class="ActivitiesBtn" @click="changeCurrentTab('activities')">
+        <MSSidebarMenuItem class="ActivitiesBtn" @click="menuNavigationHandle('activities')">
           <template #icon><Icon height="20" width="20" icon="tabler:atom-2-filled" /></template>
           <template #text>Activities</template>
         </MSSidebarMenuItem>
 
         <!-- All rooms button -->
-        <MSSidebarMenuItem class="RoomsBtn" @click="changeCurrentTab('rooms')">
+        <MSSidebarMenuItem class="RoomsBtn" @click="menuNavigationHandle('rooms')">
           <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
           <template #text>Rooms</template>
         </MSSidebarMenuItem>
 
         <!-- Notifications button -->
-        <MSSidebarMenuItem class="NotificationsBtn" @click="changeCurrentTab('notifications')">
+        <MSSidebarMenuItem class="NotificationsBtn" @click="menuNavigationHandle('notifications')">
           <template #icon><Icon height="20" width="20" icon="tabler:bell" /></template>
           <template #text>Notifications</template>
         </MSSidebarMenuItem>
 
         <!-- Setting button -->
-        <MSSidebarMenuItem class="SettingsBtn" @click="changeCurrentTab('settings')">
+        <MSSidebarMenuItem class="SettingsBtn" @click="menuNavigationHandle('settings')">
           <template #icon><Icon height="20" width="20" icon="tabler:settings" /></template>
           <template #text>Settings</template>
         </MSSidebarMenuItem>
@@ -65,12 +65,22 @@ import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
 import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
 
+// Router
+import router from '../../../routers'
+
+type TabFromFunc<T extends Function> = T extends (tab: infer TAB) => any ? TAB : never
+
 const {
   leftSidebar: {
     states: { activeSearch },
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
+
+function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {
+  changeCurrentTab(tab)
+  router.push({ name: tab })
+}
 </script>
 
 <style lang="scss">

@@ -96,7 +96,7 @@ async function registerHandle() {
 
     if (succeed) {
       storage.set('user', data)
-      router.push({ name: 'space-page' })
+      router.push({ name: 'activities' })
     }
   }
 }
