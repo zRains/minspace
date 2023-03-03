@@ -14,7 +14,7 @@
 .MSCentralSpace {
   .scale-enter-active,
   .scale-leave-active {
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
   .scale-enter-from,
   .scale-leave-to {

@@ -22,7 +22,9 @@ import MSButton from '../../../../ui/MSButton/MSButton.vue'
 <style lang="scss">
 .MSNotificationBanner {
   .BannerText {
-    margin: auto calc(var(--u-gap) * 2);
+    display: flex;
+    align-items: center;
+    height: 100%;
     font-size: 1.1rem;
     font-family: var(--f-rb);
     text-transform: uppercase;
