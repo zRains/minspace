@@ -52,7 +52,6 @@
         <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
       </div>
     </MSScroller>
-    <MSSidebarOuterPlane />
   </div>
 </template>
 
@@ -65,7 +64,6 @@ import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
 import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
-import MSSidebarOuterPlane from './outer_plane/MSSidebarOuterPlane.vue'
 
 const {
   leftSidebar: {

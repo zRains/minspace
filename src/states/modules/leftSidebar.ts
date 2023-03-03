@@ -9,8 +9,6 @@ export default function leftSidebar() {
   const currentTab = ref<Tab>('activities')
   // 是否激活左侧搜索组件
   const activeSearch = ref(false)
-  // 即将废弃-早期版本添加好友功能面板
-  const activeOuterPlane = ref(false)
   // 是否激活用户信息展示面板（搜索用户信息查看，用户信息查看等）
   const activeUserDialog = ref(false)
   // 当前查看用户信息缓存
@@ -31,10 +29,6 @@ export default function leftSidebar() {
     activeSearch.value = val
   }
 
-  const changeActiveOuterPlane = (val: boolean) => {
-    activeOuterPlane.value = val
-  }
-
   const changeActiveUserDialog = (val: boolean) => {
     activeUserDialog.value = val
   }
@@ -46,11 +40,10 @@ export default function leftSidebar() {
   // actions
 
   return {
-    states: { currentTab, activeSearch, activeOuterPlane, activeUserDialog, activeUserCache },
+    states: { currentTab, activeSearch, activeUserDialog, activeUserCache },
     mutations: {
       changeCurrentTab,
       changeActiveSearch,
-      changeActiveOuterPlane,
       changeActiveUserDialog,
       changeActiveUserCache
     },
