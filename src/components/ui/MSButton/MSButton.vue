@@ -43,6 +43,7 @@ defineProps({
   background-color: transparent;
   transition: background-color calc(var(--u-dur) / 2);
   user-select: none;
+  color: var(--c-text-1);
   cursor: pointer;
 
   .ButtonWarper {

@@ -118,10 +118,11 @@ onBeforeUnmount(() => {
           text-decoration: underline;
         }
       }
+
       .CopyIdBtn {
         font-family: var(--f-rb);
         margin-left: auto;
-        padding-right: calc(var(--u-gap) * 2);
+        padding: 0 calc(var(--u-gap) * 2);
       }
 
       .SendApplicationBtn {
@@ -154,10 +155,12 @@ onBeforeUnmount(() => {
   }
 
   .UserDialogBodyBox {
+    box-sizing: content-box;
+    padding: 0 calc(var(--u-gap) * 2);
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-top: 3rem;
     flex-grow: 1;
 
     .UserSelfDesc {

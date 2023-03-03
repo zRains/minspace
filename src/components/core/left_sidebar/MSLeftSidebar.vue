@@ -20,25 +20,31 @@
         <div class="MenuDivider"></div>
 
         <!-- Back to home button -->
-        <MSSidebarMenuItem class="ActivitiesBtn" @click="menuNavigationHandle('activities')">
+        <MSSidebarMenuItem
+          :class="{ ActivitiesBtn: true, active: currentTab === 'activities' }"
+          @click="menuNavigationHandle('activities')"
+        >
           <template #icon><Icon height="20" width="20" icon="tabler:atom-2-filled" /></template>
           <template #text>Activities</template>
         </MSSidebarMenuItem>
 
         <!-- All rooms button -->
-        <MSSidebarMenuItem class="RoomsBtn" @click="menuNavigationHandle('rooms')">
+        <MSSidebarMenuItem :class="{ RoomsBtn: true, active: currentTab === 'rooms' }" @click="menuNavigationHandle('rooms')">
           <template #icon><Icon height="20" width="20" icon="tabler:box" /></template>
           <template #text>Rooms</template>
         </MSSidebarMenuItem>
 
         <!-- Notifications button -->
-        <MSSidebarMenuItem class="NotificationsBtn" @click="menuNavigationHandle('notifications')">
+        <MSSidebarMenuItem
+          :class="{ NotificationsBtn: true, active: currentTab === 'notifications' }"
+          @click="menuNavigationHandle('notifications')"
+        >
           <template #icon><Icon height="20" width="20" icon="tabler:bell" /></template>
           <template #text>Notifications</template>
         </MSSidebarMenuItem>
 
         <!-- Setting button -->
-        <MSSidebarMenuItem class="SettingsBtn" @click="menuNavigationHandle('settings')">
+        <MSSidebarMenuItem :class="{ SettingsBtn: true, active: currentTab === 'settings' }" @click="menuNavigationHandle('settings')">
           <template #icon><Icon height="20" width="20" icon="tabler:settings" /></template>
           <template #text>Settings</template>
         </MSSidebarMenuItem>
@@ -72,7 +78,7 @@ type TabFromFunc<T extends Function> = T extends (tab: infer TAB) => any ? TAB :
 
 const {
   leftSidebar: {
-    states: { activeSearch },
+    states: { activeSearch, currentTab },
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
@@ -92,6 +98,15 @@ function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {
   .LeftSidebarMenuContainer {
     position: relative;
     padding: calc(var(--u-gap) * 1.5) var(--u-gap);
+
+    .ActivitiesBtn,
+    .RoomsBtn,
+    .NotificationsBtn,
+    .SettingsBtn {
+      &:not(:last-child) {
+        margin-bottom: calc(var(--u-gap) * 0.5);
+      }
+    }
 
     .MenuDivider {
       height: calc(var(--u-gap) * 2);

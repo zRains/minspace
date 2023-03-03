@@ -13,9 +13,10 @@ import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
 <style lang="scss">
 .MSActivitiesBanner {
   .SettingText {
-    margin: auto var(--u-gap);
+    margin: auto calc(var(--u-gap) * 2);
     font-size: 1.1rem;
     font-family: var(--f-rb);
+    text-transform: uppercase;
   }
 
   .UtilBannerOptions {
