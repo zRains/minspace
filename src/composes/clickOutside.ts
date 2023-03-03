@@ -1,12 +1,15 @@
-import { onMounted, onBeforeUnmount, Ref } from 'vue'
+import { onBeforeUnmount, type Ref, watch } from 'vue'
 
-export default function clickOutside(el: Ref<HTMLElement | undefined>, callBack: () => void) {
+export default function clickOutside(el: Ref<HTMLElement | undefined>, tracker: Ref<boolean>, callBack: () => void) {
   function clickListener(event: MouseEvent) {
     if (event.target !== el.value && !event.composedPath().includes(el.value!) && typeof callBack === 'function') {
       callBack()
     }
   }
 
-  onMounted(() => window.addEventListener('click', clickListener))
+  watch(tracker, (isActive) => {
+    isActive ? window.addEventListener('click', clickListener) : window.removeEventListener('click', clickListener)
+  })
+
   onBeforeUnmount(() => window.removeEventListener('click', clickListener))
 }

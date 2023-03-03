@@ -10,7 +10,7 @@
   </MSMainLayout>
 
   <!-- Dialog groups -->
-  <!-- <MSUserDialog /> -->
+  <MSUserDialog />
 
   <!-- Toast provider -->
   <MSToastProvider />

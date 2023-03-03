@@ -1,5 +1,5 @@
 <template>
-  <MSDialog class="MSUserDialog" v-model:visible="showUserDialog" width="560px">
+  <MSDialog class="MSUserDialog" v-model:visible="activeUserDialog" width="560px">
     <!-- Dialog header -->
     <template #header>
       <div class="UserAvatarBox">
@@ -15,9 +15,11 @@
     <template #body>
       <div class="UserDialogBodyBox">
         <div class="UserSelfDesc">
-          My name is Jeff. I also go by JD if there are too many other Jeffs around. I've been writing software for a long time and have
-          spent a good while in the dev tool space. I think a ton about how us developers do our jobs and how we can improve our tools to
-          make better software quicker.
+          <p>👋 Hello</p>
+          <p>
+            My name is zRain. I also go by JD if there are too many other Jeffs around. I've been writing software for a long time and have
+            spent a good while in the dev tool space.
+          </p>
         </div>
       </div>
     </template>
@@ -39,16 +41,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject } from 'vue'
 import MSDialog from '../../ui/MSDialog.vue'
 import MSButton from '../../ui/MSButton/MSButton.vue'
+import { coreStateKey } from '../../../states'
 
-const showUserDialog = ref(true)
+const {
+  leftSidebar: {
+    states: { activeUserDialog }
+  }
+} = inject(coreStateKey)!
 </script>
 
 <style lang="scss">
-.MSUserDialog {
-  padding-top: 10rem;
+.MSUserDialog .MSDialog {
+  /* padding-top: 10rem; */
+  /* height: fit-content; */
+  margin: 10rem auto auto auto;
 
   .UserAvatarBox {
     display: flex;
@@ -88,7 +97,19 @@ const showUserDialog = ref(true)
     border-bottom: 1px solid var(--c-divider-light);
 
     .UserSelfDesc {
-      font-size: 0.95rem;
+      p {
+        margin: 0;
+
+        &:nth-child(1) {
+          margin-bottom: var(--u-gap);
+          font-family: var(--f-rb);
+          font-size: 1.2rem;
+        }
+
+        &:nth-child(2) {
+          font-size: 0.95rem;
+        }
+      }
     }
   }
 

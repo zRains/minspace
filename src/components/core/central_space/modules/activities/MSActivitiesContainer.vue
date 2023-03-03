@@ -3,7 +3,7 @@
     <MSActivitiesBanner />
 
     <div class="ActivitiesMainBox">
-      <MSResult image="illustrations/space_activities.svg" tip="No Activities~" :size="80" />
+      <MSResult image="illustrations/space_activities.svg" tip="No Activities~" :size="50" />
     </div>
   </div>
 </template>

@@ -6,9 +6,9 @@
         <Icon height="24" width="24" icon="tabler:mail" />
       </div>
       <Icon class="ArrowIcon" height="30" width="30" icon="tabler:arrow-narrow-right" />
-      <MSUserAvatar :src="currentFriendApplicationReceiver.avatar" :size="36" />
+      <MSUserAvatar :src="activeUserCache.avatar" :size="36" />
     </div>
-    <div class="ApplicationMessage">Say hello to {{ currentFriendApplicationReceiver.username }}</div>
+    <div class="ApplicationMessage">Say hello to {{ activeUserCache.username }}</div>
     <div class="ApplicationOptions">
       <MSButton class="SendApplicationBtn" @click="sendApplicationHandle">
         <template #text>Send</template>
@@ -30,7 +30,7 @@ import useToast from '../../../../composes/toast'
 
 const {
   leftSidebar: {
-    states: { currentFriendApplicationReceiver },
+    states: { activeUserCache },
     mutations: { changeActiveOuterPlane }
   },
   user: {
@@ -44,12 +44,12 @@ function cancelHandle() {
 }
 
 async function sendApplicationHandle() {
-  if (currentUser.uid === currentFriendApplicationReceiver.uid) {
+  if (currentUser.uid === activeUserCache.uid) {
     Toast.error('Error', { content: 'Cannot add yourself as a friend' })
     return
   }
 
-  const { succeed } = await addFriendSocket(currentFriendApplicationReceiver.uid)
+  const { succeed } = await addFriendSocket(activeUserCache.uid)
 
   // if(succeed)
 }

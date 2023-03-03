@@ -1,7 +1,7 @@
 <template>
   <div
     class="MSDropdown"
-    ref="MSDropdown"
+    ref="MSDropdownRef"
     @mouseenter="trigger === 'hover' && (isActivated = true)"
     @mouseleave="trigger === 'hover' && (isActivated = false)"
   >
@@ -34,9 +34,9 @@ defineProps<{
 }>()
 
 const isActivated = ref(false)
-const MSDropdown = ref<HTMLElement>()
+const MSDropdownRef = ref<HTMLElement>()
 
-useClickOutside(MSDropdown, () => {
+useClickOutside(MSDropdownRef, isActivated, () => {
   isActivated.value = false
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
   <Transition>
-    <MSMask v-if="dialogVisible" class="MSDialogMask">
+    <MSMask v-if="dialogVisible" class="MSDialogMask" @click.self="maskClosable && (dialogVisible = false)">
       <div class="MSDialog" aria-modal="true" role="dialog" :style="{ width }">
         <!-- Dialog header -->
         <section class="DialogHeader">
@@ -76,6 +76,11 @@ const props = defineProps({
     default: true
   },
   showClose: {
+    type: Boolean,
+    required: false,
+    default: true
+  },
+  maskClosable: {
     type: Boolean,
     required: false,
     default: true
