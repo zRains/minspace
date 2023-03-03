@@ -1,7 +1,19 @@
 import { reactive, ref } from 'vue'
 import type { findUserResultDto } from '../../apis/user.api'
+import storage from '../../utils/storage'
 
 type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
+
+// 当前查看用户信息缓存
+const activeUserCache = reactive(
+  storage.getPatcher<findUserResultDto>('activeUserCache', {
+    uid: -1,
+    email: '',
+    username: '',
+    avatar: '',
+    sign: ''
+  })
+)
 
 export default function leftSidebar() {
   // states
@@ -11,14 +23,6 @@ export default function leftSidebar() {
   const activeSearch = ref(false)
   // 是否激活用户信息展示面板（搜索用户信息查看，用户信息查看等）
   const activeUserDialog = ref(false)
-  // 当前查看用户信息缓存
-  const activeUserCache = reactive<findUserResultDto>({
-    uid: -1,
-    email: '',
-    username: '',
-    avatar: '',
-    sign: ''
-  })
 
   // mutations
   const changeCurrentTab = (tab: Tab) => {

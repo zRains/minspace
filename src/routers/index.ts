@@ -49,7 +49,21 @@ const router = createRouter({
                 {
                   path: 'users',
                   name: 'users',
-                  component: () => import('../components/core/central_space/modules/users/MSUserContainer.vue')
+                  component: () => import('../components/core/central_space/modules/users/MSUserContainer.vue'),
+                  beforeEnter(to, from, next) {
+                    const {
+                      leftSidebar: {
+                        states: { activeUserCache }
+                      }
+                    } = coreState
+
+                    if (activeUserCache.uid === -1) {
+                      next({ name: 'activities' })
+                      return
+                    }
+
+                    next()
+                  }
                 },
                 {
                   path: 'messengers',

@@ -18,10 +18,11 @@ import { coreStateKey } from '../../../../states'
 
 // Router
 import router from '../../../../routers'
+import storage from '../../../../utils/storage'
 
 const {
   leftSidebar: {
-    mutations: { changeActiveUserDialog, changeActiveUserCache }
+    mutations: { changeActiveUserCache }
   }
 } = inject(coreStateKey)!
 
@@ -34,8 +35,8 @@ const props = defineProps({
 
 function activeUserHandle() {
   changeActiveUserCache(props.user)
+  storage.set('activeUserCache', props.user)
   router.push({ name: 'users' })
-  // changeActiveUserDialog(true)
 }
 </script>
 

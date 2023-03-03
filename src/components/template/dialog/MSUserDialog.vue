@@ -55,8 +55,6 @@ const {
 
 <style lang="scss">
 .MSUserDialog .MSDialog {
-  /* padding-top: 10rem; */
-  /* height: fit-content; */
   margin: 10rem auto auto auto;
 
   .UserAvatarBox {

@@ -52,7 +52,7 @@ class CustomStorage {
    * Get val
    * @param key key
    */
-  public get(key: string) {
+  public get<T = any>(key: string): T | undefined {
     if (typeof key === 'string' && this.myStorage.has(key)) {
       const { exp } = this.myStorage.get(key)!
 
@@ -65,6 +65,14 @@ class CustomStorage {
     }
 
     return undefined
+  }
+
+  public getPatcher<T = any>(key: string, val: T): T {
+    if (this.has(key)) return this.get<T>(key)!
+
+    this.set(key, val)
+
+    return val
   }
 
   /**

@@ -16,10 +16,4 @@ const {
 } = inject(coreStateKey)!
 </script>
 
-<style lang="scss">
-.MSCentralSpace {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style lang="scss"></style>
