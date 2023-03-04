@@ -55,6 +55,7 @@ $banner-height: 22px;
     line-height: $banner-height;
 
     .BannerText {
+      user-select: none;
       font-size: 0.9rem;
       color: var(--c-text-2);
       flex-grow: 1;

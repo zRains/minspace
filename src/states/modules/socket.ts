@@ -8,7 +8,6 @@ export default function useSocketStates() {
   // states
 
   // mutations
-  // eslint-disable-next-line no-unused-vars
   const connectSocket = (callback?: (s: Socket) => {}) => {
     socket = io('ws://127.0.0.1:3000', {
       reconnectionDelayMax: 1000,

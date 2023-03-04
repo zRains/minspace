@@ -35,6 +35,7 @@ const showUserAvatar = ref(true)
 
   img {
     user-zoom: none;
+    user-select: none;
     -webkit-user-drag: none;
     height: 100%;
     width: 100%;

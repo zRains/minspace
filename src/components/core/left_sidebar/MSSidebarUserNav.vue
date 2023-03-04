@@ -132,6 +132,7 @@ const userDropdownOptions: DropdownOptions = [
     }
 
     .MSSpaceStatus {
+      user-select: none;
       font-size: 0.85rem;
     }
   }
