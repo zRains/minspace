@@ -50,12 +50,12 @@
         </MSSidebarMenuItem>
       </div>
 
-      <div class="SpaceMenu">
+      <div class="CollectionMenu">
         <!-- Rooms -->
-        <!-- <MSSidebarSpaceMenu class="SidebarSpaceRoomMenu" text="ROOMS"> </MSSidebarSpaceMenu> -->
+        <MSSidebarRoomCollectionMenu />
 
-        <!-- Users -->
-        <MSSidebarSpaceMenu class="SidebarSpaceUserMenu" text="Friends"></MSSidebarSpaceMenu>
+        <!-- Friends -->
+        <MSSidebarFriendCollectionMenu />
       </div>
     </MSScroller>
   </div>
@@ -66,10 +66,13 @@ import { inject, computed } from 'vue'
 import { coreStateKey } from '../../../states'
 import MSSidebarUserNav from './MSSidebarUserNav.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
-import MSSidebarSpaceMenu from './MSSidebarSpaceMenu.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSScroller from '../../ui/MSScroller.vue'
 import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
+
+// Collection menu
+import MSSidebarFriendCollectionMenu from './space_collection_menu/friend/MSSidebarFriendCollectionMenu.vue'
+import MSSidebarRoomCollectionMenu from './space_collection_menu/room/MSSidebarRoomCollectionMenu.vue'
 
 // Router
 import router from '../../../routers'
@@ -113,7 +116,7 @@ function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {
       height: calc(var(--u-gap) * 2);
     }
 
-    .SpaceMenu {
+    .CollectionMenu {
       margin-top: calc(var(--u-gap) * 2);
 
       & > *:not(:last-child) {

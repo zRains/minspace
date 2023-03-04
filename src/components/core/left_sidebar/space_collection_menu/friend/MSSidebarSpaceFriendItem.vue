@@ -1,10 +1,10 @@
 <template>
-  <div class="MSSidebarSpaceUserItem">
-    <MSUserAvatar :src="avatar" :size="34" />
+  <div class="MSSidebarSpaceFriendItem">
+    <MSUserAvatar :src="avatar" :size="40" />
 
-    <div class="UserInfo">
-      <div class="UserName">{{ userName }}</div>
-      <div class="UserMessagePreview">Lorem Ipsum is simply</div>
+    <div class="FriendInfo">
+      <div class="FriendName">{{ friendName }}</div>
+      <div class="FriendMessagePreview">Lorem Ipsum is simply</div>
     </div>
 
     <div class="ItemStatus">
@@ -15,14 +15,14 @@
 </template>
 
 <script setup lang="ts">
-import MSUserAvatar from '../../ui/MSUserAvatar.vue'
+import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
 defineProps({
   avatar: {
     type: String,
     required: true
   },
-  userName: {
+  friendName: {
     type: String,
     required: true
   }
@@ -30,27 +30,28 @@ defineProps({
 </script>
 
 <style lang="scss">
-.MSSidebarSpaceUserItem {
+.MSSidebarSpaceFriendItem {
   display: flex;
   align-items: center;
-  padding: var(--u-gap);
+  padding: var(--u-gap) calc(var(--u-gap) * 1.2);
   border-radius: 5px;
   cursor: pointer;
 
-  .UserInfo {
+  .FriendInfo {
     flex-grow: 1;
-    padding: 0 calc(var(--u-gap) * 1.2);
+    padding: 0 calc(var(--u-gap) * 1.5);
 
-    .UserName {
+    .FriendName {
       flex-grow: 1;
+      margin-bottom: calc(var(--u-gap) * 0.5);
       line-height: 18px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
-    .UserMessagePreview {
+    .FriendMessagePreview {
       user-select: none;
       line-height: 16px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--c-text-2);
     }
   }

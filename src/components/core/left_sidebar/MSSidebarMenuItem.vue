@@ -15,7 +15,6 @@ import MSButton from '../../ui/MSButton/MSButton.vue'
   padding: var(--u-gap);
   border-radius: 5px;
   line-height: 20px;
-  color: var(--c-text-1);
   transition: background-color calc(var(--u-dur) * 0.5), color calc(var(--u-dur) * 0.5);
 
   &:hover {
