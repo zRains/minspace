@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import { io } from 'socket.io-client'
+import { onMounted } from 'vue'
 import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
 // TODO:Test code
@@ -30,6 +32,18 @@ defineProps({
     default: false
   }
 })
+
+function initSocket() {
+  const socket = io('ws://localhost:3000/space', { transports: ['websocket'], multiplex: false })
+
+  socket.on('connect', () => {
+    const { engine } = socket.io
+
+    console.log(engine.transport.name)
+  })
+}
+
+onMounted(initSocket)
 </script>
 
 <style lang="scss">

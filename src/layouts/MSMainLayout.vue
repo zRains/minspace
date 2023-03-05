@@ -30,8 +30,6 @@ import MSResizer from '../components/mini/MSResizer.vue'
   min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
-  border-left: 1px solid var(--c-divider-light);
-  border-right: 1px solid var(--c-divider-light);
   --resizer-bar-width: 4;
 
   .LeftSideBarContainer {
@@ -41,6 +39,13 @@ import MSResizer from '../components/mini/MSResizer.vue'
 
   .CentralSpaceContainer {
     flex-grow: 1;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .MSMainLayout {
+    border-left: 1px solid var(--c-divider-light);
+    border-right: 1px solid var(--c-divider-light);
   }
 }
 </style>
