@@ -1,7 +1,7 @@
 <template>
-  <MSCentralSpaceBanner class="MSMessengerBanner">
+  <MSCentralSpaceBanner class="MSFriendMessengerBanner">
     <template #banner-info>
-      <div class="MessengerInfo">
+      <div class="MessengerBannerTitleBox">
         <MSUserAvatar :src="avatar" />
         <div class="UserBannerName">{{ userName }}</div>
       </div>
@@ -26,14 +26,14 @@ defineProps({
 </script>
 
 <style lang="scss">
-.MSMessengerBanner {
-  .MessengerInfo {
+.MSFriendMessengerBanner {
+  .MessengerBannerTitleBox {
     display: flex;
     align-items: center;
     height: 100%;
 
     .UserBannerName {
-      margin-left: calc(var(--u-gap) * 2);
+      margin-left: calc(var(--u-gap) * 1.5);
       font-family: var(--f-rb);
     }
   }

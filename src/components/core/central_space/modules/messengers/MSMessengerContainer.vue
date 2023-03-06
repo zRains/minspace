@@ -1,13 +1,24 @@
 <template>
   <div class="MSMessengerContainer">
     <!-- Banner -->
-    <MSMessengerBanner
+    <!-- <MSFriendMessengerBanner
       avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
       user-name="Jeff"
+    /> -->
+    <MSRoomMessengerBanner
+      :room="{
+        rid: 1,
+        roomname: 'Deno land',
+        desc: 'The easiest, most secure JavaScript runtime.',
+        cover: 'https://avatars.githubusercontent.com/u/42048915?s=200&v=4',
+        status: 1,
+        createdAt: new Date('2023-03-06T00:59:35.743Z'),
+        editAt: new Date('2023-03-06T00:59:35.743Z')
+      }"
     />
 
     <!-- Main -->
-    <div class="Message">
+    <div class="MessageBox">
       <MSMessengerItem
         avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         user-name="Jeff"
@@ -30,7 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import MSMessengerBanner from './MSMessengerBanner.vue'
+import MSFriendMessengerBanner from './MSFriendMessengerBanner.vue'
+import MSRoomMessengerBanner from './MSRoomMessengerBanner.vue'
 import MSMessengerInput from './MSMessengerInput.vue'
 import MSMessengerItem from './MSMessengerItem.vue'
 </script>
@@ -43,7 +55,7 @@ import MSMessengerItem from './MSMessengerItem.vue'
   background-color: #fafbfd;
   height: 100vh;
 
-  .Message {
+  .MessageBox {
     margin: 0 calc(var(--u-gap) * 2);
     flex-grow: 1;
   }

@@ -49,7 +49,7 @@ function initSocket() {
   // })
 }
 
-onMounted(initSocket)
+// onMounted(initSocket)
 </script>
 
 <style lang="scss">

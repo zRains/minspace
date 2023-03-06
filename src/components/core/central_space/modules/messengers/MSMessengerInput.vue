@@ -1,7 +1,7 @@
 <template>
   <div class="MSMessengerInput">
     <MSButton class="InputEmojiBtn">
-      <template #left-icon><Icon height="24" color="var(--c-green)" icon="fluent:emoji-sparkle-24-filled" /></template>
+      <template #left-icon><Icon height="24" icon="fluent:emoji-sparkle-24-filled" /></template>
     </MSButton>
 
     <!-- main input -->
