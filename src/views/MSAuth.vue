@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import MSFullLayout from '../layouts/MSFullLayout.vue'
-import MSButton from '../components/ui/MSButton/MSButton.vue'
+import MSButton from '../components/ui/MSButton.vue'
 import MSRegister from '../components/auth/MSRegister.vue'
 import MSLogin from '../components/auth/MSLogin.vue'
 import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'

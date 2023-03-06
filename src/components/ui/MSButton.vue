@@ -1,5 +1,5 @@
 <template>
-  <button :class="{ MSButton: true, MSButtonLoading: loading }" :disabled="disabled">
+  <button :class="{ MSButton: true, MSButtonLoading: loading }" :disabled="disabled" role="button">
     <div class="ButtonWarper">
       <div :class="{ ButtonLeftIcon: true, noText }"><slot name="left-icon"></slot></div>
       <div class="ButtonText"><slot name="text"></slot></div>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import MSLoading from '../MSLoading.vue'
+import MSLoading from './MSLoading.vue'
 
 defineProps({
   noText: {
@@ -33,9 +33,9 @@ defineProps({
 
 <style lang="scss">
 .MSButton {
+  display: block;
   position: relative;
   padding: 0;
-  outline: none;
   border: none;
   font-family: inherit;
   font-size: inherit;

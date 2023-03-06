@@ -1,15 +1,22 @@
 <template>
   <div class="MSSidebarUserNav">
-    <MSUserAvatar :src="currentUser.avatar" />
+    <MSUserAvatar :src="currentUser.avatar" :size="40" />
     <div class="MSSpaceInfo">
-      <MSDropdown class="MSUserInfo" :items="userDropdownOptions" trigger="click">
+      <!-- Dropdown menu -->
+      <MSDropdown class="PreferencesDropdown" :items="userDropdownOptions" trigger="click">
         <template #trigger>
-          <div class="UserName">{{ currentUser.username }}</div>
-          <Icon icon="tabler:chevron-down" />
+          <div class="DropdownTriggerText">
+            <div class="UserName">{{ currentUser.username }}</div>
+            <Icon icon="tabler:chevron-down" />
+          </div>
         </template>
       </MSDropdown>
+
+      <!-- Sub notifications -->
       <div class="MSSpaceStatus">45 rooms online</div>
     </div>
+
+    <!-- Sidebar control area -->
     <div class="MSLeftSidebarControl">
       <MSButton>
         <template #left-icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
@@ -23,7 +30,7 @@ import { inject } from 'vue'
 import type { DropdownOptions } from '../../../types/ui'
 import MSUserAvatar from '../../ui/MSUserAvatar.vue'
 import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
-import MSButton from '../../ui/MSButton/MSButton.vue'
+import MSButton from '../../ui/MSButton.vue'
 import { coreStateKey } from '../../../states'
 
 const {
@@ -117,17 +124,21 @@ const userDropdownOptions: DropdownOptions = [
     margin-left: calc(var(--u-gap) * 1.2);
     flex-grow: 1;
 
-    .MSUserInfo {
-      font-size: 0.9rem;
-      font-family: var(--f-rb);
+    .PreferencesDropdown {
+      width: fit-content;
 
-      .UserName {
-        display: inline-block;
-        margin-right: calc(var(--u-gap) * 0.5);
-      }
+      .DropdownTriggerText {
+        display: inline-flex;
+        align-items: center;
 
-      .iconify {
-        vertical-align: middle;
+        .UserName {
+          font-family: var(--f-rb);
+          margin-right: calc(var(--u-gap) * 0.5);
+        }
+
+        .iconify {
+          vertical-align: middle;
+        }
       }
     }
 

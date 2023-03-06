@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { type PropType, ref, onMounted, render } from 'vue'
-import MSButton from '../MSButton/MSButton.vue'
+import MSButton from '../MSButton.vue'
 import MSLoading from '../MSLoading.vue'
 import Timer from '../../../utils/timer'
 

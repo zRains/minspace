@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import MSButton from '../../../../ui/MSButton/MSButton.vue'
+import MSButton from '../../../../ui/MSButton.vue'
 
 const sendText = ref('')
 </script>
@@ -37,7 +37,6 @@ $input-container-height: 40px;
   display: flex;
   align-items: center;
   left: calc(var(--u-gap) * 2);
-  /* bottom: calc(var(--u-gap) * 2); */
   padding: var(--u-gap);
   height: $input-container-height;
   width: calc(100% - var(--u-gap) * 4);

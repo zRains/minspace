@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import MSInput from '../ui/MSInput.vue'
-import MSButton from '../ui/MSButton/MSButton.vue'
+import MSButton from '../ui/MSButton.vue'
 import useToast from '../../composes/toast'
 import { login } from '../../apis/auth.api'
 import router from '../../routers'

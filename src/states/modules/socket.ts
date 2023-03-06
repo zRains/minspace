@@ -1,40 +1,42 @@
-import type { Socket } from 'socket.io-client'
-import { io } from 'socket.io-client'
-import storage from '../../utils/storage'
+// import type { Socket } from 'socket.io-client'
+// import { io } from 'socket.io-client'
+// import storage from '../../utils/storage'
 
-let socket: Socket
+// // let socket: Socket
 
-export default function useSocketStates() {
-  // states
+// export default function useSocketStates() {
+//   // states
 
-  // mutations
-  const connectSocket = (callback?: (s: Socket) => {}) => {
-    socket = io('ws://127.0.0.1:3000', {
-      reconnectionDelayMax: 1000,
-      auth: {
-        uid: storage.get('user').uid,
-        token: storage.get('user').token
-      }
-    })
+//   // mutations
+//   const connectSocket = (callback?: (s: Socket) => {}) => {
+//     socket = io('ws://127.0.0.1:3000', {
+//       reconnectionDelayMax: 1000,
+//       auth: {
+//         uid: storage.get('user').uid,
+//         token: storage.get('user').token
+//       }
+//     })
 
-    socket.on('connect', () => {
-      if (callback) callback(socket)
-    })
-  }
+//     socket.on('connect', () => {
+//       if (callback) callback(socket)
+//     })
+//   }
 
-  const disconnectSocket = () => {
-    if (socket) socket.disconnect()
-  }
+//   const disconnectSocket = () => {
+//     if (socket) socket.disconnect()
+//   }
 
-  // actions
+//   // actions
 
-  return {
-    states: {
-      get socket() {
-        return socket
-      }
-    },
-    mutations: { connectSocket, disconnectSocket },
-    actions: {}
-  }
-}
+//   return {
+//     states: {
+//       get socket() {
+//         return socket
+//       }
+//     },
+//     mutations: { connectSocket, disconnectSocket },
+//     actions: {}
+//   }
+// }
+
+export default () => {}

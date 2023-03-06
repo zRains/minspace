@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { io } from 'socket.io-client'
 import { onMounted } from 'vue'
 import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
@@ -34,13 +33,20 @@ defineProps({
 })
 
 function initSocket() {
-  const socket = io('ws://localhost:3000/space', { transports: ['websocket'], multiplex: false })
+  const socket = new WebSocket('ws://localhost:3001', ['zrain'])
 
-  socket.on('connect', () => {
-    const { engine } = socket.io
-
-    console.log(engine.transport.name)
+  socket.addEventListener('open', (event) => {
+    socket.send(
+      JSON.stringify({
+        event: 'zrr'
+      })
+    )
   })
+
+  // ws.onopen((ws:any,e:any)=>{
+  //   console.log(ws);
+
+  // })
 }
 
 onMounted(initSocket)

@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { inject, onBeforeUnmount } from 'vue'
-import MSButton from '../../../../ui/MSButton/MSButton.vue'
+import MSButton from '../../../../ui/MSButton.vue'
 import { coreStateKey } from '../../../../../states'
 import storage from '../../../../../utils/storage'
 

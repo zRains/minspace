@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import MSButton from '../../../ui/MSButton/MSButton.vue'
+import MSButton from '../../../ui/MSButton.vue'
 import { coreStateKey } from '../../../../states'
 
 const {
@@ -62,30 +62,34 @@ $banner-height: 22px;
       font-family: var(--f-rb);
     }
 
-    .BannerOptions > .MSButton {
-      height: $banner-height;
-      line-height: $banner-height;
-      padding: 0 calc(var(--u-gap) * 0.8);
-      background-color: var(--c-bg-mute);
-      border-radius: 3px;
-      font-size: 0.8rem;
+    .BannerOptions {
+      display: flex;
 
-      &.SidebarSpaceMenuAdd {
-        color: var(--c-green);
-        background-color: var(--c-green-op);
-      }
+      & > .MSButton {
+        height: $banner-height;
+        line-height: $banner-height;
+        padding: 0 calc(var(--u-gap) * 0.8);
+        background-color: var(--c-bg-mute);
+        border-radius: 3px;
+        font-size: 0.8rem;
 
-      &.SidebarSpaceMenuFold .iconify {
-        transform: rotate(0);
-        transition: transform var(--u-dur);
-
-        &.isExpand {
-          transform: rotate(180deg);
+        &.SidebarSpaceMenuAdd {
+          color: var(--c-green);
+          background-color: var(--c-green-op);
         }
-      }
 
-      &:not(:last-child) {
-        margin-right: calc(var(--u-gap) * 0.8);
+        &.SidebarSpaceMenuFold .iconify {
+          transform: rotate(0);
+          transition: transform var(--u-dur);
+
+          &.isExpand {
+            transform: rotate(180deg);
+          }
+        }
+
+        &:not(:last-child) {
+          margin-right: calc(var(--u-gap) * 0.8);
+        }
       }
     }
   }

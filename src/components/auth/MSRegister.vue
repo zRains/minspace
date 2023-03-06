@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import MSInput from '../ui/MSInput.vue'
-import MSButton from '../ui/MSButton/MSButton.vue'
+import MSButton from '../ui/MSButton.vue'
 import { register } from '../../apis/auth.api'
 import storage from '../../utils/storage'
 import router from '../../routers'

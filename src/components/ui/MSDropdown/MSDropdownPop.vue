@@ -30,6 +30,10 @@ import MSDropdownGroupItem from './MSDropdownGroupItem.vue'
 defineProps<{
   items: DropdownOptions
 }>()
+
+const emits = defineEmits<{
+  (e: 'clickOutside', num: number): void
+}>()
 </script>
 
 <style lang="scss">

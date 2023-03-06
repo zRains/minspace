@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import MSButton from './MSButton/MSButton.vue'
+import MSButton from './MSButton.vue'
 import MSMask from './MSMask.vue'
 
 const props = defineProps({

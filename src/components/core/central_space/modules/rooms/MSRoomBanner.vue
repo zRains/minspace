@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
-import MSButton from '../../../../ui/MSButton/MSButton.vue'
+import MSButton from '../../../../ui/MSButton.vue'
 </script>
 
 <style lang="scss">
