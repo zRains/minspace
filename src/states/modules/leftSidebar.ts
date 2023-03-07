@@ -18,6 +18,7 @@ const activeUserCache = reactive(
 
 // 当前激活的左侧菜单路由
 const currentTab = ref<string>(String(router.currentRoute.value.name))
+// const currentTab = ref<string>('')
 
 export default function leftSidebar() {
   // states

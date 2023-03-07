@@ -10,7 +10,7 @@
         rid: 1,
         roomname: 'Deno land',
         desc: 'The easiest, most secure JavaScript runtime.',
-        cover: 'https://avatars.githubusercontent.com/u/42048915?s=200&v=4',
+        cover: 'https://deno.land/images/deno_logo_4.gif?__frsh_c=hxjaqfs9beag',
         status: 1,
         createdAt: new Date('2023-03-06T00:59:35.743Z'),
         editAt: new Date('2023-03-06T00:59:35.743Z')

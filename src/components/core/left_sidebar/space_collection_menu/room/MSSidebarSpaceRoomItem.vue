@@ -1,10 +1,14 @@
 <template>
   <div :class="{ MSSidebarSpaceRoomItem: true, active }" @click="router.push({ name: 'messengers' })">
-    <MSUserAvatar :src="cover" :size="40" />
+    <MSUserAvatar :src="cover" :size="40" radius="5px" />
 
     <div class="RoomInfo">
       <div class="RoomName">{{ roomName }}</div>
-      <div class="RoomStatus">45 users online</div>
+      <div class="RoomNewestMsg">2 members online</div>
+    </div>
+
+    <div class="RoomStatus">
+      <div class="RoomUserCount"><Icon icon="tabler:users" width="15" height="15" />6</div>
     </div>
   </div>
 </template>
@@ -68,26 +72,40 @@ function initSocket() {
     .RoomName {
       flex-grow: 1;
       margin-bottom: calc(var(--u-gap) * 0.5);
-      line-height: 18px;
       font-size: 0.95rem;
     }
 
-    .RoomStatus {
+    .RoomNewestMsg {
       user-select: none;
-      line-height: 16px;
       font-size: 0.85rem;
       color: var(--c-text-2);
     }
   }
 
+  .RoomStatus {
+    .RoomUserCount {
+      font-size: 0.9rem;
+      color: var(--c-text-2);
+
+      .iconify {
+        margin-right: calc(var(--u-gap) * 0.2);
+        vertical-align: -0.15rem;
+      }
+    }
+  }
+
   &:hover {
-    background-color: var(--c-bg-mute);
+    background-color: var(--c-bg-soft);
   }
 
   &.active {
     background-color: var(--c-green-op);
 
     .RoomInfo .RoomName {
+      color: var(--c-green);
+    }
+
+    .RoomStatus {
       color: var(--c-green);
     }
   }

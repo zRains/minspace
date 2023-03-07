@@ -44,13 +44,11 @@ defineProps({
     .FriendName {
       flex-grow: 1;
       margin-bottom: calc(var(--u-gap) * 0.5);
-      line-height: 18px;
       font-size: 0.95rem;
     }
 
     .FriendMessagePreview {
       user-select: none;
-      line-height: 16px;
       font-size: 0.85rem;
       color: var(--c-text-2);
     }
