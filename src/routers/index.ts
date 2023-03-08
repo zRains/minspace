@@ -4,7 +4,6 @@ import { coreState } from '../states'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    // Base routers
     {
       path: '/',
       name: 'index',
@@ -79,6 +78,7 @@ const router = createRouter({
   ]
 })
 
+/** 全局路由守卫 */
 router.beforeEach((to, from, next) => {
   const {
     user: {
@@ -86,6 +86,7 @@ router.beforeEach((to, from, next) => {
     }
   } = coreState
 
+  // 是否需要验证
   if (to.meta.authRequired) {
     if (!isAuthenticated()) {
       next({

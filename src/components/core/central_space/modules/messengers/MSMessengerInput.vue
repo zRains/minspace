@@ -4,10 +4,17 @@
       <template #left-icon><Icon height="24" icon="fluent:emoji-sparkle-24-filled" /></template>
     </MSButton>
 
-    <!-- main input -->
-    <input class="SendTextInput" type="text" placeholder="Send..." v-model="sendText" />
+    <!-- Main input -->
+    <input
+      class="SendTextInput"
+      type="text"
+      placeholder="Send..."
+      :value="content"
+      @keyup.enter="enterKeyBinding"
+      @input="$emit('update:content', ($event.target as HTMLInputElement).value)"
+    />
 
-    <!-- input options -->
+    <!-- Input options -->
     <div class="InputOptions">
       <MSButton>
         <template #left-icon><Icon height="24" icon="tabler:at" /></template>
@@ -23,22 +30,34 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { type PropType } from 'vue'
 import MSButton from '../../../../ui/MSButton.vue'
 
-const sendText = ref('')
+defineProps({
+  enterKeyBinding: {
+    type: Function as PropType<() => void>,
+    required: false,
+    default: () => {}
+  },
+  content: {
+    type: String,
+    required: true
+  }
+})
+
+defineEmits<{
+  (e: 'update:content', v: string): void
+}>()
 </script>
 
 <style lang="scss">
-$input-container-height: 40px;
-
 .MSMessengerInput {
   position: absolute;
   display: flex;
   align-items: center;
   left: calc(var(--u-gap) * 2);
   padding: var(--u-gap);
-  height: $input-container-height;
+  height: var(--ms-space-input-container-height);
   width: calc(100% - var(--u-gap) * 4);
   background-color: var(--c-bg);
   box-shadow: var(--shadow-2);
@@ -51,8 +70,8 @@ $input-container-height: 40px;
     border: none;
     padding: 0;
     margin-left: calc(var(--u-gap) * 1.5);
-    height: calc(#{$input-container-height} - var(--u-gap) * 2);
-    line-height: calc(#{$input-container-height} - var(--u-gap) * 2);
+    height: calc(var(--ms-space-input-container-height) - var(--u-gap) * 2);
+    line-height: calc(var(--ms-space-input-container-height) - var(--u-gap) * 2);
     background-color: var(--c-bg);
     font-family: var(--f-r);
     font-size: 0.9rem;

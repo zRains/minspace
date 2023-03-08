@@ -1,3 +1,4 @@
+/** 基础Room类型 */
 export type BasicRoom = {
   rid: number
   roomname: string

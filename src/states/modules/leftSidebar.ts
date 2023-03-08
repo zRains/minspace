@@ -5,7 +5,7 @@ import storage from '../../utils/storage'
 
 type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger'
 
-// 当前查看用户信息缓存
+/** 当前查看用户信息缓存 */
 const activeUserCache = reactive(
   storage.getPatcher<findUserResultDto>('activeUserCache', {
     uid: -1,
@@ -16,15 +16,15 @@ const activeUserCache = reactive(
   })
 )
 
-// 当前激活的左侧菜单路由
+/** 当前激活的左侧菜单路由 */
 const currentTab = ref<string>(String(router.currentRoute.value.name))
-// const currentTab = ref<string>('')
 
 export default function leftSidebar() {
   // states
-  // 是否激活左侧搜索组件
+  /** 是否激活左侧搜索组件 */
   const activeSearch = ref(false)
-  // 是否激活用户信息展示面板（搜索用户信息查看，用户信息查看等）
+
+  /** 是否激活用户信息展示面板（搜索用户信息查看，用户信息查看等） */
   const activeUserDialog = ref(false)
 
   // mutations

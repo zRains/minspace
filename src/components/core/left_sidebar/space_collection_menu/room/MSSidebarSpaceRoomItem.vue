@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
 // TODO:Test code
@@ -35,25 +34,6 @@ defineProps({
     default: false
   }
 })
-
-function initSocket() {
-  const socket = new WebSocket('ws://localhost:3001', ['zrain'])
-
-  socket.addEventListener('open', (event) => {
-    socket.send(
-      JSON.stringify({
-        event: 'zrr'
-      })
-    )
-  })
-
-  // ws.onopen((ws:any,e:any)=>{
-  //   console.log(ws);
-
-  // })
-}
-
-// onMounted(initSocket)
 </script>
 
 <style lang="scss">

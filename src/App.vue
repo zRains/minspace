@@ -12,5 +12,3 @@ provide(coreStateKey, coreState)
 
 const { cssVarInject } = coreState.setting.states
 </script>
-
-<style lang="scss"></style>

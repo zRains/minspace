@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import type { DropdownOptions } from '../../../types/ui'
+import type { DropdownOptions } from '../../../types/ui.type'
 import MSUserAvatar from '../../ui/MSUserAvatar.vue'
 import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
 import MSButton from '../../ui/MSButton.vue'

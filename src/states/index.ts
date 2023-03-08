@@ -1,6 +1,6 @@
 import { InjectionKey } from 'vue'
 
-// State modules
+// 状态管理模块集
 import useLeftSidebar from './modules/leftSidebar'
 import useSocketStates from './modules/socket'
 import useToastStates from './modules/toast'

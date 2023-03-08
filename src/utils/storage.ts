@@ -19,10 +19,10 @@ class CustomStorage {
   }
 
   /**
-   * Set new value to myStorage
-   * @param key key
-   * @param val value
-   * @param exp expiration time
+   * 设置一个新的的键值对
+   * @param key 键名
+   * @param val 键值
+   * @param exp 过期时间
    */
   public set(key: string, val: any, exp: number = -1) {
     if (
@@ -49,8 +49,8 @@ class CustomStorage {
   }
 
   /**
-   * Get val
-   * @param key key
+   * 根据键获取值
+   * @param key 键名
    */
   public get<T = any>(key: string): T | undefined {
     if (typeof key === 'string' && this.myStorage.has(key)) {
@@ -67,6 +67,11 @@ class CustomStorage {
     return undefined
   }
 
+  /**
+   * 根据键获取值，不存在则插入再返回
+   * @param key 键名
+   * @param val 键值
+   */
   public getPatcher<T = any>(key: string, val: T): T {
     if (this.has(key)) return this.get<T>(key)!
 
@@ -76,8 +81,8 @@ class CustomStorage {
   }
 
   /**
-   * delete val
-   * @param key key
+   * 根据键名删除一个值
+   * @param key 键名
    */
   public del(key: string) {
     if (typeof key === 'string' && this.myStorage.has(key)) {
@@ -90,17 +95,13 @@ class CustomStorage {
   }
 
   /**
-   * Check whatever key in myStorage
-   * @param key key
+   * 查看是否存在相应的键名
+   * @param key 键名
    */
   public has(key: string) {
     return this.get(key) !== undefined
   }
 
-  /**
-   * Get CustomStorage instance
-   * @param options
-   */
   public static getInstance(options: { clearAll?: boolean; clearExpire?: boolean }) {
     if (!CustomStorage.instance) {
       CustomStorage.instance = new CustomStorage(options)

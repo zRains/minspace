@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { DropdownExpandItem, DropdownItem, DropdownToggleItem } from '../../../types/ui'
+import type { DropdownExpandItem, DropdownItem, DropdownToggleItem } from '../../../types/ui.type'
 import MSDropdownItem from './MSDropdownItem.vue'
 import MSDropdownExpandItem from './MSDropdownExpandItem.vue'
 

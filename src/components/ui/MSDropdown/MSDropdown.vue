@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { DropdownOptions } from '../../../types/ui'
+import type { DropdownOptions } from '../../../types/ui.type'
 import MSDropdownPop from './MSDropdownPop.vue'
 import useClickOutside from '../../../composes/clickOutside'
 import MSButton from '../MSButton.vue'

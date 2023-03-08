@@ -1,6 +1,6 @@
 import { h, render, DefineComponent } from 'vue'
 
-/** Debounce fun */
+/** 防抖 */
 export function debounce(fn: () => void, delay = 300) {
   let timer = 0
   return function _() {
@@ -9,7 +9,7 @@ export function debounce(fn: () => void, delay = 300) {
   }
 }
 
-/** Throttle fun */
+/** 节流 */
 export function throttle(fn: () => void, delay = 300) {
   let timer = 0
   return function _() {
@@ -19,7 +19,7 @@ export function throttle(fn: () => void, delay = 300) {
   }
 }
 
-/** Get relative time */
+/** 获取相对时间 */
 export function getRelativeTime(d1: number, d2 = +new Date()) {
   const units = {
     year: 24 * 60 * 60 * 1000 * 365,
@@ -42,6 +42,7 @@ export function getRelativeTime(d1: number, d2 = +new Date()) {
   return 'Unknown time'
 }
 
+/** 手动渲染Vue组件实例 */
 export function renderInstance<T extends DefineComponent>(Constructor: T, props: Record<string, any>) {
   const container = document.createElement('div')
 

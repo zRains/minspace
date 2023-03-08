@@ -1,7 +1,4 @@
 import type { VNode } from 'vue'
-/**
- * --------------------------------- MSDropdown ---------------------------------
- */
 
 export type DropdownItem = {
   type: 'click'

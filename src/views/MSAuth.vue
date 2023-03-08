@@ -1,6 +1,6 @@
 <template>
   <MSFullLayout class="MSAuth">
-    <!-- Page background animation -->
+    <!-- 背景动画 -->
     <svg viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" class="MSAuthAnimeBg transition duration-300 ease-in-out delay-150">
       <path
         d="M 0,400 C 0,400 0,200 0,200 C 111.67464114832538,171.35885167464116 223.34928229665076,142.71770334928232 316,141 C 408.65071770334924,139.28229665071768 482.27751196172244,164.48803827751195 559,198 C 635.7224880382776,231.51196172248805 715.5406698564594,273.33014354066984 828,269 C 940.4593301435406,264.66985645933016 1085.5598086124403,214.1913875598086 1193,195 C 1300.4401913875597,175.8086124401914 1370.22009569378,187.9043062200957 1440,200 C 1440,200 1440,400 1440,400 Z"
@@ -10,7 +10,6 @@
         transform="rotate(-180 720 200)"
       ></path>
     </svg>
-
     <div class="AuthBanner">
       <div class="AuthContainer">
         <p>START FOR FREE</p>
@@ -25,24 +24,25 @@
         <MSLogin :class="{ active: !isRegisterMode }" />
       </div>
 
-      <!-- TODO: Public rooms -->
+      <!-- TODO: 待开发-可免密加入的公共space -->
       <div class="PublicRooms"></div>
     </div>
   </MSFullLayout>
 
-  <!-- Toast -->
+  <!-- Toast提示组件 -->
   <MSToastProvider />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import MSFullLayout from '../layouts/MSFullLayout.vue'
-import MSButton from '../components/ui/MSButton.vue'
-import MSRegister from '../components/auth/MSRegister.vue'
 import MSLogin from '../components/auth/MSLogin.vue'
+import MSRegister from '../components/auth/MSRegister.vue'
+import MSButton from '../components/ui/MSButton.vue'
 import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
+import MSFullLayout from '../layouts/MSFullLayout.vue'
 import router from '../routers'
 
+/** 是否是注册模式 */
 const isRegisterMode = ref(router.currentRoute.value.query?.authType === 'register')
 </script>
 

@@ -13,11 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { type PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { BasicRoom } from '../../../../../types/room.type'
 import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
-import MSButton from '../../../../ui/MSButton.vue'
 
 defineProps({
   room: {

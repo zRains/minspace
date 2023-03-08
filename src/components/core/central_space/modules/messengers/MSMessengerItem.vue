@@ -1,8 +1,11 @@
 <template>
   <div :class="{ MSMessengerItem: true, SelfMessageItem: selfMessage }">
+    <!-- User avatar -->
     <div class="MessageAvatar">
       <MSUserAvatar :src="avatar" :alt="userName" />
     </div>
+
+    <!-- Message body -->
     <div class="MessageBody">
       <div class="MessageBanner">
         <div class="MessageSenderName">{{ userName }}</div>

@@ -1,21 +1,16 @@
 <template>
   <div class="MSMainLayout">
-    <!-- Left sidebar -->
+    <!-- 左侧边栏 -->
     <div class="LeftSideBarContainer">
       <slot name="left-sideBar" />
 
-      <!-- Sidebar resizer -->
+      <!-- 侧边栏宽度调整器 -->
       <MSResizer :css-prop="'--ms-left-sidebar-width'" />
     </div>
 
-    <!-- Central space -->
+    <!-- 中央区域 -->
     <div class="CentralSpaceContainer">
       <slot name="central-space" />
-    </div>
-
-    <!-- Right sidebar -->
-    <div class="RightSideBarContainer">
-      <slot name="right-sideBar" />
     </div>
   </div>
 </template>

@@ -1,42 +1,61 @@
-// import type { Socket } from 'socket.io-client'
-// import { io } from 'socket.io-client'
-// import storage from '../../utils/storage'
+import { SOCKET_URL } from '../../minspace.config'
+import { MessageType, RoomMessageDto } from '../../types/message.type'
+import storage from '../../utils/storage'
 
-// // let socket: Socket
+let socket: WebSocket
 
-// export default function useSocketStates() {
-//   // states
+function authSocket(s: WebSocket) {}
 
-//   // mutations
-//   const connectSocket = (callback?: (s: Socket) => {}) => {
-//     socket = io('ws://127.0.0.1:3000', {
-//       reconnectionDelayMax: 1000,
-//       auth: {
-//         uid: storage.get('user').uid,
-//         token: storage.get('user').token
-//       }
-//     })
+/** Socket 事件绑定 */
+function bindSocket(s: WebSocket) {
+  s.addEventListener('sendRoomMessage-succeed', function (data) {
+    console.log(data)
+  })
+}
 
-//     socket.on('connect', () => {
-//       if (callback) callback(socket)
-//     })
-//   }
+function sendJson<T = any>(payload: { event: string; data?: T; [k: string]: any }) {
+  socket.send(JSON.stringify(Object.assign(payload, { uid: storage.get('user').uid })))
+}
 
-//   const disconnectSocket = () => {
-//     if (socket) socket.disconnect()
-//   }
+export default function useSocket() {
+  // states
 
-//   // actions
+  // mutations
+  function seedRoomMessage(rid: number, content: string, type: MessageType) {
+    sendJson<RoomMessageDto>({
+      event: 'sendRoomMessage',
+      data: {
+        rid,
+        uid: storage.get('user').uid,
+        type: MessageType.TEXT,
+        content,
+        createdAt: Date.now()
+      }
+    })
+  }
 
-//   return {
-//     states: {
-//       get socket() {
-//         return socket
-//       }
-//     },
-//     mutations: { connectSocket, disconnectSocket },
-//     actions: {}
-//   }
-// }
+  // actions
+  function initSocket() {
+    socket = new WebSocket(SOCKET_URL)
 
-export default () => {}
+    function initSocketHandle() {
+      bindSocket(socket)
+
+      sendJson({
+        event: 'init',
+        data: {
+          token: storage.get('user').token
+        }
+      })
+      socket.removeEventListener('open', initSocketHandle)
+    }
+
+    socket.addEventListener('open', initSocketHandle)
+  }
+
+  return {
+    states: {},
+    mutations: { seedRoomMessage },
+    actions: { initSocket }
+  }
+}

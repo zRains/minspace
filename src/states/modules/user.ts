@@ -33,7 +33,9 @@ export default function useUserStates() {
 
   // actions
   const isAuthenticated = () => {
-    if (storage.has('user')) setCurrentUser(storage.get('user'))
+    // 重新设置用户信息
+    if (storage.has('user')) setCurrentUser(storage.get('user')!)
+
     return currentUser.token !== ''
   }
 
