@@ -2,9 +2,12 @@ import { SOCKET_URL } from '../../minspace.config'
 import { MessageType, RoomMessageDto } from '../../types/message.type'
 import storage from '../../utils/storage'
 
-let socket: WebSocket
+type ClientSocketPayload<T> = {
+  event: string
+  data?: T extends Record<string, any> ? T & { uid?: number } : never
+}
 
-function authSocket(s: WebSocket) {}
+let socket: WebSocket
 
 /** Socket 事件绑定 */
 function bindSocket(s: WebSocket) {
@@ -13,8 +16,10 @@ function bindSocket(s: WebSocket) {
   })
 }
 
-function sendJson<T = any>(payload: { event: string; data?: T; [k: string]: any }) {
-  socket.send(JSON.stringify(Object.assign(payload, { uid: storage.get('user').uid })))
+function sendJson<T = any>(payload: ClientSocketPayload<T>) {
+  payload.data && (payload.data.uid = storage.get('user').uid)
+
+  socket.send(JSON.stringify(payload))
 }
 
 export default function useSocket() {
@@ -54,7 +59,11 @@ export default function useSocket() {
   }
 
   return {
-    states: {},
+    states: {
+      get socket() {
+        return socket
+      }
+    },
     mutations: { seedRoomMessage },
     actions: { initSocket }
   }

@@ -12,7 +12,7 @@
         <div class="MessageBannerSplitDot"></div>
         <div class="MessageSendTime">{{ getRelativeTime(sendTime) }}</div>
       </div>
-      <div class="MessageContent">{{ message }}</div>
+      <div class="MessageContent"><slot></slot></div>
     </div>
   </div>
 </template>
@@ -32,10 +32,6 @@ defineProps({
     required: true
   },
   userName: {
-    type: String,
-    required: true
-  },
-  message: {
     type: String,
     required: true
   },

@@ -1,3 +1,5 @@
+import type { User } from './user.type'
+
 /** 信息类型 */
 // eslint-disable-next-line no-shadow
 export enum MessageType {
@@ -21,4 +23,9 @@ export type RoomMessageDto = {
   type: MessageType
   content: any
   createdAt: number
+}
+
+export type RoomTextMessageItem = {
+  message: RoomMessageDto
+  user: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'>
 }

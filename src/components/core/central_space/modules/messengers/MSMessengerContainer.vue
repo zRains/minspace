@@ -19,7 +19,7 @@
 
     <!-- Main -->
     <MSScroller class="MessageBox">
-      <MSMessengerItem
+      <!-- <MSMessengerItem
         avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         user-name="Jeff"
         message="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
@@ -32,7 +32,8 @@
         user-name="zRain"
         message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <MSMessengerItem :self-message="true" avatar="https://zrain.fun/favicon.ico" user-name="zRain" message="https://zrain.fun/" />
+      <MSMessengerItem :self-message="true" avatar="https://zrain.fun/favicon.ico" user-name="zRain" message="https://zrain.fun/" /> -->
+      <!-- <MSTextMessengerItem :room-text-message-item=""/> -->
     </MSScroller>
 
     <!-- Input -->
@@ -42,24 +43,32 @@
 
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-import { MessageType } from '../../../../../types/message.type'
 import MSFriendMessengerBanner from './MSFriendMessengerBanner.vue'
 import MSRoomMessengerBanner from './MSRoomMessengerBanner.vue'
 import MSMessengerInput from './MSMessengerInput.vue'
-import MSMessengerItem from './MSMessengerItem.vue'
 import MSScroller from '../../../../ui/MSScroller.vue'
 import { coreStateKey } from '../../../../../states'
+import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
+import type { RoomTextMessageItem } from '../../../../../types/message.type'
+import { MessageType } from '../../../../../types/message.type'
 
 // TODO
 const {
   socket: {
+    states,
     mutations: { seedRoomMessage }
   }
 } = inject(coreStateKey)!
 const inputContent = ref('')
 
 function seedRoomMessageHandle() {
-  // seedRoomMessage(1, inputContent.value, MessageType.TEXT)
+  const userSocket = states.socket
+
+  userSocket.addEventListener('sendRoomMessage-succeed', function (data: any) {
+    console.log(data)
+  })
+
+  seedRoomMessage(1, inputContent.value, MessageType.TEXT)
 }
 </script>
 
