@@ -36,7 +36,7 @@ defineProps({
     required: true
   },
   sendTime: {
-    type: Number,
+    type: [Number, String],
     required: false,
     default: +new Date()
   }

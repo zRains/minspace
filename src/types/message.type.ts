@@ -18,6 +18,7 @@ export enum SenderType {
 
 /** Room信息类型 */
 export type RoomMessageDto = {
+  rmid: number
   rid: number
   uid: number
   type: MessageType

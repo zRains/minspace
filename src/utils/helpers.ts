@@ -20,7 +20,8 @@ export function throttle(fn: () => void, delay = 300) {
 }
 
 /** 获取相对时间 */
-export function getRelativeTime(d1: number, d2 = +new Date()) {
+export function getRelativeTime(d1: number | string, d2 = Date.now()) {
+  d1 = typeof d1 === 'string' ? new Date(d1).getTime() : d1
   const units = {
     year: 24 * 60 * 60 * 1000 * 365,
     month: (24 * 60 * 60 * 1000 * 365) / 12,

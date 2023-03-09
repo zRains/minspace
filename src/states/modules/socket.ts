@@ -1,70 +1,42 @@
-import { SOCKET_URL } from '../../minspace.config'
-import { MessageType, RoomMessageDto } from '../../types/message.type'
+import { ref } from 'vue'
 import storage from '../../utils/storage'
+import Ws from '../../utils/socket'
 
-type ClientSocketPayload<T> = {
-  event: string
-  data?: T extends Record<string, any> ? T & { uid?: number } : never
-}
-
-let socket: WebSocket
-
-/** Socket 事件绑定 */
-function bindSocket(s: WebSocket) {
-  s.addEventListener('sendRoomMessage-succeed', function (data) {
-    console.log(data)
-  })
-}
-
-function sendJson<T = any>(payload: ClientSocketPayload<T>) {
-  payload.data && (payload.data.uid = storage.get('user').uid)
-
-  socket.send(JSON.stringify(payload))
-}
+const isSocketOpen = ref(false)
 
 export default function useSocket() {
   // states
 
-  // mutations
-  function seedRoomMessage(rid: number, content: string, type: MessageType) {
-    sendJson<RoomMessageDto>({
-      event: 'sendRoomMessage',
-      data: {
-        rid,
-        uid: storage.get('user').uid,
-        type: MessageType.TEXT,
-        content,
-        createdAt: Date.now()
-      }
-    })
-  }
-
   // actions
   function initSocket() {
-    socket = new WebSocket(SOCKET_URL)
+    const ws = Ws.getInstance({
+      onError() {
+        isSocketOpen.value = false
+      },
+      onClose() {
+        isSocketOpen.value = false
+      }
+    })
 
-    function initSocketHandle() {
-      bindSocket(socket)
+    ws.send({
+      event: 'init',
+      data: {
+        uid: storage.get('user').uid,
+        token: storage.get('user').token
+      }
+    })
 
-      sendJson({
-        event: 'init',
-        data: {
-          token: storage.get('user').token
-        }
-      })
-      socket.removeEventListener('open', initSocketHandle)
-    }
-
-    socket.addEventListener('open', initSocketHandle)
+    ws.subscribeOnce('init', ({ succeed }) => {
+      if (succeed) isSocketOpen.value = true
+    })
   }
 
   return {
     states: {
-      get socket() {
-        return socket
-      }
+      isSocketOpen,
+      ws: Ws.getInstance()
     },
-    mutations: { seedRoomMessage },
+    mutations: {},
     actions: { initSocket }
   }
 }

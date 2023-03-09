@@ -69,7 +69,7 @@ defineEmits<{
     outline: none;
     border: none;
     padding: 0;
-    margin-left: calc(var(--u-gap) * 1.5);
+    margin: 0 calc(var(--u-gap) * 1.5);
     height: calc(var(--ms-space-input-container-height) - var(--u-gap) * 2);
     line-height: calc(var(--ms-space-input-container-height) - var(--u-gap) * 2);
     background-color: var(--c-bg);

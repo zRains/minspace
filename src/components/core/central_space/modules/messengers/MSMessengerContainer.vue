@@ -33,7 +33,7 @@
         message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
       <MSMessengerItem :self-message="true" avatar="https://zrain.fun/favicon.ico" user-name="zRain" message="https://zrain.fun/" /> -->
-      <!-- <MSTextMessengerItem :room-text-message-item=""/> -->
+      <MSTextMessengerItem v-for="msg in roomMessages.collection" :key="msg.message.rmid" :room-text-message-item="msg" />
     </MSScroller>
 
     <!-- Input -->
@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref, inject, reactive } from 'vue'
 import MSFriendMessengerBanner from './MSFriendMessengerBanner.vue'
 import MSRoomMessengerBanner from './MSRoomMessengerBanner.vue'
 import MSMessengerInput from './MSMessengerInput.vue'
@@ -51,25 +51,39 @@ import { coreStateKey } from '../../../../../states'
 import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
 import type { RoomTextMessageItem } from '../../../../../types/message.type'
 import { MessageType } from '../../../../../types/message.type'
+import storage from '../../../../../utils/storage'
 
-// TODO
 const {
   socket: {
-    states,
-    mutations: { seedRoomMessage }
+    states: { ws }
   }
 } = inject(coreStateKey)!
 const inputContent = ref('')
+const roomMessages = reactive<{
+  collection: RoomTextMessageItem[]
+}>({
+  collection: []
+})
 
 function seedRoomMessageHandle() {
-  const userSocket = states.socket
-
-  userSocket.addEventListener('sendRoomMessage-succeed', function (data: any) {
-    console.log(data)
+  ws.send({
+    event: 'send-room-message',
+    data: {
+      uid: storage.get('user').uid,
+      rid: 1,
+      content: inputContent.value,
+      type: MessageType.TEXT,
+      createdAt: Date.now()
+    }
   })
-
-  seedRoomMessage(1, inputContent.value, MessageType.TEXT)
 }
+
+ws.subscribe('send-room-message', (data) => {
+  if (data.succeed) {
+    const { succeed, ...meta } = data
+    roomMessages.collection.push(meta)
+  }
+})
 </script>
 
 <style lang="scss">

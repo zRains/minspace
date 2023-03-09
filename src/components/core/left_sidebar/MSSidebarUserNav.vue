@@ -1,22 +1,34 @@
 <template>
   <div class="MSSidebarUserNav">
-    <MSUserAvatar :src="currentUser.avatar" :size="40" />
-    <div class="MSSpaceInfo">
-      <!-- Dropdown menu -->
-      <MSDropdown class="PreferencesDropdown" :items="userDropdownOptions" trigger="click">
-        <template #trigger>
-          <div class="DropdownTriggerText">
-            <div class="UserName">{{ currentUser.username }}</div>
-            <Icon icon="tabler:chevron-down" />
-          </div>
-        </template>
-      </MSDropdown>
+    <Transition name="scale" mode="out-in">
+      <div v-if="isSocketOpen" class="SidebarUserNavMainContainer">
+        <MSUserAvatar :src="currentUser.avatar" :size="40" />
 
-      <!-- Sub notifications -->
-      <div class="MSSpaceStatus">45 rooms online</div>
-    </div>
+        <!-- 用户信息主要展示 -->
+        <div class="MSSpaceInfo">
+          <!-- 下拉菜单 -->
+          <MSDropdown class="PreferencesDropdown" :items="userDropdownOptions" trigger="click">
+            <template #trigger>
+              <div class="DropdownTriggerText">
+                <div class="UserName">{{ currentUser.username }}</div>
+                <Icon icon="tabler:chevron-down" />
+              </div>
+            </template>
+          </MSDropdown>
 
-    <!-- Sidebar control area -->
+          <!-- 当前房间在线信息 -->
+          <div class="MSSpaceStatus">45 rooms online</div>
+        </div>
+      </div>
+
+      <!-- Socket连接中展示 -->
+      <div v-else class="SocketConnecting">
+        <MSLoading :size="32" />
+        <div class="ConnectingTip">Connecting...</div>
+      </div>
+    </Transition>
+
+    <!-- 侧边栏状态按钮 -->
     <div class="MSLeftSidebarControl">
       <MSButton>
         <template #left-icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
@@ -32,10 +44,14 @@ import MSUserAvatar from '../../ui/MSUserAvatar.vue'
 import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
 import MSButton from '../../ui/MSButton.vue'
 import { coreStateKey } from '../../../states'
+import MSLoading from '../../ui/MSLoading.vue'
 
 const {
   user: {
     states: { currentUser }
+  },
+  socket: {
+    states: { isSocketOpen }
   }
 } = inject(coreStateKey)!
 
@@ -120,31 +136,49 @@ const userDropdownOptions: DropdownOptions = [
   padding: 0 calc(var(--u-gap) * 2);
   height: var(--ms-left-sidebar-outer-board-height);
 
-  .MSSpaceInfo {
-    margin-left: calc(var(--u-gap) * 1.2);
+  .SidebarUserNavMainContainer {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
 
-    .PreferencesDropdown {
-      width: fit-content;
+    .MSSpaceInfo {
+      margin-left: calc(var(--u-gap) * 1.2);
+      flex-grow: 1;
 
-      .DropdownTriggerText {
-        display: inline-flex;
-        align-items: center;
+      .PreferencesDropdown {
+        width: fit-content;
 
-        .UserName {
-          font-family: var(--f-rb);
-          margin-right: calc(var(--u-gap) * 0.5);
-        }
+        .DropdownTriggerText {
+          display: inline-flex;
+          align-items: center;
 
-        .iconify {
-          vertical-align: middle;
+          .UserName {
+            font-family: var(--f-rb);
+            margin-right: calc(var(--u-gap) * 0.5);
+          }
+
+          .iconify {
+            vertical-align: middle;
+          }
         }
       }
-    }
 
-    .MSSpaceStatus {
-      user-select: none;
-      font-size: 0.85rem;
+      .MSSpaceStatus {
+        user-select: none;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .SocketConnecting {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+
+    .ConnectingTip {
+      margin-left: calc(var(--u-gap) * 1.5);
+      font-size: 1.1rem;
+      font-family: var(--f-rb);
     }
   }
 }
