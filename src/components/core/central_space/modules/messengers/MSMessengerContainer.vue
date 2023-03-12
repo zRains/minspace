@@ -52,6 +52,7 @@ import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
 import type { RoomTextMessageItem } from '../../../../../types/message.type'
 import { MessageType } from '../../../../../types/message.type'
 import storage from '../../../../../utils/storage'
+import { User } from '../../../../../types/user.type'
 
 const {
   socket: {
@@ -66,16 +67,35 @@ const roomMessages = reactive<{
 })
 
 function seedRoomMessageHandle() {
-  ws.send({
-    event: 'send-room-message',
-    data: {
-      uid: storage.get('user').uid,
-      rid: 1,
+  const { uid, role, avatar, username, status }: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'> = storage.get('user')!
+
+  roomMessages.collection.push({
+    user: {
+      uid,
+      role,
+      avatar,
+      username,
+      status
+    },
+    message: {
       content: inputContent.value,
-      type: MessageType.TEXT,
-      createdAt: Date.now()
+      rid: 1,
+      uid,
+      createdAt: Date.now(),
+      rmid: 1,
+      type: MessageType.TEXT
     }
   })
+  // ws.send({
+  //   event: 'send-room-message',
+  //   data: {
+  //     uid: storage.get('user').uid,
+  //     rid: 1,
+  //     content: inputContent.value,
+  //     type: MessageType.TEXT,
+  //     createdAt: Date.now()
+  //   }
+  // })
 }
 
 ws.subscribe('send-room-message', (data) => {

@@ -10,18 +10,18 @@
       <div class="MessageBanner">
         <div class="MessageSenderName">{{ userName }}</div>
         <div class="MessageBannerSplitDot"></div>
-        <div class="MessageSendTime">{{ getRelativeTime(sendTime) }}</div>
+        <div class="MessageSendTime">{{ localSendTime }}</div>
       </div>
-      <div class="MessageContent"><slot></slot></div>
+      <div class="MessageContent"><slot></slot><span v-if="isSending" class="SendingLoader"></span></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getRelativeTime } from '../../../../../utils/helpers'
+import { computed } from 'vue'
 import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
 
-defineProps({
+const props = defineProps({
   selfMessage: {
     type: Boolean,
     required: false,
@@ -39,7 +39,16 @@ defineProps({
     type: [Number, String],
     required: false,
     default: +new Date()
+  },
+  isSending: {
+    type: Boolean,
+    required: false,
+    default: false
   }
+})
+
+const localSendTime = computed(() => {
+  return new Date(props.sendTime).toLocaleDateString()
 })
 </script>
 
@@ -73,10 +82,35 @@ defineProps({
     }
 
     .MessageContent {
-      padding: var(--u-gap) calc(var(--u-gap) * 1.5);
+      position: relative;
+      padding: calc(var(--u-gap) * 0.8) calc(var(--u-gap) * 1.2);
       background-color: var(--c-bg);
       border: 1px solid var(--c-divider-light);
       border-radius: 5px;
+
+      .SendingLoader {
+        position: absolute;
+        left: calc(-16px - var(--u-gap) * 0.4);
+        bottom: 2px;
+
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--c-green);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     }
   }
 
