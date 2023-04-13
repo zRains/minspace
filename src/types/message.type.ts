@@ -1,7 +1,6 @@
 import type { User } from './user.type'
 
 /** 信息类型 */
-// eslint-disable-next-line no-shadow
 export enum MessageType {
   TEXT = 'TEXT',
   IMAGE = 'IMAGE',
@@ -10,10 +9,16 @@ export enum MessageType {
 }
 
 /** 发送者类型 */
-// eslint-disable-next-line no-shadow
 export enum SenderType {
   USER = 'USER',
   SYSTEM = 'SYSTEM'
+}
+
+/** 本地信息发送状态 */
+export enum MessageSendingStatus {
+  SENDING = 'SENDING',
+  FAIL = 'FAIL',
+  SUCCESS = 'SUCCESS'
 }
 
 /** Room信息类型 */
@@ -26,7 +31,8 @@ export type RoomMessageDto = {
   createdAt: number
 }
 
-export type RoomTextMessageItem = {
+export interface RoomTextMessageItem {
   message: RoomMessageDto
   user: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'>
+  status: MessageSendingStatus
 }

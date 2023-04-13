@@ -49,10 +49,12 @@ import MSMessengerInput from './MSMessengerInput.vue'
 import MSScroller from '../../../../ui/MSScroller.vue'
 import { coreStateKey } from '../../../../../states'
 import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
-import type { RoomTextMessageItem } from '../../../../../types/message.type'
 import { MessageType } from '../../../../../types/message.type'
 import storage from '../../../../../utils/storage'
 import { User } from '../../../../../types/user.type'
+
+// Types
+import { type RoomTextMessageItem, MessageSendingStatus } from '../../../../../types/message.type'
 
 const {
   socket: {
@@ -66,6 +68,7 @@ const roomMessages = reactive<{
   collection: []
 })
 
+// TODO 测试本地发送
 function seedRoomMessageHandle() {
   const { uid, role, avatar, username, status }: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'> = storage.get('user')!
 
@@ -84,8 +87,10 @@ function seedRoomMessageHandle() {
       createdAt: Date.now(),
       rmid: 1,
       type: MessageType.TEXT
-    }
+    },
+    status: MessageSendingStatus.SENDING
   })
+
   // ws.send({
   //   event: 'send-room-message',
   //   data: {

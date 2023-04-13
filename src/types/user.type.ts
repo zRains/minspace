@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum RoleType {
   USER = 'USER',
   OPERATOR = 'OPERATOR',

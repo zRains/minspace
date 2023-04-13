@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue'
-import type { findUserResultDto } from '../../apis/user.api'
+import type { findUserResultDto } from '../../types/user.type'
 import router from '../../routers'
 import storage from '../../utils/storage'
 
