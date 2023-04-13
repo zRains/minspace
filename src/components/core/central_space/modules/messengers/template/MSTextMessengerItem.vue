@@ -11,10 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import type { RoomTextMessageItem } from '../../../../../../types/message.type'
+import storage from '@util/storage'
 import MSMessengerItem from '../MSMessengerItem.vue'
-import storage from '../../../../../../utils/storage'
+
+// Types
+import type { PropType } from 'vue'
+import type { RoomTextMessageItem } from '@type/message.type'
 
 defineProps({
   roomTextMessageItem: {

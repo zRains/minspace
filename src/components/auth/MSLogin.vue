@@ -25,15 +25,18 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import MSInput from '../ui/MSInput.vue'
-import MSButton from '../ui/MSButton.vue'
-import useToast from '../../composes/toast'
-import { login } from '../../apis/auth.api'
-import router from '../../routers'
+import { useRouter } from 'vue-router'
+import MSButton from '@comp/ui/MSButton.vue'
+import MSInput from '@comp/ui/MSInput.vue'
+import useToast from '@cos/toast'
 import { coreState } from '../../states'
+
+// Services
+import { login } from '@api/auth.api'
 
 const isLoading = ref(false)
 const Toast = useToast()
+const router = useRouter()
 
 const loginModule = reactive({
   email: '',

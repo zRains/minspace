@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import MSActivitiesBanner from './MSActivitiesBanner.vue'
-import MSResult from '../../../../ui/MSResult.vue'
+import MSResult from '@comp/ui/MSResult.vue'
 </script>
 
 <style lang="scss">

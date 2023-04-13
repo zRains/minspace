@@ -35,15 +35,19 @@
 
 <script setup lang="ts">
 import { ref, reactive, inject } from 'vue'
-import MSInput from '../../../ui/MSInput.vue'
+import MSInput from '@comp/ui/MSInput.vue'
 import MSSidebarMenuItem from '../MSSidebarMenuItem.vue'
 import MSUserResult from './MSUserResult.vue'
-import MSButton from '../../../ui/MSButton.vue'
-import MSResult from '../../../ui/MSResult.vue'
-import { searchUser } from '../../../../apis/user.api'
-import type { findUserResultDto } from '../../../../apis/user.api'
+import MSButton from '@comp/ui/MSButton.vue'
+import MSResult from '@comp/ui/MSResult.vue'
+import MSCollapsibleBox from '@comp/ui/MSCollapsibleBox.vue'
 import { coreStateKey } from '../../../../states'
-import MSCollapsibleBox from '../../../ui/MSCollapsibleBox.vue'
+
+// Types
+import type { findUserResultDto } from '@type/user.type'
+
+// Services
+import { searchUser } from '@api/user.api'
 
 const {
   leftSidebar: {

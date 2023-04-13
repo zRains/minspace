@@ -1,6 +1,6 @@
-import { render, h } from 'vue'
+import { h, render } from 'vue'
+import MSToast from '@comp/ui/toast/MSToast.vue'
 import { coreState } from '../states'
-import MSToast from '../components/ui/toast/MSToast.vue'
 
 interface ToastOption {
   type?: 'success' | 'info' | 'warning' | 'error' | 'loading'

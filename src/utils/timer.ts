@@ -2,7 +2,7 @@
 export default class Timer {
   public startedAt: number
 
-  public timer: number
+  public timer: any
 
   public delay: number
 

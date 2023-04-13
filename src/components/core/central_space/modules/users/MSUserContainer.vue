@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import MSUserInfo from './MSUserInfo.vue'
-import MSScroller from '../../../../ui/MSScroller.vue'
+import MSScroller from '@comp/ui/MSScroller.vue'
 </script>
 
 <style lang="scss"></style>

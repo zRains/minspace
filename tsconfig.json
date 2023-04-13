@@ -10,7 +10,18 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@comp/*": ["components/*"],
+      "@style/*": ["styles/*"],
+      "@layout/*": ["layouts/*"],
+      "@util/*": ["utils/*"],
+      "@type/*": ["types/*"],
+      "@api/*": ["apis/*"],
+      "@cos/*": ["composes/*"],
+      "@/*": ["./*"]
+    }
   },
   "include": ["src/**/*", "vite.config.ts"]
 }

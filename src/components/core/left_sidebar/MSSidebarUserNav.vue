@@ -39,12 +39,14 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import type { DropdownOptions } from '../../../types/ui.type'
-import MSUserAvatar from '../../ui/MSUserAvatar.vue'
-import MSDropdown from '../../ui/MSDropdown/MSDropdown.vue'
-import MSButton from '../../ui/MSButton.vue'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
+import MSDropdown from '@comp/ui/MSDropdown/MSDropdown.vue'
+import MSButton from '@comp/ui/MSButton.vue'
+import MSLoading from '@comp/ui/MSLoading.vue'
 import { coreStateKey } from '../../../states'
-import MSLoading from '../../ui/MSLoading.vue'
+
+// Types
+import type { DropdownOptions } from '@type/ui.type'
 
 const {
   user: {

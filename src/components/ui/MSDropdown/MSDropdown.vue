@@ -21,10 +21,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { DropdownOptions } from '../../../types/ui.type'
+import useClickOutside from '@cos/clickOutside'
+import MSButton from '@comp/ui/MSButton.vue'
 import MSDropdownPop from './MSDropdownPop.vue'
-import useClickOutside from '../../../composes/clickOutside'
-import MSButton from '../MSButton.vue'
+
+// Types
+import type { DropdownOptions } from '@type/ui.type'
 
 defineProps<{
   items: DropdownOptions

@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 
 // TODO:Test code
 import router from '../../../../../routers'

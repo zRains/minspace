@@ -36,9 +36,9 @@
 
 <script setup lang="ts">
 import { inject, onBeforeUnmount } from 'vue'
-import MSButton from '../../../../ui/MSButton.vue'
+import MSButton from '@comp/ui/MSButton.vue'
+import storage from '@util/storage'
 import { coreStateKey } from '../../../../../states'
-import storage from '../../../../../utils/storage'
 
 const {
   leftSidebar: {

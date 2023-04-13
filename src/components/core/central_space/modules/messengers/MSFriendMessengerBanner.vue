@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
 
 defineProps({

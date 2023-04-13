@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import MSResizer from '../components/mini/MSResizer.vue'
+import MSResizer from '@comp/mini/MSResizer.vue'
 </script>
 
 <style lang="scss">

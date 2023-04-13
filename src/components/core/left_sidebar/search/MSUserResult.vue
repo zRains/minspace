@@ -11,7 +11,9 @@
 <script setup lang="ts">
 import { type PropType } from 'vue'
 import MSSearchUserItem from './MSSearchUserItem.vue'
-import type { findUserResultDto } from '../../../../apis/user.api'
+
+// Types
+import type { findUserResultDto } from '@type/user.type'
 
 defineProps({
   users: {

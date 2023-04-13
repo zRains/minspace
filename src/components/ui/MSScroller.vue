@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, type PropType, ref } from 'vue'
+import { ref, computed, onMounted, type PropType } from 'vue'
 
 const props = defineProps({
   direction: {

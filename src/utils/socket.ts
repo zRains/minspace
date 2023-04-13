@@ -30,7 +30,7 @@ export default class Ws {
   public isReconnecting: boolean
 
   /** 延时重连Id */
-  public timerId: number | null
+  public timerId: any
 
   /** 是否是用户手动关闭连接 */
   public isCustomClosed: boolean

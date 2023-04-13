@@ -40,11 +40,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, render, type PropType } from 'vue'
 import { Icon } from '@iconify/vue'
-import { type PropType, ref, onMounted, render } from 'vue'
-import MSButton from '../MSButton.vue'
-import MSLoading from '../MSLoading.vue'
-import Timer from '../../../utils/timer'
+import MSButton from '@comp/ui/MSButton.vue'
+import MSLoading from '@comp/ui/MSLoading.vue'
+import Timer from '@util/timer'
 
 const props = defineProps({
   type: {

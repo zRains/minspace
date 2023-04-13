@@ -12,19 +12,20 @@
 
 <script setup lang="ts">
 import { inject, type PropType } from 'vue'
-import { findUserResultDto } from '../../../../apis/user.api'
-import MSUserAvatar from '../../../ui/MSUserAvatar.vue'
+import { useRouter } from 'vue-router'
+import storage from '@util/storage'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import { coreStateKey } from '../../../../states'
 
-// Router
-import router from '../../../../routers'
-import storage from '../../../../utils/storage'
+// Types
+import type { findUserResultDto } from '@type/user.type'
 
 const {
   leftSidebar: {
     mutations: { changeActiveUserCache }
   }
 } = inject(coreStateKey)!
+const router = useRouter()
 
 const props = defineProps({
   user: {

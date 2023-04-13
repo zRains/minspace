@@ -63,19 +63,15 @@
 
 <script setup lang="ts">
 import { inject, computed } from 'vue'
-import { coreStateKey } from '../../../states'
+import { useRouter } from 'vue-router'
+import MSScroller from '@comp/ui/MSScroller.vue'
+import MSCollapsibleBox from '@comp/ui/MSCollapsibleBox.vue'
 import MSSidebarUserNav from './MSSidebarUserNav.vue'
 import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
-import MSScroller from '../../ui/MSScroller.vue'
-import MSCollapsibleBox from '../../ui/MSCollapsibleBox.vue'
-
-// Collection menu
 import MSSidebarFriendCollectionMenu from './space_collection_menu/friend/MSSidebarFriendCollectionMenu.vue'
 import MSSidebarRoomCollectionMenu from './space_collection_menu/room/MSSidebarRoomCollectionMenu.vue'
-
-// Router
-import router from '../../../routers'
+import { coreStateKey } from '../../../states'
 
 type TabFromFunc<T extends Function> = T extends (tab: infer TAB) => any ? TAB : never
 
@@ -85,6 +81,7 @@ const {
     mutations: { changeCurrentTab }
   }
 } = inject(coreStateKey)!
+const router = useRouter()
 const currentTab = computed(() => router.currentRoute.value.name || '')
 
 function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {

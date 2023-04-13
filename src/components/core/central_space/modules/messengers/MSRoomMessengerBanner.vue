@@ -14,9 +14,11 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { BasicRoom } from '../../../../../types/room.type'
-import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
+
+// Types
+import type { BasicRoom } from '@type/room.type'
 
 defineProps({
   room: {

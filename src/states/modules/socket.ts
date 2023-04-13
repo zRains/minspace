@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import storage from '../../utils/storage'
-import Ws from '../../utils/socket'
+import storage from '@util/storage'
+import Ws from '@util/socket'
 
 const isSocketOpen = ref(false)
 
@@ -9,7 +9,7 @@ export default function useSocket() {
 
   // actions
   function initSocket() {
-    const ws = Ws.getInstance({
+    const wsInstance = Ws.getInstance({
       onError() {
         isSocketOpen.value = false
       },
@@ -18,7 +18,7 @@ export default function useSocket() {
       }
     })
 
-    ws.send({
+    wsInstance.send({
       event: 'init',
       data: {
         uid: storage.get('user').uid,
@@ -26,7 +26,7 @@ export default function useSocket() {
       }
     })
 
-    ws.subscribeOnce('init', ({ succeed }) => {
+    wsInstance.subscribeOnce('init', ({ succeed }) => {
       if (succeed) isSocketOpen.value = true
     })
   }
@@ -34,7 +34,9 @@ export default function useSocket() {
   return {
     states: {
       isSocketOpen,
-      ws: Ws.getInstance()
+      get ws() {
+        return isSocketOpen.value ? Ws.getInstance() : null
+      }
     },
     mutations: {},
     actions: { initSocket }

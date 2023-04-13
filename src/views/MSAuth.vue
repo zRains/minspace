@@ -35,15 +35,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import MSLogin from '../components/auth/MSLogin.vue'
-import MSRegister from '../components/auth/MSRegister.vue'
-import MSButton from '../components/ui/MSButton.vue'
-import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
-import MSFullLayout from '../layouts/MSFullLayout.vue'
-import router from '../routers'
+import { useRoute } from 'vue-router'
+import MSLogin from '@comp/auth/MSLogin.vue'
+import MSRegister from '@comp/auth/MSRegister.vue'
+import MSButton from '@comp/ui/MSButton.vue'
+import MSToastProvider from '@comp/ui/toast/MSToastProvider.vue'
+import MSFullLayout from '@layout/MSFullLayout.vue'
 
 /** 是否是注册模式 */
-const isRegisterMode = ref(router.currentRoute.value.query?.authType === 'register')
+const isRegisterMode = ref(useRoute().query.authType === 'register')
 </script>
 
 <style lang="scss">

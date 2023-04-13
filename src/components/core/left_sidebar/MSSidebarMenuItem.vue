@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import MSButton from '../../ui/MSButton.vue'
+import MSButton from '@comp/ui/MSButton.vue'
 </script>
 
 <style lang="scss">

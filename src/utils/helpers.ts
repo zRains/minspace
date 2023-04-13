@@ -2,7 +2,8 @@ import { h, render, DefineComponent } from 'vue'
 
 /** 防抖 */
 export function debounce(fn: () => void, delay = 300) {
-  let timer = 0
+  let timer: any
+
   return function _() {
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => fn.apply(null), delay)
@@ -11,7 +12,8 @@ export function debounce(fn: () => void, delay = 300) {
 
 /** 节流 */
 export function throttle(fn: () => void, delay = 300) {
-  let timer = 0
+  let timer: any
+
   return function _() {
     if (!timer) {
       timer = setTimeout(() => fn.apply(null), delay)

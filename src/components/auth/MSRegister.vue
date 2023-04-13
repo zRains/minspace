@@ -52,16 +52,18 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import MSInput from '../ui/MSInput.vue'
-import MSButton from '../ui/MSButton.vue'
-import { register } from '../../apis/auth.api'
-import storage from '../../utils/storage'
-import router from '../../routers'
-import useToast from '../../composes/toast'
+import { useRouter } from 'vue-router'
+import MSInput from '@comp/ui/MSInput.vue'
+import MSButton from '@comp/ui/MSButton.vue'
+import storage from '@util/storage'
+import useToast from '@cos/toast'
+
+// Services
+import { register } from '@api/auth.api'
 
 const isLoading = ref(false)
 const Toast = useToast()
-
+const router = useRouter()
 const registerModule = reactive({
   email: '',
   password: '',
@@ -74,6 +76,7 @@ const registerModule = reactive({
 function checkRegisterValid() {
   const invalidArr: string[] = []
 
+  // TODO 需要优化
   registerModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerModule.email)
   if (!registerModule.isEmailValid) invalidArr.push('Invalid email')
 

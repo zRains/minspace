@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { type PropType } from 'vue'
-import MSButton from '../../../../ui/MSButton.vue'
+import MSButton from '@comp/ui/MSButton.vue'
 
 defineProps({
   enterKeyBinding: {

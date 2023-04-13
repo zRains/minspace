@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import MSUserAvatar from '../../../../ui/MSUserAvatar.vue'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 
 const props = defineProps({
   selfMessage: {

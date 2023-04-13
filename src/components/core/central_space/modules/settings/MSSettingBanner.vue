@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import MSButton from '@comp/ui/MSButton.vue'
 import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
-import MSButton from '../../../../ui/MSButton.vue'
 </script>
 
 <style lang="scss">

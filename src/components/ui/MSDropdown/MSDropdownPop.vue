@@ -22,10 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import type { DropdownOptions } from '../../../types/ui.type'
 import MSDropdownItem from './MSDropdownItem.vue'
 import MSDropdownExpandItem from './MSDropdownExpandItem.vue'
 import MSDropdownGroupItem from './MSDropdownGroupItem.vue'
+
+// Types
+import type { DropdownOptions } from '@type/ui.type'
 
 defineProps<{
   items: DropdownOptions

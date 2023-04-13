@@ -44,17 +44,16 @@
 <script setup lang="ts">
 import { ref, inject, reactive } from 'vue'
 import MSFriendMessengerBanner from './MSFriendMessengerBanner.vue'
+import storage from '@util/storage'
 import MSRoomMessengerBanner from './MSRoomMessengerBanner.vue'
 import MSMessengerInput from './MSMessengerInput.vue'
-import MSScroller from '../../../../ui/MSScroller.vue'
-import { coreStateKey } from '../../../../../states'
+import MSScroller from '@comp/ui/MSScroller.vue'
 import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
-import { MessageType } from '../../../../../types/message.type'
-import storage from '../../../../../utils/storage'
-import { User } from '../../../../../types/user.type'
+import { coreStateKey } from '../../../../../states'
 
 // Types
-import { type RoomTextMessageItem, MessageSendingStatus } from '../../../../../types/message.type'
+import { type RoomTextMessageItem, MessageType, MessageSendingStatus } from '@type/message.type'
+import type { User } from '@type/user.type'
 
 const {
   socket: {
@@ -103,12 +102,12 @@ function seedRoomMessageHandle() {
   // })
 }
 
-ws.subscribe('send-room-message', (data) => {
-  if (data.succeed) {
-    const { succeed, ...meta } = data
-    roomMessages.collection.push(meta)
-  }
-})
+// ws.subscribe('send-room-message', (data) => {
+//   if (data.succeed) {
+//     const { succeed, ...meta } = data
+//     roomMessages.collection.push(meta)
+//   }
+// })
 </script>
 
 <style lang="scss">

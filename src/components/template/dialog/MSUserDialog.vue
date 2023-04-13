@@ -42,8 +42,8 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import MSDialog from '../../ui/MSDialog.vue'
-import MSButton from '../../ui/MSButton.vue'
+import MSDialog from '@comp/ui/MSDialog.vue'
+import MSButton from '@comp/ui/MSButton.vue'
 import { coreStateKey } from '../../../states'
 
 const {

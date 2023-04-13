@@ -19,13 +19,11 @@
 
 <script setup lang="ts">
 import { inject, onMounted } from 'vue'
-import MSLeftSidebar from '../components/core/left_sidebar/MSLeftSidebar.vue'
-import MSToastProvider from '../components/ui/toast/MSToastProvider.vue'
-import MSMainLayout from '../layouts/MSMainLayout.vue'
+import MSLeftSidebar from '@comp/core/left_sidebar/MSLeftSidebar.vue'
+import MSUserDialog from '@comp/template/dialog/MSUserDialog.vue'
+import MSToastProvider from '@comp/ui/toast/MSToastProvider.vue'
+import MSMainLayout from '@layout/MSMainLayout.vue'
 import { coreStateKey } from '../states'
-
-// Dialog
-import MSUserDialog from '../components/template/dialog/MSUserDialog.vue'
 
 const {
   socket: {

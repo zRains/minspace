@@ -1,9 +1,9 @@
 import type { AxiosRequestConfig, Canceler } from 'axios'
 import axios from 'axios'
-import useToast from '../composes/toast'
-import { AXIOS_BASE_URL } from '../minspace.config'
+import useToast from '@cos/toast'
+import storage from '@util/storage'
 import router from '../routers'
-import storage from '../utils/storage'
+import { AXIOS_BASE_URL } from '../minspace.config'
 
 const Toast = useToast()
 

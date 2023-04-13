@@ -1,4 +1,4 @@
-import type { User } from './user.type'
+import type { User } from '@type/user.type'
 
 /** 信息类型 */
 export enum MessageType {

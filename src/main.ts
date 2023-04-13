@@ -1,7 +1,7 @@
+import router from '@/routers'
 import { Icon } from '@iconify/vue'
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './routers'
 import './styles/global.scss'
 
 const MinspaceAPP = createApp(App)

@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, type PropType, ref } from 'vue'
+import { ref, computed, nextTick, type PropType } from 'vue'
 
 defineEmits(['update:value'])
 
@@ -176,6 +176,7 @@ defineExpose({
       }
 
       &[type='number'] {
+        appearance: textfield;
         -moz-appearance: textfield;
       }
 
