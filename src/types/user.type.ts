@@ -5,15 +5,15 @@ export enum RoleType {
 }
 
 /** 用户基本架构模型 */
-export type User = {
+export interface User {
   uid: number
   role: RoleType
   sign: string
   email: string
   avatar: string
   username: string
-  createdAt: Date
-  editAt: Date
+  createdAt: string
+  editAt: string
   status: number
 }
 

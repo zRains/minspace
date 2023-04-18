@@ -198,13 +198,12 @@ defineExpose({
     padding: 0 calc(var(--u-gap) * 1.5);
 
     .ToastTitle {
+      font-size: 1.1rem;
       font-family: var(--f-rb);
-      font-weight: bold;
     }
 
     .ToastContent {
       padding-top: calc(var(--u-gap) / 1.8);
-      font-size: 0.9rem;
     }
   }
 

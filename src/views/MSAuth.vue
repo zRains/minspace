@@ -20,8 +20,13 @@
             <template #text>{{ isRegisterMode ? 'Log In' : 'Sign up' }}</template>
           </MSButton>
         </p>
-        <MSRegister :class="{ active: isRegisterMode }" />
-        <MSLogin :class="{ active: !isRegisterMode }" />
+
+        <!-- 登录/注册变更组 -->
+        <KeepAlive>
+          <Transition name="scale" mode="out-in">
+            <component :is="isRegisterMode ? MSRegister : MSLogin" />
+          </Transition>
+        </KeepAlive>
       </div>
 
       <!-- TODO: 待开发-可免密加入的公共space -->
@@ -91,8 +96,8 @@ const isRegisterMode = ref(useRoute().query.authType === 'register')
       .MSLogin {
         position: absolute;
         margin: 1.5rem 0;
-        opacity: 0;
-        visibility: hidden;
+        /* opacity: 0;
+        visibility: hidden; */
         transition: opacity var(--u-dur), visibility var(--u-dur);
 
         .InputBanner {
@@ -114,10 +119,10 @@ const isRegisterMode = ref(useRoute().query.authType === 'register')
           color: var(--c-bg);
         }
 
-        &.active {
+        /* &.active {
           opacity: 1;
           visibility: visible;
-        }
+        } */
       }
     }
 

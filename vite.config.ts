@@ -14,6 +14,7 @@ export default defineConfig({
       '@type': path.resolve(__dirname, 'src/types'),
       '@api': path.resolve(__dirname, 'src/apis'),
       '@cos': path.resolve(__dirname, 'src/composes'),
+      '@store': path.resolve(__dirname, 'src/stores'),
       '@': path.resolve(__dirname, 'src')
     }
   }

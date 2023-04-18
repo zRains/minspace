@@ -29,7 +29,7 @@ import { useRouter } from 'vue-router'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSInput from '@comp/ui/MSInput.vue'
 import useToast from '@cos/toast'
-import { coreState } from '../../states'
+import useUserStore from '@store/user.store'
 
 // Services
 import { login } from '@api/auth.api'
@@ -37,6 +37,7 @@ import { login } from '@api/auth.api'
 const isLoading = ref(false)
 const Toast = useToast()
 const router = useRouter()
+const userStore = useUserStore()
 
 const loginModule = reactive({
   email: '',
@@ -66,7 +67,7 @@ async function loginHandle() {
     isLoading.value = false
 
     if (succeed) {
-      coreState.user.mutations.setCurrentUser(data)
+      userStore.setCurrentUser(data)
       router.push({ name: 'activities' })
     }
   }

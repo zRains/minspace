@@ -23,6 +23,7 @@
           ["@type", "./src/types/"],
           ["@api", "./src/apis/"],
           ["@cos", "./src/composes/"],
+          ["@store", "./src/stores/"],
           ["@", "./src"]
         ]
       }

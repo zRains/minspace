@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { coreState } from '../states'
+import useUserStore from '@store/user.store'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,22 +46,21 @@ const router = createRouter({
                   component: () => import('../components/core/central_space/modules/settings/MSSettingContainer.vue')
                 },
                 {
+                  // TODO 待改进：添加动态参数
                   path: 'users',
                   name: 'users',
                   component: () => import('../components/core/central_space/modules/users/MSUserContainer.vue'),
                   beforeEnter(to, from, next) {
-                    const {
-                      leftSidebar: {
-                        states: { activeUserCache }
-                      }
-                    } = coreState
-
-                    if (activeUserCache.uid === -1) {
-                      next({ name: 'activities' })
-                      return
-                    }
-
-                    next()
+                    // const {
+                    //   leftSidebar: {
+                    //     states: { activeUserCache }
+                    //   }
+                    // } = coreState
+                    // if (activeUserCache.uid === -1) {
+                    //   next({ name: 'activities' })
+                    //   return
+                    // }
+                    // next()
                   }
                 },
                 {
@@ -80,15 +79,11 @@ const router = createRouter({
 
 /** 全局路由守卫 */
 router.beforeEach((to, from, next) => {
-  const {
-    user: {
-      actions: { isAuthenticated }
-    }
-  } = coreState
+  const userStore = useUserStore()
 
   // 是否需要验证
   if (to.meta.authRequired) {
-    if (!isAuthenticated()) {
+    if (!userStore.hasToken()) {
       next({
         name: 'auth',
         query: { authType: 'login', redirect: to.fullPath }

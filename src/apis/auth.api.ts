@@ -1,11 +1,15 @@
 import { ARFactory } from '.'
 
-interface LoginDto {
+interface LoginRequired {
   email: string
   password: string
 }
 
-export function login({ email, password }: LoginDto) {
+export interface RegisterRequired extends LoginRequired {
+  passwordConfirm: string
+}
+
+export function login({ email, password }: LoginRequired) {
   return ARFactory({
     url: '/auth/login',
     method: 'POST',
@@ -13,11 +17,7 @@ export function login({ email, password }: LoginDto) {
   })
 }
 
-export interface RegisterDto extends LoginDto {
-  passwordConfirm: string
-}
-
-export function register({ email, password, passwordConfirm }: RegisterDto) {
+export function register({ email, password, passwordConfirm }: RegisterRequired) {
   return ARFactory({
     url: '/auth/register',
     method: 'POST',

@@ -20,6 +20,7 @@
       "@type/*": ["types/*"],
       "@api/*": ["apis/*"],
       "@cos/*": ["composes/*"],
+      "@store/*": ["stores/*"],
       "@/*": ["./*"]
     }
   },

@@ -24,7 +24,7 @@ class CustomStorage {
    * @param val 键值
    * @param exp 过期时间
    */
-  public set(key: string, val: any, exp: number = -1) {
+  public set<T = any>(key: string, val: T, exp: number = -1) {
     if (
       typeof key !== 'string' ||
       typeof exp !== 'number' ||
