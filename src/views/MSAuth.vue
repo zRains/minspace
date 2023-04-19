@@ -29,7 +29,7 @@
         </KeepAlive>
       </div>
 
-      <!-- TODO: 待开发-可免密加入的公共space -->
+      <!-- TODO 待开发：可免密加入的公共space -->
       <div class="PublicRooms"></div>
     </div>
   </MSFullLayout>

@@ -1,5 +1,5 @@
 <template>
-  <div class="MSMessengerInput">
+  <div :class="{ MSMessengerInput: true, activated }">
     <MSButton class="InputEmojiBtn">
       <template #left-icon><Icon height="24" icon="fluent:emoji-sparkle-24-filled" /></template>
     </MSButton>
@@ -10,6 +10,7 @@
       type="text"
       placeholder="Send..."
       :value="content"
+      :disabled="!activated"
       @keyup.enter="enterKeyBinding"
       @input="$emit('update:content', ($event.target as HTMLInputElement).value)"
     />
@@ -42,6 +43,11 @@ defineProps({
   content: {
     type: String,
     required: true
+  },
+  activated: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -62,7 +68,6 @@ defineEmits<{
   background-color: var(--c-bg);
   box-shadow: var(--shadow-2);
   border-radius: 5px;
-  animation: inputAnime var(--u-dur) forwards;
 
   .SendTextInput {
     flex-grow: 1;
@@ -83,6 +88,10 @@ defineEmits<{
     .MSButton:not(:last-child) {
       margin-right: var(--u-gap);
     }
+  }
+
+  &.activated {
+    animation: inputAnime var(--u-dur) forwards;
   }
 
   @keyframes inputAnime {

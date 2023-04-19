@@ -12,7 +12,15 @@
         <div class="MessageBannerSplitDot"></div>
         <div class="MessageSendTime">{{ localSendTime }}</div>
       </div>
-      <div class="MessageContent"><slot></slot><span v-if="isSending" class="SendingLoader"></span></div>
+      <div class="MessageContent">
+        <!-- 消息内容 -->
+        <slot></slot>
+
+        <!-- 信息状态 -->
+        <div class="MessageStatus">
+          <span v-if="status === MessageStatus.SENDING" class="SendingLoader"></span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +28,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
+
+// Types
+import type { PropType } from 'vue'
+import { MessageStatus } from '@type/message.type'
 
 const props = defineProps({
   selfMessage: {
@@ -40,10 +52,10 @@ const props = defineProps({
     required: false,
     default: +new Date()
   },
-  isSending: {
-    type: Boolean,
+  status: {
+    type: String as PropType<MessageStatus>,
     required: false,
-    default: false
+    default: MessageStatus.SENDING
   }
 })
 
@@ -88,27 +100,29 @@ const localSendTime = computed(() => {
       border: 1px solid var(--c-divider-light);
       border-radius: 5px;
 
-      .SendingLoader {
+      .MessageStatus {
         position: absolute;
         left: calc(-16px - var(--u-gap) * 0.4);
-        bottom: 2px;
+        bottom: -2px;
 
-        width: 12px;
-        height: 12px;
-        border: 2px solid var(--c-green);
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-      }
-
-      @keyframes rotation {
-        0% {
-          transform: rotate(0deg);
+        .SendingLoader {
+          width: 12px;
+          height: 12px;
+          border: 2px solid var(--c-green);
+          border-bottom-color: transparent;
+          border-radius: 50%;
+          display: inline-block;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
         }
-        100% {
-          transform: rotate(360deg);
+
+        @keyframes rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       }
     }

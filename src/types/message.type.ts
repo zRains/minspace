@@ -15,14 +15,14 @@ export enum SenderType {
 }
 
 /** 本地信息发送状态 */
-export enum MessageSendingStatus {
+export enum MessageStatus {
   SENDING = 'SENDING',
   FAIL = 'FAIL',
   SUCCESS = 'SUCCESS'
 }
 
 /** Room信息类型 */
-export type RoomMessageDto = {
+export type RoomMessage = {
   rmid: number
   rid: number
   uid: number
@@ -32,7 +32,7 @@ export type RoomMessageDto = {
 }
 
 export interface RoomTextMessageItem {
-  message: RoomMessageDto
+  message: RoomMessage
   user: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'>
-  status: MessageSendingStatus
+  status: MessageStatus
 }

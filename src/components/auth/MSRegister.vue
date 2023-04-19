@@ -76,7 +76,7 @@ const registerModule = reactive({
 function checkRegisterValid() {
   const invalidArr: string[] = []
 
-  // TODO 需要优化
+  // TODO 待优化：规则构建器
   registerModule.isEmailValid = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(registerModule.email)
   if (!registerModule.isEmailValid) invalidArr.push('Invalid email')
 
