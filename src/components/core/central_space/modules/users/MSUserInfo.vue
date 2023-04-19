@@ -1,11 +1,11 @@
 <template>
-  <div class="MSUserInfo">
+  <div v-if="user" class="MSUserInfo">
     <section class="UserAvatarBox">
-      <img class="UserAvatar" :src="activeUserCache.avatar" :alt="activeUserCache.username" />
+      <MSUserAvatar class="UserProfileAvatar" :src="user.avatar" :alt="user.username" :size="100" />
       <div class="UserDesc">
-        <section>{{ activeUserCache.username }}</section>
+        <section>{{ user.username }}</section>
         <section>
-          <span>@{{ activeUserCache.username }}</span>
+          <span>@{{ user.username }}</span>
         </section>
       </div>
       <div class="UserOption">
@@ -18,7 +18,7 @@
         </MSButton>
         <MSButton class="CopyIdBtn">
           <template #left-icon><Icon icon="tabler:id" /></template>
-          <template #text>#{{ activeUserCache.uid }}</template>
+          <template #text>#{{ user.uid }}</template>
         </MSButton>
       </div>
     </section>
@@ -27,7 +27,7 @@
       <div class="UserSelfDesc">
         <p>👋 Hello</p>
         <p>
-          {{ activeUserCache.sign }}
+          {{ user.sign }}
         </p>
       </div>
     </div>
@@ -35,20 +35,32 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onBeforeMount } from 'vue'
+import { useRoute } from 'vue-router'
 import MSButton from '@comp/ui/MSButton.vue'
-import storage from '@util/storage'
-import { coreStateKey } from '../../../../../states'
+import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 
-const {
-  leftSidebar: {
-    states: { activeUserCache }
+// Types
+import { findUserResultScheme } from '@type/user.type'
+
+// Services
+import { searchUser } from '@api/user.api'
+
+const route = useRoute()
+const uid = computed(() => Number.parseInt(route.params.uid as string, 10))
+const user = ref<findUserResultScheme>()
+
+async function fetchUserInfoHandle() {
+  const { succeed, data } = await searchUser<findUserResultScheme>({ uid: uid.value })
+
+  if (succeed) {
+    user.value = data
   }
-} = inject(coreStateKey)!
+}
 
-onBeforeUnmount(() => {
-  storage.del('activeUserCache')
-})
+watch(uid, fetchUserInfoHandle)
+
+onBeforeMount(fetchUserInfoHandle)
 </script>
 
 <style lang="scss">
@@ -65,12 +77,10 @@ onBeforeUnmount(() => {
     height: var(--avatar-box-height);
     flex-shrink: 0;
 
-    .UserAvatar {
+    .UserProfileAvatar {
       position: absolute;
       bottom: 0;
       left: calc(var(--avatar-box-bg-height) - var(--avatar-height) * 0.5);
-      height: var(--avatar-height);
-      width: var(--avatar-height);
       border-radius: 50%;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     }
@@ -122,7 +132,7 @@ onBeforeUnmount(() => {
       .CopyIdBtn {
         font-family: var(--f-rb);
         margin-left: auto;
-        padding: 0 calc(var(--u-gap) * 2);
+        padding: 0 calc(var(--u-gap) * 1.5);
       }
 
       .SendApplicationBtn {

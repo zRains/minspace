@@ -44,7 +44,7 @@ import MSCollapsibleBox from '@comp/ui/MSCollapsibleBox.vue'
 import { coreStateKey } from '../../../../states'
 
 // Types
-import type { findUserResultDto } from '@type/user.type'
+import type { findUserResultScheme } from '@type/user.type'
 
 // Services
 import { searchUser } from '@api/user.api'
@@ -61,7 +61,7 @@ const searchValue = ref('')
 const searching = ref(false)
 const initialize = ref(true)
 const searchResultCollapsible = ref(true)
-const searchResult = reactive<{ user: findUserResultDto[] }>({
+const searchResult = reactive<{ user: findUserResultScheme[] }>({
   user: []
 })
 
@@ -78,10 +78,11 @@ async function searchHandle() {
   initialize.value = false
   if (searchValue.value.length > 0) {
     searching.value = true
-    // User search
-    const { succeed: isFindUserSucceed, data: findUserData } = await searchUser({ keyword: searchValue.value })
+    /** 用户搜索 */
+    const { succeed: isFindUserSucceed, data: findUserData } = await searchUser<findUserResultScheme[]>({ keyword: searchValue.value })
 
-    // Room search
+    /** 房间搜索 */
+    // TODO 待完成：房间搜索
 
     if (isFindUserSucceed) searchResult.user = findUserData
 

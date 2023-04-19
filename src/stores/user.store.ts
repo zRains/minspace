@@ -9,6 +9,7 @@ interface UserWithToken extends User {
 }
 
 interface State {
+  /** 当前登录用户 */
   currentUser: UserWithToken | null
 }
 
@@ -24,6 +25,7 @@ const useUserStore = defineStore('user', {
       storage.set('user', user)
       this.currentUser = user
     },
+
     /** 验证用户是否携带token */
     hasToken() {
       if (storage.has('user')) {

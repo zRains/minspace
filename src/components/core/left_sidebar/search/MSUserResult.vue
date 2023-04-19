@@ -13,11 +13,11 @@ import { type PropType } from 'vue'
 import MSSearchUserItem from './MSSearchUserItem.vue'
 
 // Types
-import type { findUserResultDto } from '@type/user.type'
+import type { findUserResultScheme } from '@type/user.type'
 
 defineProps({
   users: {
-    type: Array as PropType<findUserResultDto[]>,
+    type: Array as PropType<findUserResultScheme[]>,
     required: true
   }
 })

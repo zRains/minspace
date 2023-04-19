@@ -13,12 +13,11 @@
 <script setup lang="ts">
 import { inject, type PropType } from 'vue'
 import { useRouter } from 'vue-router'
-import storage from '@util/storage'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import { coreStateKey } from '../../../../states'
 
 // Types
-import type { findUserResultDto } from '@type/user.type'
+import type { findUserResultScheme } from '@type/user.type'
 
 const {
   leftSidebar: {
@@ -26,18 +25,15 @@ const {
   }
 } = inject(coreStateKey)!
 const router = useRouter()
-
 const props = defineProps({
   user: {
-    type: Object as PropType<findUserResultDto>,
+    type: Object as PropType<findUserResultScheme>,
     required: true
   }
 })
 
 function activeUserHandle() {
-  changeActiveUserCache(props.user)
-  storage.set('activeUserCache', props.user)
-  router.push({ name: 'users' })
+  router.push({ name: 'user', params: { uid: props.user.uid } })
 }
 </script>
 

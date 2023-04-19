@@ -47,8 +47,8 @@ const router = createRouter({
                 },
                 {
                   // TODO 待改进：添加动态参数
-                  path: 'users',
-                  name: 'users',
+                  path: 'user/:uid(\\d+)',
+                  name: 'user',
                   component: () => import('../components/core/central_space/modules/users/MSUserContainer.vue'),
                   beforeEnter(to, from, next) {
                     // const {
@@ -60,7 +60,7 @@ const router = createRouter({
                     //   next({ name: 'activities' })
                     //   return
                     // }
-                    // next()
+                    next()
                   }
                 },
                 {

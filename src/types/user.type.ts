@@ -18,7 +18,7 @@ export interface User {
 }
 
 /** 用户模糊查询数据结构 */
-export type findUserDto = Partial<Pick<User, 'uid' | 'email' | 'username'> & { keyword: string }>
+export type findUserScheme = Partial<Pick<User, 'uid' | 'email' | 'username'> & { keyword: string }>
 
 /** 用户详情数据结构 */
-export type findUserResultDto = Pick<User, 'uid' | 'email' | 'username' | 'avatar' | 'sign'>
+export type findUserResultScheme = Pick<User, 'uid' | 'email' | 'username' | 'avatar' | 'sign'>
