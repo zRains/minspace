@@ -42,24 +42,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import MSFriendMessengerBanner from './MSFriendMessengerBanner.vue'
 import storage from '@util/storage'
 import MSRoomMessengerBanner from './MSRoomMessengerBanner.vue'
 import MSMessengerInput from './MSMessengerInput.vue'
 import MSScroller from '@comp/ui/MSScroller.vue'
 import MSTextMessengerItem from './template/MSTextMessengerItem.vue'
-import { coreStateKey } from '../../../../../states'
+import useSocketStore from '@store/socket.store'
 
 // Types
 import { type RoomTextMessageItem, MessageType, MessageSendingStatus } from '@type/message.type'
 import type { User } from '@type/user.type'
 
-const {
-  socket: {
-    states: { ws }
-  }
-} = inject(coreStateKey)!
+const socketStore = useSocketStore()
 const inputContent = ref('')
 const roomMessages = reactive<{
   collection: RoomTextMessageItem[]

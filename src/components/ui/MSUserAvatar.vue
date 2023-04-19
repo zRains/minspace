@@ -1,5 +1,9 @@
 <template>
-  <div class="MSUserAvatar" :style="{ height: size + 'px', width: size + 'px', borderRadius: radius }">
+  <div
+    class="MSUserAvatar"
+    :style="{ height: size + 'px', width: size + 'px', borderRadius: radius, cursor: onClick ? 'pointer' : 'default' }"
+    @click="onClick && onClick()"
+  >
     <img v-if="showUserAvatar && src" :src="optimizedSrc" :alt="alt" @error="showUserAvatar = false" />
     <Icon v-else :height="size" :width="size" icon="tabler:photo-x" />
   </div>
@@ -8,6 +12,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { optimizeSVG } from '@util/helpers'
+
+// Types
+import type { PropType } from 'vue'
 
 const props = defineProps({
   src: {
@@ -28,6 +35,10 @@ const props = defineProps({
     type: String,
     required: false,
     default: 'user avatar'
+  },
+  onClick: {
+    type: Function as PropType<() => void>,
+    required: false
   }
 })
 

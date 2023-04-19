@@ -1,4 +1,6 @@
 <template>
+  <!-- TODO 带改善：没有过度动画 -->
+  <!-- <Transition name="scale" mode="out-in"> -->
   <div v-if="user" class="MSUserInfo">
     <section class="UserAvatarBox">
       <MSUserAvatar class="UserProfileAvatar" :src="user.avatar" :alt="user.username" :size="100" />
@@ -32,10 +34,11 @@
       </div>
     </div>
   </div>
+  <!-- </Transition> -->
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeMount } from 'vue'
+import { ref, computed, watchEffect, onBeforeMount, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
@@ -49,8 +52,11 @@ import { searchUser } from '@api/user.api'
 const route = useRoute()
 const uid = computed(() => Number.parseInt(route.params.uid as string, 10))
 const user = ref<findUserResultScheme>()
+const stopWatchUid = watchEffect(fetchUserInfoHandle)
 
 async function fetchUserInfoHandle() {
+  if (Number.isNaN(uid.value)) return
+
   const { succeed, data } = await searchUser<findUserResultScheme>({ uid: uid.value })
 
   if (succeed) {
@@ -58,9 +64,7 @@ async function fetchUserInfoHandle() {
   }
 }
 
-watch(uid, fetchUserInfoHandle)
-
-onBeforeMount(fetchUserInfoHandle)
+onBeforeUnmount(stopWatchUid)
 </script>
 
 <style lang="scss">

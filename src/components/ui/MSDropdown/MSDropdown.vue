@@ -15,7 +15,11 @@
       <template #text><slot name="trigger"></slot></template>
     </MSButton>
 
-    <MSDropdownPop :items="items" @click="() => clickToClose && (isActivated = !isActivated)" />
+    <MSDropdownPop
+      :items="items"
+      :close-pop-handle="() => (isActivated = false)"
+      @click="() => clickToClose && (isActivated = !isActivated)"
+    />
   </div>
 </template>
 

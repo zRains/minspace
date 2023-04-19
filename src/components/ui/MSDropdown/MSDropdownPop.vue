@@ -2,7 +2,16 @@
   <ul class="MSDropdownPop">
     <li v-for="item in items" :key="JSON.stringify(item)" :data-type="item.type">
       <!-- Dropdown item -->
-      <MSDropdownItem v-if="item.type === 'click'">
+      <MSDropdownItem
+        v-if="item.type === 'click'"
+        @click="
+          () => {
+            /** 触发事件，之后再关闭popper */
+            item.onClick()
+            closePopHandle()
+          }
+        "
+      >
         <template #left-icon><component v-if="'icon' in item" :is="item.icon" /></template>
         <template #text>{{ item.text }}</template>
       </MSDropdownItem>
@@ -31,10 +40,7 @@ import type { DropdownOptions } from '@type/ui.type'
 
 defineProps<{
   items: DropdownOptions
-}>()
-
-const emits = defineEmits<{
-  (e: 'clickOutside', num: number): void
+  closePopHandle: () => void
 }>()
 </script>
 

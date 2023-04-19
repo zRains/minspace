@@ -1,8 +1,12 @@
 <template>
   <div class="MSSidebarUserNav">
     <Transition name="scale" mode="out-in">
-      <div v-if="isSocketOpen" class="SidebarUserNavMainContainer">
-        <MSUserAvatar :src="currentUser.avatar" :size="40" />
+      <div v-if="socketStore.isSocketOpen" class="SidebarUserNavMainContainer">
+        <MSUserAvatar
+          :src="currentUser.avatar"
+          :size="40"
+          :on-click="() => router.push({ name: 'user', params: { uid: currentUser.uid } })"
+        />
 
         <!-- 用户信息主要展示 -->
         <div class="MSSpaceInfo">
@@ -38,37 +42,33 @@
 </template>
 
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSDropdown from '@comp/ui/MSDropdown/MSDropdown.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSLoading from '@comp/ui/MSLoading.vue'
-import { coreStateKey } from '../../../states'
 import useUserStore from '@store/user.store'
+import useSocketStore from '@store/socket.store'
 
 // Types
 import type { DropdownOptions } from '@type/ui.type'
 
-const {
-  socket: {
-    states: { isSocketOpen }
-  }
-} = inject(coreStateKey)!
+const socketStore = useSocketStore()
 const userStore = useUserStore()
+const router = useRouter()
+const currentUser = computed(() => userStore.currentUser!)
 const userDropdownOptions: DropdownOptions = [
   {
     type: 'click',
     text: 'View profile',
-    onClick: () => {}
-  },
-  {
-    type: 'click',
-    text: 'Notification preferences',
-    onClick: () => {}
+    onClick: () => {
+      router.push({ name: 'user', params: { uid: currentUser.value.uid } })
+    }
   },
   {
     type: 'expand',
-    text: 'Theme setting',
+    text: 'Theme mode',
     items: [
       {
         type: 'click',
@@ -101,22 +101,6 @@ const userDropdownOptions: DropdownOptions = [
         type: 'click',
         text: 'Group click test-2',
         onClick: () => {}
-      },
-      {
-        type: 'expand',
-        text: 'Group expand test-1',
-        items: [
-          {
-            type: 'click',
-            text: 'Light Mode',
-            onClick: () => {}
-          },
-          {
-            type: 'click',
-            text: 'Dark Mode',
-            onClick: () => {}
-          }
-        ]
       }
     ]
   },
@@ -126,7 +110,6 @@ const userDropdownOptions: DropdownOptions = [
     onClick: () => {}
   }
 ]
-const currentUser = computed(() => userStore.currentUser!)
 </script>
 
 <style lang="scss">
