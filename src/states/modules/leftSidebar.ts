@@ -16,7 +16,7 @@ const activeUserCache = reactive(
 )
 
 /** 当前激活的左侧菜单路由 */
-// TODO 待优化
+// TODO 待优化：未初始化
 const currentTab = ref<string>('')
 
 export default function leftSidebar() {

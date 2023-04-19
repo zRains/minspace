@@ -59,3 +59,38 @@ export function renderInstance<T extends DefineComponent>(Constructor: T, props:
 
   document.body.appendChild(container.firstChild!)
 }
+
+/**
+ * 优化svg并回传data-url，过程参照：https://github.com/convertSvg/svgtodataurl
+ * @param originalData 原始数据
+ * @returns
+ */
+export function optimizeSVG(originalData: string) {
+  if (!originalData.startsWith('<')) return originalData
+
+  const patchSVG = originalData.replace(/[%"&#{}<>]/g, function replacer(target) {
+    switch (target) {
+      case '%':
+        return '%25'
+      case '"':
+        return "'"
+      case '&':
+        return '%26'
+      case '#':
+        return '%23'
+      case '{':
+        return '%7B'
+      case '} ':
+        return '%7D'
+      case '<':
+        return '%3C'
+      case '>':
+        return '%3E'
+
+      default:
+        return ''
+    }
+  })
+
+  return `data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E${patchSVG}%3C/svg%3E`
+}

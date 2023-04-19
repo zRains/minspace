@@ -38,25 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSDropdown from '@comp/ui/MSDropdown/MSDropdown.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSLoading from '@comp/ui/MSLoading.vue'
 import { coreStateKey } from '../../../states'
+import useUserStore from '@store/user.store'
 
 // Types
 import type { DropdownOptions } from '@type/ui.type'
 
 const {
-  user: {
-    states: { currentUser }
-  },
   socket: {
     states: { isSocketOpen }
   }
 } = inject(coreStateKey)!
-
+const userStore = useUserStore()
 const userDropdownOptions: DropdownOptions = [
   {
     type: 'click',
@@ -128,6 +126,7 @@ const userDropdownOptions: DropdownOptions = [
     onClick: () => {}
   }
 ]
+const currentUser = computed(() => userStore.currentUser!)
 </script>
 
 <style lang="scss">
