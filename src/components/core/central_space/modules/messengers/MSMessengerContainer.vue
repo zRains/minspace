@@ -121,6 +121,14 @@ onMounted(() => {
       }
     }
   })
+
+  socketStore.ws!.subscribe('receive-room-message', ({ message, user }) => {
+    roomMessages.collection.push({
+      user,
+      message,
+      status: MessageStatus.SUCCESS
+    })
+  })
 })
 </script>
 
