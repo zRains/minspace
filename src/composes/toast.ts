@@ -1,6 +1,6 @@
 import { h, render } from 'vue'
 import MSToast from '@comp/ui/toast/MSToast.vue'
-import { coreState } from '../states'
+import useToastStore from '@store/toast.store'
 
 interface ToastOption {
   type?: 'success' | 'info' | 'warning' | 'error' | 'loading'
@@ -16,13 +16,9 @@ interface ToastOption {
   content?: string | string[]
 }
 
-const {
-  toast: {
-    mutations: { addCloseHandle }
-  }
-} = coreState
-
 export default function useToast() {
+  const toast = useToastStore()
+
   return {
     create(options: ToastOption | string): {
       closeToastHandle: () => void
@@ -43,7 +39,7 @@ export default function useToast() {
 
       const toastCloseHandle = vNode.component?.exposed!.closeToastHandle
 
-      addCloseHandle(toastCloseHandle)
+      toast.addCloseHandle(toastCloseHandle)
 
       return {
         closeToastHandle: toastCloseHandle

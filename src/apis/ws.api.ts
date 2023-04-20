@@ -1,5 +1,3 @@
-import { coreState } from '../states'
-
 type WsResponse = {
   code: number
   data: any

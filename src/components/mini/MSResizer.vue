@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, inject } from 'vue'
+import { ref, watch } from 'vue'
 import storage from '../../utils/storage'
 import useMouseMoveX from '../../composes/mouseMoveX'
-import { coreStateKey } from '../../states'
+import useConfigStore from '@store/config.store'
 
 const props = defineProps({
   cssProp: {
@@ -15,15 +15,10 @@ const props = defineProps({
   }
 })
 
-const {
-  setting: {
-    states: { cssVarInject },
-    mutations: { setCssVarInject }
-  }
-} = inject(coreStateKey)!
+const configStore = useConfigStore()
 const resizerActive = ref(false)
 const resizerRef = ref<HTMLElement>()
-let originalBarWidth = Number.parseInt(cssVarInject[props.cssProp], 10)
+let originalBarWidth = Number.parseInt(configStore.cssVarInject[props.cssProp], 10)
 const moveX = useMouseMoveX(
   resizerRef,
   () => {
@@ -33,8 +28,8 @@ const moveX = useMouseMoveX(
   },
   () => {
     resizerActive.value = false
-    originalBarWidth = Number.parseInt(cssVarInject[props.cssProp], 10)
-    Reflect.set(storage.get('setting'), 'cssVarInject', cssVarInject)
+    originalBarWidth = Number.parseInt(configStore.cssVarInject[props.cssProp], 10)
+    Reflect.set(storage.get('setting'), 'cssVarInject', configStore.cssVarInject)
     storage.set('setting', storage.get('setting'))
     document.documentElement.removeAttribute('style')
   }
@@ -44,7 +39,7 @@ watch(moveX, (n) => {
   const targetWidth = originalBarWidth + n
 
   // eslint-disable-next-line no-nested-ternary
-  setCssVarInject(props.cssProp, `${targetWidth <= 290 ? 290 : targetWidth >= 420 ? 420 : targetWidth}px`)
+  configStore.setCssVarInject(props.cssProp, `${targetWidth <= 290 ? 290 : targetWidth >= 420 ? 420 : targetWidth}px`)
 })
 </script>
 

@@ -6,7 +6,7 @@
     <!-- Main sidebar container -->
     <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
       <div class="CoreMenu">
-        <MSCollapsibleBox :collapsed="activeSearch">
+        <MSCollapsibleBox :collapsed="leftSidebarStore.isActiveSearchComponent">
           <!-- Add room button -->
           <MSSidebarMenuItem class="AddRoomBtn">
             <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import MSScroller from '@comp/ui/MSScroller.vue'
 import MSCollapsibleBox from '@comp/ui/MSCollapsibleBox.vue'
@@ -71,21 +71,14 @@ import MSSidebarMenuItem from './MSSidebarMenuItem.vue'
 import MSSearchContainer from './search/MSSearchContainer.vue'
 import MSSidebarFriendCollectionMenu from './space_collection_menu/friend/MSSidebarFriendCollectionMenu.vue'
 import MSSidebarRoomCollectionMenu from './space_collection_menu/room/MSSidebarRoomCollectionMenu.vue'
-import { coreStateKey } from '../../../states'
+import useLeftSidebarStore from '@store/leftSidebar.store'
 
-type TabFromFunc<T extends Function> = T extends (tab: infer TAB) => any ? TAB : never
-
-const {
-  leftSidebar: {
-    states: { activeSearch },
-    mutations: { changeCurrentTab }
-  }
-} = inject(coreStateKey)!
 const router = useRouter()
 const currentTab = computed(() => router.currentRoute.value.name || '')
+const leftSidebarStore = useLeftSidebarStore()
 
-function menuNavigationHandle(tab: TabFromFunc<typeof changeCurrentTab>) {
-  changeCurrentTab(tab)
+function menuNavigationHandle(tab: typeof leftSidebarStore.currentTab) {
+  leftSidebarStore.currentTab = tab
   router.push({ name: tab })
 }
 </script>

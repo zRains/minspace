@@ -11,19 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import { inject, type PropType } from 'vue'
 import { useRouter } from 'vue-router'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
-import { coreStateKey } from '../../../../states'
 
 // Types
+import type { PropType } from 'vue'
 import type { findUserResultScheme } from '@type/user.type'
 
-const {
-  leftSidebar: {
-    mutations: { changeActiveUserCache }
-  }
-} = inject(coreStateKey)!
 const router = useRouter()
 const props = defineProps({
   user: {

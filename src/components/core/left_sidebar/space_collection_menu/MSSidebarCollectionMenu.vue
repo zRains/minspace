@@ -19,15 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import MSButton from '../../../ui/MSButton.vue'
-import { coreStateKey } from '../../../../states'
-
-const {
-  leftSidebar: {
-    mutations: { changeCurrentTab }
-  }
-} = inject(coreStateKey)!
 
 const props = defineProps({
   text: {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ MSSearchContainer: true, activeSearch }">
+  <div :class="{ MSSearchContainer: true, activeSearch: leftSidebarStore.isActiveSearchComponent }">
     <MSSidebarMenuItem @click="activeSearchHandle">
       <template #icon><Icon height="20" width="20" icon="tabler:search" /></template>
       <template #text>Search</template>
@@ -17,7 +17,11 @@
       border-color="var(--c-bg-mute)"
     />
 
-    <MSCollapsibleBox class="SearchResultContainer" :collapsed="!activeSearch" :disable="!searchResultCollapsible">
+    <MSCollapsibleBox
+      class="SearchResultContainer"
+      :collapsed="!leftSidebarStore.isActiveSearchComponent"
+      :disable="!searchResultCollapsible"
+    >
       <div class="SearchOption">
         <MSButton class="CancelSearchBtn" @click="cancelSearchHandle">
           <template #left-icon><Icon icon="tabler:zoom-cancel" /></template>
@@ -34,14 +38,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject } from 'vue'
+import { ref, reactive } from 'vue'
 import MSInput from '@comp/ui/MSInput.vue'
 import MSSidebarMenuItem from '../MSSidebarMenuItem.vue'
 import MSUserResult from './MSUserResult.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSResult from '@comp/ui/MSResult.vue'
 import MSCollapsibleBox from '@comp/ui/MSCollapsibleBox.vue'
-import { coreStateKey } from '../../../../states'
+import useLeftSidebarStore from '@store/leftSidebar.store'
 
 // Types
 import type { findUserResultScheme } from '@type/user.type'
@@ -49,13 +53,7 @@ import type { findUserResultScheme } from '@type/user.type'
 // Services
 import { searchUser } from '@api/user.api'
 
-const {
-  leftSidebar: {
-    states: { activeSearch },
-    mutations: { changeActiveSearch }
-  }
-} = inject(coreStateKey)!
-
+const leftSidebarStore = useLeftSidebarStore()
 const inputRef = ref<HTMLElement & { focusInput: () => {} }>()
 const searchValue = ref('')
 const searching = ref(false)
@@ -67,7 +65,7 @@ const searchResult = reactive<{ user: findUserResultScheme[] }>({
 
 function activeSearchHandle() {
   searchResultCollapsible.value = true
-  changeActiveSearch(true)
+  leftSidebarStore.isActiveSearchComponent = true
   setTimeout(() => {
     inputRef.value!.focusInput()
   }, 100)
@@ -93,12 +91,14 @@ async function searchHandle() {
     }
 
     searching.value = false
-  } else changeActiveSearch(false)
+  } else {
+    leftSidebarStore.isActiveSearchComponent = false
+  }
 }
 
 function cancelSearchHandle() {
   searchResultCollapsible.value = true
-  changeActiveSearch(false)
+  leftSidebarStore.isActiveSearchComponent = false
   setTimeout(() => {
     initialize.value = true
     searchValue.value = ''

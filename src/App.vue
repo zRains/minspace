@@ -1,14 +1,11 @@
 <template>
-  <div class="AppCssVarInjector" :style="cssVarInject">
+  <div class="AppCssVarInjector" :style="configStore.cssVarInject">
     <RouterView />
   </div>
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
-import { coreState, coreStateKey } from '@/states'
+import useConfigStore from '@store/config.store'
 
-provide(coreStateKey, coreState)
-
-const { cssVarInject } = coreState.setting.states
+const configStore = useConfigStore()
 </script>

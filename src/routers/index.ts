@@ -26,6 +26,11 @@ const router = createRouter({
               redirect: { name: 'activities' },
               children: [
                 {
+                  path: 'new_room',
+                  name: 'new_room',
+                  component: () => import('../components/core/central_space/modules/rooms/MSNewRoomContainer.vue')
+                },
+                {
                   path: 'activities',
                   name: 'activities',
                   component: () => import('../components/core/central_space/modules/activities/MSActivitiesContainer.vue')

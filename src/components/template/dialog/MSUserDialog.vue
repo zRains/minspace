@@ -1,5 +1,5 @@
 <template>
-  <MSDialog class="MSUserDialog" v-model:visible="activeUserDialog" width="560px">
+  <MSDialog class="MSUserDialog" v-model:visible="leftSidebar.isActiveUserDialog" width="560px">
     <!-- Dialog header -->
     <template #header>
       <div class="UserAvatarBox">
@@ -41,16 +41,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
 import MSDialog from '@comp/ui/MSDialog.vue'
 import MSButton from '@comp/ui/MSButton.vue'
-import { coreStateKey } from '../../../states'
+import useLeftSidebarStore from '@store/leftSidebar.store'
 
-const {
-  leftSidebar: {
-    states: { activeUserDialog }
-  }
-} = inject(coreStateKey)!
+const leftSidebar = useLeftSidebarStore()
 </script>
 
 <style lang="scss">
