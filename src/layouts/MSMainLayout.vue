@@ -23,7 +23,8 @@ import MSResizer from '@comp/mini/MSResizer.vue'
 .MSMainLayout {
   display: flex;
   min-height: 100vh;
-  max-width: 1200px;
+  /* TODO 待优化：是否控制应用整体宽度 */
+  /* max-width: 1200px; */
   margin: 0 auto;
   --resizer-bar-width: 4;
 

@@ -6,9 +6,9 @@
     <!-- Main sidebar container -->
     <MSScroller class="LeftSidebarMenuContainer" height="calc(100vh - var(--ms-left-sidebar-outer-board-height))">
       <div class="CoreMenu">
-        <MSCollapsibleBox :collapsed="leftSidebarStore.isActiveSearchComponent">
+        <MSCollapsibleBox :collapsed="leftSidebarStore.isActiveSearchComponent" @click="menuNavigationHandle('new_room')">
           <!-- Add room button -->
-          <MSSidebarMenuItem class="AddRoomBtn">
+          <MSSidebarMenuItem :class="{ AddRoomBtn: true, active: currentTab === 'new_room' }">
             <template #icon><Icon height="20" width="20" color="var(--c-brand)" icon="akar-icons:circle-plus-fill" /></template>
             <template #text>New room</template>
           </MSSidebarMenuItem>
