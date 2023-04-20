@@ -101,9 +101,7 @@ const props = defineProps({
     default: 'auto'
   }
 })
-
 const emit = defineEmits(['update:visible'])
-
 const dialogVisible = computed({
   get: () => props.visible,
   set: (v) => emit('update:visible', v)

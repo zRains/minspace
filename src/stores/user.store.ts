@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import storage from '@util/storage'
+import useSocketStore from './socket.store'
 
 // Types
 import type { User } from '@type/user.type'
@@ -33,6 +34,15 @@ const useUserStore = defineStore('user', {
       }
 
       return this.currentUser !== null
+    },
+
+    /** 用户退出登录，注意断开socket连接 */
+    cleanCurrentUser() {
+      const socketStore = useSocketStore()
+
+      storage.del('user')
+      this.currentUser = null
+      socketStore.closeSocket()
     }
   }
 })

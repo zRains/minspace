@@ -22,17 +22,17 @@ export enum MessageStatus {
 }
 
 /** Room信息类型 */
-export type RoomMessage = {
+export type RoomMessage<T extends MessageType> = {
   rmid: number
   rid: number
   uid: number
-  type: MessageType
+  type: T
   content: any
   createdAt: number
 }
 
 export interface RoomTextMessageItem {
-  message: RoomMessage
+  message: RoomMessage<MessageType.TEXT>
   user: Pick<User, 'uid' | 'role' | 'avatar' | 'username' | 'status'>
   status: MessageStatus
 }

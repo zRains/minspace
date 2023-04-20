@@ -57,6 +57,7 @@ import MSInput from '@comp/ui/MSInput.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import storage from '@util/storage'
 import useToast from '@cos/toast'
+import useUserStore from '@store/user.store'
 
 // Services
 import { register } from '@api/auth.api'
@@ -64,6 +65,7 @@ import { register } from '@api/auth.api'
 const isLoading = ref(false)
 const Toast = useToast()
 const router = useRouter()
+const userStore = useUserStore()
 const registerModule = reactive({
   email: '',
   password: '',
@@ -98,7 +100,7 @@ async function registerHandle() {
     isLoading.value = false
 
     if (succeed) {
-      storage.set('user', data)
+      userStore.setCurrentUser(data)
       router.push({ name: 'activities' })
     }
   }

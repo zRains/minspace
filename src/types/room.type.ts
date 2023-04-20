@@ -1,3 +1,6 @@
+// Types
+import { RoomTextMessageItem } from './message.type'
+
 /** 基础Room类型 */
 export type BasicRoom = {
   rid: number
@@ -8,3 +11,7 @@ export type BasicRoom = {
   createdAt: Date
   editAt: Date
 }
+
+// export interface SpaceRoomRecord extends BasicRoom {
+//   records:
+// }

@@ -20,6 +20,7 @@ const useSocketStore = defineStore('socket', {
     }
   },
   actions: {
+    /** 初始化socket */
     initSocket() {
       const selfStore = this
       const wsInstance = Ws.getInstance({
@@ -46,6 +47,13 @@ const useSocketStore = defineStore('socket', {
       wsInstance.subscribeOnce('init', ({ succeed }) => {
         if (succeed) selfStore.isSocketOpen = true
       })
+    },
+
+    /** 关闭socket */
+    closeSocket() {
+      const wsInstance = Ws.getInstance()
+
+      wsInstance.close()
     }
   }
 })

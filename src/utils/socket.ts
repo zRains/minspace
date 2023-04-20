@@ -145,6 +145,9 @@ export default class Ws {
   }
 
   public close() {
+    /** 清除事件订阅列表 */
+    // TODO 待考量：是否需要清除订阅事件
+    // this.eventCenter.clean()
     this.isCustomClosed = true
     this.ws.close()
   }

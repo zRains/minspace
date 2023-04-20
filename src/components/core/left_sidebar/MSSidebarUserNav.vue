@@ -38,14 +38,18 @@
         <template #left-icon><Icon height="25" width="25" icon="tabler:layout-sidebar-left-collapse" /></template>
       </MSButton>
     </div>
+
+    <!-- 退出登录弹窗 -->
+    <MSUserSignOutDialog v-model:visible="showSignoutDialog" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSDropdown from '@comp/ui/MSDropdown/MSDropdown.vue'
+import MSUserSignOutDialog from '@comp/template/dialog/MSUserSignOutDialog.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSLoading from '@comp/ui/MSLoading.vue'
 import useUserStore from '@store/user.store'
@@ -58,6 +62,7 @@ const socketStore = useSocketStore()
 const userStore = useUserStore()
 const router = useRouter()
 const currentUser = computed(() => userStore.currentUser!)
+const showSignoutDialog = ref(false)
 const userDropdownOptions: DropdownOptions = [
   {
     type: 'click',
@@ -106,8 +111,10 @@ const userDropdownOptions: DropdownOptions = [
   },
   {
     type: 'click',
-    text: 'Click test-3',
-    onClick: () => {}
+    text: 'Sign out',
+    onClick: () => {
+      showSignoutDialog.value = true
+    }
   }
 ]
 </script>
