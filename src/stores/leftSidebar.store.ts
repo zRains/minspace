@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 // Types
-type Tab = 'activities' | 'rooms' | 'notifications' | 'settings' | 'messenger' | 'new_room'
+type Tab = 'activities' | 'rooms' | 'notifications' | 'setting_profile' | 'messenger' | 'new_room'
 
 interface State {
   /** 当前激活主菜单路由名 */

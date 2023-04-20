@@ -48,7 +48,14 @@ const router = createRouter({
                 {
                   path: 'settings',
                   name: 'settings',
-                  component: () => import('../components/core/central_space/modules/settings/MSSettingContainer.vue')
+                  component: () => import('../components/core/central_space/modules/settings/MSSettingContainer.vue'),
+                  children: [
+                    {
+                      path: 'setting_profile',
+                      name: 'setting_profile',
+                      component: () => import('../components/core/central_space/modules/settings/pages/MSSettingProfilePage.vue')
+                    }
+                  ]
                 },
                 {
                   // TODO 待改进：添加动态参数

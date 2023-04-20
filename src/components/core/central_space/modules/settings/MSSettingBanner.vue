@@ -37,11 +37,12 @@ import MSCentralSpaceBanner from '../../MSCentralSpaceBanner.vue'
     height: 100%;
 
     .SaveBtn {
-      padding: calc(var(--u-gap) * 0.5) calc(var(--u-gap) * 2);
+      padding: calc(var(--u-gap) * 0.7) calc(var(--u-gap) * 2);
       background-color: var(--c-green);
       color: var(--c-bg);
       border-radius: 3px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-family: var(--f-rb);
     }
   }
 }

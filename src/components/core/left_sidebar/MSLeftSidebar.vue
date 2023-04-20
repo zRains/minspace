@@ -44,7 +44,10 @@
         </MSSidebarMenuItem>
 
         <!-- Setting button -->
-        <MSSidebarMenuItem :class="{ SettingsBtn: true, active: currentTab === 'settings' }" @click="menuNavigationHandle('settings')">
+        <MSSidebarMenuItem
+          :class="{ SettingsBtn: true, active: currentTab === 'setting_profile' }"
+          @click="menuNavigationHandle('setting_profile')"
+        >
           <template #icon><Icon height="20" width="20" icon="tabler:settings" /></template>
           <template #text>Settings</template>
         </MSSidebarMenuItem>

@@ -11,13 +11,26 @@
         </section>
       </div>
       <div class="UserOption">
-        <MSButton class="SendApplicationBtn">
-          <template #left-icon><Icon icon="tabler:mail-forward" height="18" /></template>
-          <template #text>Send application</template>
-        </MSButton>
-        <MSButton class="ReportBtn">
-          <template #text>Block or Report</template>
-        </MSButton>
+        <!-- 如果是当前登录用户则进行操作隐藏 -->
+        <template v-if="userStore.currentUser!.uid !== uid">
+          <MSButton class="SendApplicationBtn">
+            <template #left-icon><Icon icon="tabler:mail-forward" height="18" /></template>
+            <template #text>Send application</template>
+          </MSButton>
+          <MSButton class="ReportBtn">
+            <template #text>Block or Report</template>
+          </MSButton>
+        </template>
+
+        <!-- 资料编辑按钮 -->
+        <template v-else>
+          <MSButton class="SendApplicationBtn">
+            <template #left-icon><Icon icon="tabler:pencil-minus" height="18" /></template>
+            <template #text>Edit your profile</template>
+          </MSButton>
+        </template>
+
+        <!-- uid查看与复制操作按钮 -->
         <MSButton class="CopyIdBtn">
           <template #left-icon><Icon icon="tabler:id" /></template>
           <template #text>#{{ user.uid }}</template>
@@ -38,10 +51,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect, onBeforeMount, onBeforeUnmount } from 'vue'
+import { ref, computed, watchEffect, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
+import useUserStore from '@store/user.store'
 
 // Types
 import { findUserResultScheme } from '@type/user.type'
@@ -50,6 +64,7 @@ import { findUserResultScheme } from '@type/user.type'
 import { searchUser } from '@api/user.api'
 
 const route = useRoute()
+const userStore = useUserStore()
 const uid = computed(() => Number.parseInt(route.params.uid as string, 10))
 const user = ref<findUserResultScheme>()
 const stopWatchUid = watchEffect(fetchUserInfoHandle)

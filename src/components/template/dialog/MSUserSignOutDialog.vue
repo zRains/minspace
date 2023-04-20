@@ -8,13 +8,17 @@
     <!-- Dialog body -->
     <template #body>
       <div class="SignOutDialogDetails">
-        <div class="Tip">The local personal information of the following user <strong>will be cleared:</strong></div>
+        <div class="Describe">The local personal information of the following user <strong>will be cleared:</strong></div>
         <div class="UserAvatarBox">
-          <MSUserAvatar :src="currentUser.avatar" :alt="currentUser.username" :size="60" />
+          <MSUserAvatar :src="currentUser.avatar" :alt="currentUser.username" :size="64" />
           <div class="UserInfo">
             <span class="UserName">{{ currentUser.username }} </span>
             <span class="UserId">#{{ currentUser.uid }}</span>
           </div>
+        </div>
+        <div class="Tip">
+          <Icon icon="tabler:alert-circle" width="16" />This operation will not clear the message records stored in the cloud for your login
+          next time.
         </div>
       </div>
     </template>
@@ -82,9 +86,10 @@ async function userSignOutHandle() {
 
   .SignOutDialogDetails {
     padding: calc(var(--u-gap) * 2);
+    font-size: 1.05rem;
     border-bottom: 1px solid var(--c-divider-light);
 
-    .Tip strong {
+    .Describe strong {
       font-family: var(--f-rbi);
     }
 
@@ -92,7 +97,7 @@ async function userSignOutHandle() {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: calc(var(--u-gap) * 2);
+      margin: calc(var(--u-gap) * 2) 0;
 
       .UserInfo {
         span {
@@ -113,6 +118,16 @@ async function userSignOutHandle() {
         }
       }
     }
+
+    .Tip {
+      font-size: 0.85rem;
+      color: var(--c-text-2);
+
+      .iconify {
+        margin-right: calc(var(--u-gap) * 0.5);
+        vertical-align: -0.15rem;
+      }
+    }
   }
 
   .SignOutDialogOperations {
@@ -122,9 +137,9 @@ async function userSignOutHandle() {
     justify-content: center;
 
     .MSButton {
-      padding: calc(var(--u-gap) * 0.7) calc(var(--u-gap) * 6);
+      padding: var(--u-gap) calc(var(--u-gap) * 6);
       border-radius: 5px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
 
       &.ConfirmBtn {
         color: var(--c-white);
