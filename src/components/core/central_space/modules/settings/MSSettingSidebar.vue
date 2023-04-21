@@ -1,25 +1,37 @@
 <template>
   <div class="MSSettingSidebar">
     <!-- 用户信息配置 -->
-    <MSButton class="SettingNavBtn activated">
+    <MSButton
+      :class="{ SettingNavBtn: true, activated: spaceStore.currentSettingTab === 'setting_profile' }"
+      @click="changeSettingTabHandle('setting_profile')"
+    >
       <template #text>Profile</template>
       <template #left-icon><Icon icon="tabler:user-circle" width="20" /></template>
     </MSButton>
 
     <!-- 应用外观配置 -->
-    <MSButton class="SettingNavBtn">
+    <MSButton
+      :class="{ SettingNavBtn: true, activated: spaceStore.currentSettingTab === 'setting_appearance' }"
+      @click="changeSettingTabHandle('setting_appearance')"
+    >
       <template #text>Appearance</template>
       <template #left-icon><Icon icon="tabler:brush" width="20" /></template>
     </MSButton>
 
     <!-- 消息通知配置 -->
-    <MSButton class="SettingNavBtn">
+    <MSButton
+      :class="{ SettingNavBtn: true, activated: spaceStore.currentSettingTab === 'setting_notification' }"
+      @click="changeSettingTabHandle('setting_notification')"
+    >
       <template #text>Notification</template>
       <template #left-icon><Icon icon="tabler:bell" width="20" /></template>
     </MSButton>
 
     <!-- 用户隐私配置 -->
-    <MSButton class="SettingNavBtn">
+    <MSButton
+      :class="{ SettingNavBtn: true, activated: spaceStore.currentSettingTab === 'setting_accessibility' }"
+      @click="changeSettingTabHandle('setting_accessibility')"
+    >
       <template #text>Accessibility</template>
       <template #left-icon><Icon icon="tabler:accessible" width="20" /></template>
     </MSButton>
@@ -28,6 +40,16 @@
 
 <script setup lang="ts">
 import MSButton from '@comp/ui/MSButton.vue'
+import useSpaceStore from '@store/space.store'
+import { useRouter } from 'vue-router'
+
+const spaceStore = useSpaceStore()
+const router = useRouter()
+
+function changeSettingTabHandle(tab: typeof spaceStore.currentSettingTab) {
+  spaceStore.currentSettingTab = tab
+  router.push({ name: tab })
+}
 </script>
 
 <style lang="scss">

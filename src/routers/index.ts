@@ -54,6 +54,21 @@ const router = createRouter({
                       path: 'setting_profile',
                       name: 'setting_profile',
                       component: () => import('../components/core/central_space/modules/settings/pages/MSSettingProfilePage.vue')
+                    },
+                    {
+                      path: 'setting_appearance',
+                      name: 'setting_appearance',
+                      component: () => import('../components/core/central_space/modules/settings/pages/MSSettingAppearancePage.vue')
+                    },
+                    {
+                      path: 'setting_notification',
+                      name: 'setting_notification',
+                      component: () => import('../components/core/central_space/modules/settings/pages/MSSettingNotificationPage.vue')
+                    },
+                    {
+                      path: 'setting_accessibility',
+                      name: 'setting_accessibility',
+                      component: () => import('../components/core/central_space/modules/settings/pages/MSSettingAccessibilityPage.vue')
                     }
                   ]
                 },

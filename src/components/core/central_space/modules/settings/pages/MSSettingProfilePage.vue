@@ -45,7 +45,8 @@
     </MSSettingItem>
 
     <!-- README配置 -->
-    <MSSettingItem class="UsernamePropertySettting" property="Readme"> </MSSettingItem>
+    <!-- TODO 待完成：用户Readme -->
+    <MSSettingItem class="UsernamePropertySettting" property="Readme"></MSSettingItem>
   </div>
 </template>
 
