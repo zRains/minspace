@@ -1,24 +1,31 @@
 <template>
-  <div :class="{ MSInput: true, MSInputInvalid: invalid }" :style="inputStyles">
-    <!-- Left icon -->
+  <div class="MSInput" :style="inputStyles" @click="focusInput">
+    <!-- 左图标 -->
     <div class="InputLeftIcon"><slot name="left-icon"></slot></div>
 
-    <!-- Input -->
+    <!-- 输入框主体 -->
     <div class="InputContainer">
       <input
-        :type="showPassword ? 'text' : inputType"
+        :type="type"
         :placeholder="placeholder"
-        @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
         :value="value"
+        :maxlength="maxlength"
+        :minlength="minlength"
+        :max="max"
+        :min="min"
         ref="inputRef"
+        @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
       />
+
+      <!-- 输入框边框 -->
+      <div :class="{ InputBorder: true, invalid: invalid }"></div>
     </div>
 
-    <!-- Right icon -->
+    <!-- 右图标 -->
     <div class="InputRightIcon">
       <slot name="right-icon">
         <Icon
-          v-if="inputType === 'password'"
+          v-if="type === 'password'"
           @mousedown="showPassword = true"
           @mouseup="
             () => {
@@ -36,7 +43,7 @@
               focusInput()
             }
           "
-          icon="tabler:wash-dryclean-off"
+          icon="tabler:circle-x"
         />
       </slot>
     </div>
@@ -44,9 +51,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, type PropType } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 
-defineEmits(['update:value'])
+// Types
+import type { PropType, InputHTMLAttributes } from 'vue'
 
 const props = defineProps({
   size: {
@@ -68,16 +76,7 @@ const props = defineProps({
     required: false,
     default: 'var(--c-divider)'
   },
-  inputType: {
-    type: String as PropType<'text' | 'number' | 'password' | 'search'>,
-    required: false,
-    default: 'text'
-  },
-  placeholder: {
-    type: String,
-    required: false,
-    default: ''
-  },
+
   cleanable: {
     type: Boolean,
     required: false,
@@ -91,24 +90,40 @@ const props = defineProps({
   value: {
     type: String,
     required: true
+  },
+  type: {
+    type: String as PropType<InputHTMLAttributes['type']>,
+    default: 'text'
+  },
+  placeholder: {
+    type: String as PropType<InputHTMLAttributes['placeholder']>
+  },
+  maxlength: {
+    type: Number as PropType<InputHTMLAttributes['maxlength']>
+  },
+  minlength: {
+    type: Number as PropType<InputHTMLAttributes['minlength']>
+  },
+  max: {
+    type: Number as PropType<InputHTMLAttributes['max']>
+  },
+  min: {
+    type: Number as PropType<InputHTMLAttributes['min']>
+  },
+  pattern: {
+    type: Object as PropType<InputHTMLAttributes['pattern']>
+  },
+  required: {
+    type: Boolean as PropType<InputHTMLAttributes['required']>
   }
 })
-
 const sizeRefer = {
   large: 7,
   middle: 5,
   small: 3
 }
-
 const inputRef = ref<HTMLInputElement>()
 const showPassword = ref(false)
-const focusInput = () => {
-  nextTick(() => {
-    const valueLen = inputRef.value!.value.length
-    inputRef.value!.focus()
-    inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
-  })
-}
 const inputStyles = computed(() => ({
   padding: `${sizeRefer[props.size]}px`,
   '--input-icon-margin': `${sizeRefer[props.size]}px`,
@@ -118,19 +133,28 @@ const inputStyles = computed(() => ({
   width: props.width ? `${props.width}px` : 'unset'
 }))
 
+defineEmits(['update:value'])
+
 defineExpose({
   focusInput
 })
+
+function focusInput() {
+  nextTick(() => {
+    const valueLen = inputRef.value!.value.length
+    inputRef.value!.focus()
+    inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
+  })
+}
 </script>
 
 <style lang="scss">
 .MSInput {
+  position: relative;
   display: flex;
   align-self: center;
-  border: 1px solid var(--input-border-color);
-  border-radius: 5px;
-  background-color: var(--input-background-color);
   transition: border var(--u-dur), background-color var(--u-dur);
+  cursor: text;
 
   .InputLeftIcon,
   .InputRightIcon {
@@ -188,17 +212,28 @@ defineExpose({
           -webkit-appearance: none;
         }
       }
+
+      &:focus + .InputBorder {
+        border: 2px solid var(--c-green);
+      }
+    }
+
+    .InputBorder {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: 1px solid var(--input-border-color);
+      border-radius: 5px;
+      background-color: var(--input-background-color);
+      transition: border calc(var(--u-dur) * 0.5);
+      z-index: -1;
     }
   }
 
-  &.MSInputInvalid {
-    border: 1px solid var(--c-red);
-
-    .InputLeftIcon,
-    .InputRightIcon,
-    .InputContainer input {
-      color: var(--c-red);
-    }
+  &:hover .InputContainer .InputBorder {
+    border: 2px solid var(--c-divider);
   }
 }
 </style>

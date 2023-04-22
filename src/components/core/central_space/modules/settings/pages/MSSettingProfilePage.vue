@@ -5,10 +5,13 @@
       <MSUserAvatar :src="currentUser.avatar" :alt="currentUser.username" :size="80" />
 
       <div class="Operations">
-        <MSButton class="UploadBtn">
-          <template #left-icon><Icon icon="tabler:photo-up" width="18" /></template>
-          <template #text>Upload a new photo</template>
-        </MSButton>
+        <FileUploader ref="upload" v-model="files" post-action="/post.method" put-action="/put.method">
+          <MSButton class="UploadBtn">
+            <template #left-icon><Icon icon="tabler:photo-up" width="18" /></template>
+            <template #text>Upload a new photo</template>
+          </MSButton></FileUploader
+        >
+
         <MSButton class="RevertBtn">
           <template #text>Revert to identicon</template>
         </MSButton>
@@ -46,17 +49,18 @@
 
     <!-- README配置 -->
     <!-- TODO 待完成：用户Readme -->
-    <MSSettingItem class="UsernamePropertySettting" property="Readme"></MSSettingItem>
+    <MSSettingItem class="UsernamePropertySettting" property="Readme"> </MSSettingItem>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import useUserStore from '@store/user.store'
 import MSUserAvatar from '@comp/ui/MSUserAvatar.vue'
 import MSSettingItem from '../MSSettingItem.vue'
 import MSButton from '@comp/ui/MSButton.vue'
 import MSInput from '@comp/ui/MSInput.vue'
+import FileUploader from 'vue-upload-component'
 
 const userStore = useUserStore()
 const currentUser = computed(() => userStore.currentUser!)
@@ -64,6 +68,7 @@ const userProfile = reactive({
   username: currentUser.value.username,
   sign: currentUser.value.sign
 })
+const files = ref([])
 </script>
 
 <style lang="scss">
@@ -79,6 +84,14 @@ const userProfile = reactive({
     .Operations {
       display: flex;
       margin-top: calc(var(--u-gap) * 2);
+
+      .file-uploads {
+        margin-right: var(--u-gap);
+
+        label[for='file'] {
+          cursor: pointer;
+        }
+      }
 
       .MSButton {
         &.UploadBtn {
@@ -96,10 +109,6 @@ const userProfile = reactive({
           &:hover {
             text-decoration: underline;
           }
-        }
-
-        &:not(:last-child) {
-          margin-right: calc(var(--u-gap) * 1.5);
         }
       }
     }
