@@ -22,14 +22,14 @@ defineProps({
     position: relative;
     margin-bottom: calc(var(--u-gap) * 2);
     padding-left: 12px;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-family: var(--f-rb);
 
     &::before {
       position: absolute;
       content: '';
       left: 0;
-      top: 2px;
+      top: 0;
       width: 6px;
       height: 90%;
       border-radius: 2px;

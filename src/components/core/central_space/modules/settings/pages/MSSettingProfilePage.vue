@@ -8,7 +8,7 @@
         <FileUploader ref="upload" v-model="files" post-action="/post.method" put-action="/put.method">
           <MSButton class="UploadBtn">
             <template #left-icon><Icon icon="tabler:photo-up" width="18" /></template>
-            <template #text>Upload a new photo</template>
+            <template #text>Upload new photo</template>
           </MSButton></FileUploader
         >
 
@@ -20,7 +20,7 @@
 
     <!-- 用户名配置 -->
     <MSSettingItem class="UsernamePropertySettting" property="Username">
-      <MSInput v-model:value="userProfile.username" :width="240">
+      <MSInput v-model:value="userProfile.username" :width="200">
         <template #left-icon><Icon icon="tabler:at" /></template>
       </MSInput>
       <div class="Tip">
@@ -31,20 +31,7 @@
 
     <!-- 用户签名 -->
     <MSSettingItem class="SignPropertySettting" property="Sign">
-      <textarea
-        v-model="userProfile.sign"
-        rows="5"
-        style="
-          width: 400px;
-          font-family: var(--f-b);
-          resize: none;
-          border-radius: 3px;
-          border: 1px solid var(--c-divider);
-          padding: var(--u-gap);
-          outline: none;
-        "
-      ></textarea>
-      <!-- <MSInput v-model:value="userProfile.sign" :width="240" /> -->
+      <MSInput v-model:value="userProfile.sign" type="textarea" :width="600" :rows="5" />
     </MSSettingItem>
 
     <!-- README配置 -->

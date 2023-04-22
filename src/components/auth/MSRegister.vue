@@ -4,7 +4,7 @@
     <div class="InputBanner">Email</div>
     <MSInput
       v-model:value="registerModule.email"
-      :invalid="!registerModule.isEmailValid"
+      :is-invalid="!registerModule.isEmailValid"
       :width="250"
       cleanable
       size="large"
@@ -19,7 +19,7 @@
     <div class="InputBanner">Password</div>
     <MSInput
       v-model:value="registerModule.password"
-      :invalid="!registerModule.isPasswordValid"
+      :is-invalid="!registerModule.isPasswordValid"
       :width="250"
       size="large"
       input-type="password"
@@ -33,7 +33,7 @@
     <div class="InputBanner">Password confirm</div>
     <MSInput
       v-model:value="registerModule.passwordConfirm"
-      :invalid="!registerModule.isPasswordConfirmValid"
+      :is-invalid="!registerModule.isPasswordConfirmValid"
       :width="250"
       size="large"
       input-type="password"

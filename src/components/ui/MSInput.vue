@@ -1,11 +1,27 @@
 <template>
   <div class="MSInput" :style="inputStyles" @click="focusInput">
     <!-- 左图标 -->
-    <div class="InputLeftIcon"><slot name="left-icon"></slot></div>
+    <div v-if="type === 'text'" class="InputLeftIcon"><slot name="left-icon"></slot></div>
 
     <!-- 输入框主体 -->
     <div class="InputContainer">
+      <textarea
+        v-if="type === 'textarea'"
+        :rows="rows"
+        :placeholder="placeholder"
+        :value="value"
+        :maxlength="maxlength"
+        :minlength="minlength"
+        :max="max"
+        :min="min"
+        ref="inputRef"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
+        @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
+      />
+
       <input
+        v-else
         :type="type"
         :placeholder="placeholder"
         :value="value"
@@ -14,11 +30,13 @@
         :max="max"
         :min="min"
         ref="inputRef"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
         @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
       />
 
       <!-- 输入框边框 -->
-      <div :class="{ InputBorder: true, invalid: invalid }"></div>
+      <div :class="{ InputBorder: true, focused: isFocused, invalid: isInvalid }"></div>
     </div>
 
     <!-- 右图标 -->
@@ -51,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 
 // Types
 import type { PropType, InputHTMLAttributes } from 'vue'
@@ -82,7 +100,7 @@ const props = defineProps({
     required: false,
     default: false
   },
-  invalid: {
+  isInvalid: {
     type: Boolean,
     required: false,
     default: false
@@ -115,6 +133,10 @@ const props = defineProps({
   },
   required: {
     type: Boolean as PropType<InputHTMLAttributes['required']>
+  },
+  rows: {
+    type: Number,
+    required: false
   }
 })
 const sizeRefer = {
@@ -123,6 +145,7 @@ const sizeRefer = {
   small: 3
 }
 const inputRef = ref<HTMLInputElement>()
+const isFocused = ref(false)
 const showPassword = ref(false)
 const inputStyles = computed(() => ({
   padding: `${sizeRefer[props.size]}px`,
@@ -130,7 +153,7 @@ const inputStyles = computed(() => ({
   '--input-background-color': props.backgroundColor,
   '--input-border-color': props.borderColor,
   fontSize: `calc(0.9rem + ${(sizeRefer[props.size] - 6) * 0.01}rem)`,
-  width: props.width ? `${props.width}px` : 'unset'
+  maxWidth: props.width ? `${props.width}px` : '100%'
 }))
 
 defineEmits(['update:value'])
@@ -141,6 +164,8 @@ defineExpose({
 
 function focusInput() {
   nextTick(() => {
+    if (isFocused.value) return
+
     const valueLen = inputRef.value!.value.length
     inputRef.value!.focus()
     inputRef.value!.setSelectionRange(valueLen * 2, valueLen * 2)
@@ -181,6 +206,7 @@ function focusInput() {
   .InputContainer {
     flex-grow: 1;
 
+    textarea,
     input {
       display: block;
       margin: 0;
@@ -192,6 +218,7 @@ function focusInput() {
       font-size: inherit;
       background-color: var(--input-background-color);
       transition: color var(--u-dur), background-color var(--u-dur);
+      resize: vertical;
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -212,10 +239,6 @@ function focusInput() {
           -webkit-appearance: none;
         }
       }
-
-      &:focus + .InputBorder {
-        border: 2px solid var(--c-green);
-      }
     }
 
     .InputBorder {
@@ -227,12 +250,16 @@ function focusInput() {
       border: 1px solid var(--input-border-color);
       border-radius: 5px;
       background-color: var(--input-background-color);
-      transition: border calc(var(--u-dur) * 0.5);
+      transition: border calc(var(--u-dur) * 0.8);
       z-index: -1;
+
+      &.focused {
+        border: 2px solid var(--c-green);
+      }
     }
   }
 
-  &:hover .InputContainer .InputBorder {
+  &:hover .InputContainer .InputBorder:not(.focused, .invalid) {
     border: 2px solid var(--c-divider);
   }
 }

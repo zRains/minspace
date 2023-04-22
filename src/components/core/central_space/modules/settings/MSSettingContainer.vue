@@ -35,14 +35,16 @@ onBeforeMount(() => {
 
 <style lang="scss">
 .MSSettingContainer {
-  height: 100%;
+  height: calc(100% - var(--ms-left-central-banner-height));
 
   .MSSettingBox {
     display: flex;
-    height: calc(100% - var(--ms-left-central-banner-height));
+    height: 100%;
 
     .MSSettingContent {
       flex-grow: 1;
+      height: calc(100vh - var(--ms-left-central-banner-height));
+      overflow-y: auto;
     }
   }
 }

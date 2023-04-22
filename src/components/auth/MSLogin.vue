@@ -2,7 +2,7 @@
   <div class="MSLogin">
     <!-- Email -->
     <div class="InputBanner">Email</div>
-    <MSInput v-model:value="loginModule.email" :invalid="!loginModule.isEmailValid" size="large" :width="250" type="text" cleanable>
+    <MSInput v-model:value="loginModule.email" :is-invalid="!loginModule.isEmailValid" size="large" :width="250" type="text" cleanable>
       <template #left-icon>
         <Icon icon="tabler:mail" />
       </template>
@@ -10,7 +10,7 @@
 
     <!-- Password -->
     <div class="InputBanner">Password</div>
-    <MSInput v-model:value="loginModule.password" :invalid="!loginModule.isPasswordValid" size="large" :width="250" type="password">
+    <MSInput v-model:value="loginModule.password" :is-invalid="!loginModule.isPasswordValid" size="large" :width="250" type="password">
       <template #left-icon>
         <Icon icon="tabler:lock" />
       </template>
