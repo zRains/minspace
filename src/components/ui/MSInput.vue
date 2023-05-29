@@ -54,7 +54,7 @@
           :icon="showPassword ? 'tabler:eye-off' : 'tabler:eye'"
         />
         <Icon
-          v-else-if="cleanable && value"
+          v-else-if="cleanable"
           @click="
             () => {
               $emit('update:value', '')
@@ -250,8 +250,12 @@ function focusInput() {
       border: 1px solid var(--input-border-color);
       border-radius: 5px;
       background-color: var(--input-background-color);
-      transition: border calc(var(--u-dur) * 0.8);
+      transition: border calc(var(--u-dur) * 0.5);
       z-index: -1;
+
+      &.invalid {
+        border: 2px solid var(--c-red);
+      }
 
       &.focused {
         border: 2px solid var(--c-green);

@@ -31,7 +31,7 @@
 
     <!-- 用户签名 -->
     <MSSettingItem class="SignPropertySettting" property="Sign">
-      <MSInput v-model:value="userProfile.sign" type="textarea" :width="600" :rows="5" />
+      <MSInput v-model:value="userProfile.sign" type="textarea" :width="600" :rows="4" />
     </MSSettingItem>
 
     <!-- README配置 -->
